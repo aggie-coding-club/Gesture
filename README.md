@@ -4,12 +4,12 @@
 
 We will be combining React and Electron for this project! To test out this repository, run these commands:
 
-- **git clone https://github.com/Sofia-Ortega/ElectronAndReact.git**
+- **git clone https://github.com/aggie-coding-club/Vision-Controls.git**
 
     Clones git repository to your computer
     Note: run this command in directory you want to project to show up in
     
-- **cd ElectronAndReact**
+- **cd Vision-Controls**
 
     Travel in your terminal into whatever the repository is called - I believe it will be called ElectronAndReact
 
@@ -20,6 +20,11 @@ We will be combining React and Electron for this project! To test out this repos
 - **yarn install**
 
     Installs all the dependencies you need to work on the project.
+    
+- **cd front-end**
+
+    Travel to directory where frontend will be working in
+
 
 - **yarn start** or **npm run start**
 
