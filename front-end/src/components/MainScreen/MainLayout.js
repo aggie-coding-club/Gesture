@@ -32,11 +32,8 @@ export default function MainLayout() {
       <div style={sideScreen}>
         <SideBar/>
       </div>
-
-        <div style={cameraScreen}>
+      <div style={cameraScreen}>
           <CameraScreen />
-
-
       </div>
     </div>
   )
