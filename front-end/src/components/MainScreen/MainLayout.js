@@ -10,16 +10,15 @@ export default function MainLayout() {
   }
 
   const sideScreen = {
-    background: "grey",
+    background: "#090e18",
     width: "20vw",
-    height: "100vh"
-
-
+    height: "100vh",
+    color: "#afb0b2"
   }
   const cameraScreen = {
-
-    background: "green",
-    width: "80vw"
+    background: "#3c3740",
+    width: "80vw",
+    color: "#afb0b2"
 
   }
 
