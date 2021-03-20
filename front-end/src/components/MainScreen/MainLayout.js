@@ -6,29 +6,37 @@ export default function MainLayout() {
 
   const flexContainer = {
     display: "flex",
-    backgroundColor: "blue"
+    backgroundColor: "#090e18",
+
   }
 
   const sideScreen = {
     background: "#090e18",
+    color: "#afb0b2",
     width: "20vw",
-    height: "100vh",
-    color: "#afb0b2"
+    height: "98vh",
+
   }
   const cameraScreen = {
     background: "#3c3740",
     width: "80vw",
-    color: "#afb0b2"
-
+    height: "98vh",
+    color: "#afb0b2",
+    borderRadius: "25px",
+    margin: "1vh 1vh 1vh 0",
   }
+
 
   return(
     <div style={flexContainer}>
       <div style={sideScreen}>
         <SideBar/>
       </div>
-      <div style={cameraScreen}>
-        <CameraScreen />
+
+        <div style={cameraScreen}>
+          <CameraScreen />
+
+
       </div>
     </div>
   )
