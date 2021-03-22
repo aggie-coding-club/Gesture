@@ -3,6 +3,8 @@
   "main": "public/main.js",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/aggie-coding-club/Vision-Controls",
+  "author": "Nathan Casazza <nate2jake@live.com>",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -17,7 +19,30 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron-start": "electron ."
+    "electron-start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.electron.app",
+    "linux": {
+      "target": [
+        "deb"
+      ],
+      "category": "Utility"
+    },
+    "win": {
+      "target": [
+        "portable"
+      ]
+    },
+    "portable": {
+      "artifactName": "vision_controls.exe"
+    },
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "extends": null
   },
   "eslintConfig": {
     "extends": [
@@ -38,6 +63,7 @@
     ]
   },
   "devDependencies": {
-    "electron": "^12.0.1"
+    "electron": "^12.0.1",
+    "electron-builder": "^22.10.5"
   }
 }
