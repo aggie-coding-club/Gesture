@@ -7,7 +7,8 @@ function createWindow() {
     height: 600,
     webPreferences: {
       nodeIntegration: true
-    }
+    },
+    icon: __dirname + '/visioncontrols.ico'
   })
 
   //to get access to Chrome dev tools
