@@ -40,6 +40,7 @@ We will be combining React and Electron for this project! To test out this repos
 ## Bundle Electron App
  
  - **cd front-end**
+ - **yarn install** or **npm install**
  - **npm run preelectron-pack**
  - **npm run electron-pack**
 
