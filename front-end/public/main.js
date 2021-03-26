@@ -1,4 +1,4 @@
-const {app, BrowserWindow} = require('electron')
+const { app, BrowserWindow } = require('electron')
 const path = require('path')
 
 function createWindow() {
@@ -13,11 +13,8 @@ function createWindow() {
   //to get access to Chrome dev tools
   win.webContents.openDevTools()
 
-  //gets our React app running on localhost and displays it in the Electron window
-  win.loadURL('http://localhost:3000/')
-
-  //build app?
-  //win.loadURL(`file://${path.join(__dirname,'../build/index.html')}`)
+  // build app 
+  win.loadURL(`file://${path.join(__dirname, '../build/index.html')}`)
 }
 
 app.whenReady().then(createWindow)
@@ -31,7 +28,7 @@ app.on('window-all-closed', () => {
 
 //when app ready to go, electron window opens
 app.on('activate', () => {
-  if(BrowserWindow.getAllWindows().length == 0) {
+  if (BrowserWindow.getAllWindows().length == 0) {
     createWindow()
   }
 })
