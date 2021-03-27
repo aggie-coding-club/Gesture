@@ -10,7 +10,6 @@ function App() {
   return (
     <div>
       <MainLayout btnClick={btnClick}/>
-
     </div>
   );
 }

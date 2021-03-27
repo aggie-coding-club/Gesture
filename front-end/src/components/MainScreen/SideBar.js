@@ -1,5 +1,6 @@
 import React from "react"
 import Options from "./Options";
+import CameraOption from "./CameraOption";
 
 
 export default function SideBar({btnClick}) {
@@ -25,9 +26,12 @@ export default function SideBar({btnClick}) {
         <Options btnClick={btnClick} name={"Settings"}/>
         <Options btnClick={btnClick} name={"Profile"}/>
         <Options btnClick={btnClick} name={"About"}/>
-        <Options btnClick={btnClick} name={"Camera"}/>
-
       </div>
+      <div>
+        <CameraOption btnClick={btnClick} />
+      </div>
+
+
 
     </div>
   )

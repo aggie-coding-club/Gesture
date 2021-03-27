@@ -18,7 +18,7 @@ export default function MainLayout({btnClick}) {
 
   }
   const cameraScreen = {
-    background: "#3c3740",
+    background: "#3a414d",
     width: "80vw",
     height: "98vh",
     color: "#afb0b2",
