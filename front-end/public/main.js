@@ -11,7 +11,7 @@ function createWindow() {
     icon: __dirname + '/visioncontrols.ico'
   })
 
-  //to get access to Chrome dev tools
+  //to get access to Chrome dev tools -------COMMENT TO BUILD APP --------
   win.webContents.openDevTools()
 
   // build app ----- UNCOMMENT TO BUILD APP --------
