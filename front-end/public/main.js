@@ -14,9 +14,11 @@ function createWindow() {
   //to get access to Chrome dev tools
   win.webContents.openDevTools()
 
-  // build app 
-  win.loadURL(`file://${path.join(__dirname, '../build/index.html')}`)
-}
+  // build app ----- UNCOMMENT TO BUILD APP --------
+  //win.loadURL(`file://${path.join(__dirname, '../build/index.html')}`)
+
+  //developer -------COMMENT TO BUILD APP --------
+  win.loadURL('http://localhost:3000/')}
 
 app.whenReady().then(createWindow)
 
