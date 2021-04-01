@@ -37,6 +37,13 @@ We will be combining React and Electron for this project! To test out this repos
       - Electron is grabbing whatever you are running on your localhost and displaying it on your Electron window.\
       - Consequences: only an empty screen will show up because it could not grab anything from the localhost
 
+## Bundle Electron App
+ 
+ - **cd front-end**
+ - **yarn install** or **npm install**
+ - **npm run preelectron-pack**
+ - **npm run electron-pack**
+
 
 ## Learn More React
 
