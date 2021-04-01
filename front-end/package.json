@@ -15,7 +15,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start":"react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -25,8 +25,11 @@
   },
   "build": {
     "files": [
-    "build/**/*",
-    "node_modules/**/*"
+      "build/**/*",
+      "node_modules/**/*",
+      "./dist/**/*",
+      "./public/**/*",
+      "*.js"
     ],
     "appId": "com.electron.app",
     "artifactName": "vision_controls.${ext}",
@@ -34,15 +37,21 @@
       "target": [
         "deb"
       ],
-      "category": "Utility"
+      "category": "Utility",
+      "icon": "./public/vc.png"
     },
     "win": {
+      "icon": "./public/vc.ico",
       "target": [
         "nsis"
       ]
     },
+    "directories": {
+      "buildResources": "public"
+    },
     "mac": {
-      "category": "public.app-category.utilities"
+      "category": "public.app-category.utilities",
+      "icon": "./public/vc.icns"
     },
     "extends": null
   },
