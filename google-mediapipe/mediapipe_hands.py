@@ -135,5 +135,4 @@ def vid_hand_detect(target):
   print('FPS: ', fps)
 
 # %%
-img_hand_detect(['../../test-vids/piece_sign.png'])
 vid_hand_detect(target)
