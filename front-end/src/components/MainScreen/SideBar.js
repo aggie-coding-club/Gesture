@@ -10,9 +10,24 @@ export default function SideBar({btnClick}) {
     paddingLeft: "1vw"
   }
 
-  const optionStyle = {
-    padding: "10vh 0 10vh 10vw",
+  const optionWrapper = {
+    display: "flex",
+    flexDirection: "column",
+
+    margin: "10vh 0 10vh 0",
+    alignItems: "center"
   }
+  const optionStyle = {
+    flex: 1,
+
+  }
+  const cameraOptionStyle = {
+    flex: 3,
+
+
+  }
+
+
 
 
   return (
@@ -22,13 +37,15 @@ export default function SideBar({btnClick}) {
       <div style={logo}>
         <p>VISIONS CONTROL</p>
       </div>
-      <div style={optionStyle}>
-        <Options btnClick={btnClick} name={"Settings"}/>
-        <Options btnClick={btnClick} name={"Profile"}/>
-        <Options btnClick={btnClick} name={"About"}/>
-      </div>
-      <div>
-        <CameraOption btnClick={btnClick} />
+      <div style={optionWrapper}>
+        <div style={optionStyle}>
+          <Options btnClick={btnClick} name={"Settings"}/>
+          <Options btnClick={btnClick} name={"Profile"}/>
+          <Options btnClick={btnClick} name={"About"}/>
+        </div>
+        <div style={cameraOptionStyle}>
+          <CameraOption btnClick={btnClick} />
+        </div>
       </div>
 
 
