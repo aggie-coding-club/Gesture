@@ -6,7 +6,8 @@ export default function CameraOption({btnClick}) {
   }
 
   const btnContainer = {
-    padding: "5vh 0 5vh 5vw",
+
+    padding: "10vh 0 10vh 0"
   }
 
   const btnStyle = {
@@ -17,6 +18,7 @@ export default function CameraOption({btnClick}) {
     overflow: "hidden",
     outline: "none",
     padding: "2vh 5vw",
+    margin: "auto",
     borderRadius: "10px"
   }
 

@@ -13,13 +13,13 @@ export default function MainLayout({btnClick}) {
   const sideScreen = {
     background: "#090e18",
     color: "#afb0b2",
-    width: "20vw",
+    flex: 1,
     height: "98vh",
 
   }
   const cameraScreen = {
     background: "#3a414d",
-    width: "80vw",
+    flex: 3,
     height: "98vh",
     color: "#afb0b2",
     borderRadius: "25px",
