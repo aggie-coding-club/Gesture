@@ -4,13 +4,19 @@ import mediapipe as mp
 import numpy as np
 import time
 
-# Dimensions of the camera output window
-wCam, hCam = 1280, 720
-
 # Getting openCV ready
 cap = cv2.VideoCapture(0)
-cap.set(3, wCam)
-cap.set(4, hCam)
+
+# Dimensions of the camera output window
+wCam = int(cap.get(3))
+hCam = int(cap.get(4))
+
+# For testing, write output to video
+#out = cv2.VideoWriter('output.mp4',cv2.VideoWriter_fourcc('M','J','P','G'), 30, (wCam,hCam))
+
+# Sets up list to use for averaging the gesture
+frames_to_average = 5 # number of frames to average
+prevGestures = [] # gestures calculated in previous frames
 
 # Getting media-pipe ready
 mpHands = mp.solutions.hands
@@ -37,15 +43,25 @@ def gesture(f):
     :param f: list of open fingers (+ num) and closed fingers (- num)
     :return: string representing the gesture that is detected
     """
+    #print("Thumb is at:", f[0])
     if f[1] > 0 > f[2] and f[4] > 0 > f[3]:
         return "Rock & Roll"
-    if f[0] > 0 and (f[1] < 0 and f[2] < 0 and f[3] < 0 and f[4] < 0):
+    elif f[0] > 0 and (f[1] < 0 and f[2] < 0 and f[3] < 0 and f[4] < 0):
         return "Thumbs Up"
-    if f[1] > 0 and f[2] > 0 and (f[3] < 0 and f[4] < 0):
+    elif f[0] < 0 and f[1] > 0 and f[2] < 0 and (f[3] < 0 and f[4] < 0):
+        return "1 finger"
+    elif f[0] < 0 and f[1] > 0 and f[2] > 0 and (f[3] < 0 and f[4] < 0):
         return "Peace"
-    if f[0] > 0 and f[1] > 0 and f[2] > 0 and f[3] > 0 and f[4] > 0:
+    elif f[0] > 0 and f[1] > 0 and f[2] > 0 and f[3] > 0 and f[4] > 0:
         return "Open Hand"
-    return "No Gesture"
+    elif f[0] < 0 and f[1] < 0 and f[2] < 0 and f[3] < 0 and f[4] < 0:
+        return "Fist"
+    elif f[0] < 0 and f[1] > 0 and f[2] > 0 and f[3] > 0 and f[4] > 0: 
+        return "4 fingers"
+    elif f[0] < 0 and f[1] > 0 and f[2] > 0 and f[3] > 0 and f[4] < 0:
+        return "3 fingers"
+    else:
+        return "No Gesture"
 
 def calcFPS(pt, ct, framelist):
     fps = 1 / (ct - pt)
@@ -82,33 +98,68 @@ def straightFingers(hand, img):
     openFingers = []
     lms = hand.landmark  # 2d list of all 21 landmarks with there respective x, an y coordinates
     for id in fingerTipIDs:
-        x2, y2 = lms[id].x, lms[id].y  # x, and y of the finger tip
-        x1, y1 = lms[id-2].x, lms[id-2].y  # x, and y of the joint 2 points below the finger tip
-        x0, y0 = lms[0].x, lms[0].y  # x, and y of the wrist
-        fv = [x2-x1, y2-y1]  # joint to finger tip vector
-        fv = normalize(fv)
-        pv = [x1-x0, y1-y0]  # wrist to joint vector
-        pv = normalize(pv)
-        openFingers.append(dotProduct(fv, pv))  # Calculates if the finger is open or closed
+        if id == 4: # This is for the thumb calculation, because it works differently than the other fingers
+            x2, y2 = lms[id].x, lms[id].y  # x, and y of the finger tip
+            x1, y1 = lms[id-2].x, lms[id-2].y  # x, and y of the joint 2 points below the finger tip
+            x0, y0 = lms[0].x, lms[0].y  # x, and y of the wrist
+            fv = [x2-x1, y2-y1]  # joint to finger tip vector
+            fv = normalize(fv)
+            pv = [x1-x0, y1-y0]  # wrist to joint vector
+            pv = normalize(pv)
 
-        # Code below draws the two vectors from above
-        cx, cy = int(lms[id].x * wCam), int(lms[id].y * hCam)
-        cx2, cy2 = int(lms[id-2].x * wCam), int(lms[id-2].y * hCam)
-        cx0, cy0 = int(lms[0].x * wCam), int(lms[0].y * hCam)
-        cv2.line(img, (cx0, cy0), (cx2, cy2), (255, 0, 0), 2)
-        if dotProduct(fv, pv) >= 0:
-            cv2.line(img, (cx, cy), (cx2, cy2), (0, 255, 0), 2)
-        else:
-            cv2.line(img, (cx, cy), (cx2, cy2), (0, 0, 255), 2)
-        # cv2.circle(img, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
+            thumb = dotProduct(fv, pv)
+            # Thumb that is greater than 0, but less than .65 is typically
+            # folded across the hand, which should be calculated as "down"
+            if thumb > .65:
+                openFingers.append(thumb)  # Calculates if the finger is open or closed
+            else:
+                openFingers.append(-1)
+
+            # Code below draws the two vectors from above
+            cx, cy = int(lms[id].x * wCam), int(lms[id].y * hCam)
+            cx2, cy2 = int(lms[id-2].x * wCam), int(lms[id-2].y * hCam)
+            cx0, cy0 = int(lms[0].x * wCam), int(lms[0].y * hCam)
+            cv2.line(img, (cx0, cy0), (cx2, cy2), (255, 0, 0), 2)
+            if dotProduct(fv, pv) >= .65:
+                cv2.line(img, (cx, cy), (cx2, cy2), (0, 255, 0), 2)
+            else:
+                cv2.line(img, (cx, cy), (cx2, cy2), (0, 0, 255), 2)
+
+        else: # for any other finger (not thumb)
+            x2, y2 = lms[id].x, lms[id].y  # x, and y of the finger tip
+            x1, y1 = lms[id-2].x, lms[id-2].y  # x, and y of the joint 2 points below the finger tip
+            x0, y0 = lms[0].x, lms[0].y  # x, and y of the wrist
+            fv = [x2-x1, y2-y1]  # joint to finger tip vector
+            fv = normalize(fv)
+            pv = [x1-x0, y1-y0]  # wrist to joint vector
+            pv = normalize(pv)
+            openFingers.append(dotProduct(fv, pv))  # Calculates if the finger is open or closed
+
+            # Code below draws the two vectors from above
+            cx, cy = int(lms[id].x * wCam), int(lms[id].y * hCam)
+            cx2, cy2 = int(lms[id-2].x * wCam), int(lms[id-2].y * hCam)
+            cx0, cy0 = int(lms[0].x * wCam), int(lms[0].y * hCam)
+            cv2.line(img, (cx0, cy0), (cx2, cy2), (255, 0, 0), 2)
+            if dotProduct(fv, pv) >= 0:
+                cv2.line(img, (cx, cy), (cx2, cy2), (0, 255, 0), 2)
+            else:
+                cv2.line(img, (cx, cy), (cx2, cy2), (0, 0, 255), 2)
+            # cv2.circle(img, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
     return openFingers
 
+frame_count = 0
 while True:
     """
     Main code loop
     """
     # Gets the image from openCV and gets the hand data from media-pipe
     success, img = cap.read()
+
+    # If there are no more frames, break loop
+    if img is None:
+        print("Video ended. Closing.")
+        break
+
     imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     results = hands.process(imgRGB)
 
@@ -116,9 +167,17 @@ while True:
     if results.multi_hand_landmarks:
         for handLms in results.multi_hand_landmarks:
             fingers = straightFingers(handLms, img)
-            print(gesture(fingers))
-            # mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
+            prevGestures.append(gesture(fingers))
+            frame_count += 1
+            #mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
             mpDraw.draw_landmarks(img, handLms)
+        
+        # averages 'frames_to_average' amount of frames before deciding on the gesture
+        if frame_count > (frames_to_average - 1):
+            if (all(x == prevGestures[0] for x in prevGestures)):
+                print(prevGestures[0])
+            prevGestures = []
+            frame_count = 0
 
     # Used for fps calculation
     currTime = time.time()
@@ -129,7 +188,11 @@ while True:
     cv2.putText(img, str(int(np.average(fpsList))), (10, 70),
                 cv2.FONT_HERSHEY_PLAIN, 2, (0, 255, 0), 3)
 
-    cv2.imshow("Image", img)
+    cv2.imshow("Video with Hand Detection", img)
+
+    # Used for testing, writing video to output
+    #out.write(img)
+
     cv2.waitKey(1)
 
 
