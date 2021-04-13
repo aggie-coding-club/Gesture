@@ -1,14 +1,29 @@
+
 # Hand Gesture Recognition
 
-## Background Subtraction
-Background subtraction is performed using OpenCV's BackgroundSubtractor class. 
-There are currently two differnt subtractors implemented, MOG2 and KNN.
+  
 
-### Testing Background Subtraction
+## Dependencies
 
-`python3 background_subtraction_test.py -v path_to_video -m method`
-path_to_video: path to a video file that OpenCV supports.
-method: MOG2 or KNN, KNN is currently the better option
+Dependencies can be installed using: `pip install -r requirements.txt`
 
 
+## Using Gesture Recognition
+
+  
+
+`python3 HandTracker.py`
+
+- Uses computer's default camera to detect hand gestures
+
+## Advanced Configuration
+
+### Averaging Frames
+- frames_to_average: number of frames to look at before determining a hand gesture (all must match). Note the following:
+     - With a higher `frames_to_average`, the script may be slow to recognize a gesture.
+     - With a lower `frames_to_average`, the script will be very fast, but may have mistakes.
+
+### Adding / Editing Gestures
+- When adding or editing a gesture in the `gesture` function, keep the following in mind: 
+     - `f[0]` = thumb, `f[1]` = index, `f[2]` = middle, `f[3]` = ring, `f[4]` = pinky
 
