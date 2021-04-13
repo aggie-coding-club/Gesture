@@ -28,6 +28,7 @@ Python 3
      - With a higher `frames_to_average`, the script may be slow to recognize a gesture.
      - With a lower `frames_to_average`, the script will be very fast, but may have mistakes.
 
+### Adding / Editing Gestures
 - When adding or editing a gesture in the `gesture` function, keep the following in mind: 
      - `f[0]` = thumb, `f[1]` = index, `f[2]` = middle, `f[3]` = ring, `f[4]` = pinky
 
