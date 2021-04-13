@@ -5,6 +5,8 @@
 
 ## Dependencies
 
+Dependencies can be installed using: `pip install -r requirements.txt`
+
 Python 3
 
 `pip install opencv-python`
