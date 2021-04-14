@@ -147,6 +147,19 @@ def straightFingers(hand, img):
             # cv2.circle(img, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
     return openFingers
 
+def getHand(handedness):
+    '''
+    Mediapipe assumes that the camera is mirrored
+    :param handedness: media-pipe object of handedness
+    :return: string that is 'Left' or 'Right'
+    '''
+    hand = handedness.classification[0].label
+
+    if(hand == 'Left'):
+        return 'Right'
+    else:
+        return 'Left'
+
 frame_count = 0
 while True:
     """
@@ -163,19 +176,27 @@ while True:
     imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     results = hands.process(imgRGB)
 
+    leftPrevGestures = []
+    rightPrevGestures = []
     # if there are hands in frame, calculate which fingers are open and draw the landmarks for each hand
     if results.multi_hand_landmarks:
-        for handLms in results.multi_hand_landmarks:
+        for handLms, handedness in zip(results.multi_hand_landmarks, results.multi_handedness):
             fingers = straightFingers(handLms, img)
-            prevGestures.append(gesture(fingers))
+            hand = getHand(handedness)
+            if hand == "Left":
+                leftPrevGestures.append(gesture(fingers))
+            else:
+                rightPrevGestures.append(gesture(fingers))
             frame_count += 1
             #mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
             mpDraw.draw_landmarks(img, handLms)
         
         # averages 'frames_to_average' amount of frames before deciding on the gesture
         if frame_count > (frames_to_average - 1):
-            if (all(x == prevGestures[0] for x in prevGestures)):
-                print(prevGestures[0])
+            if (len(rightPrevGestures) != 0 and all(x == rightPrevGestures[0] for x in rightPrevGestures)):
+                print('Right: ', rightPrevGestures[0])
+            if (len(leftPrevGestures) != 0 and all(x == leftPrevGestures[0] for x in leftPrevGestures)):
+                print('Left: ', leftPrevGestures[0])
             prevGestures = []
             frame_count = 0
 
