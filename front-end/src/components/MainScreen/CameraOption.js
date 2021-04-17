@@ -6,7 +6,6 @@ export default function CameraOption({btnClick}) {
   }
 
   const btnContainer = {
-
     padding: "10vh 0 10vh 0"
   }
 

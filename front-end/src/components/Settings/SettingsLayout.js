@@ -4,7 +4,7 @@ import TrickGesturesPairs from "./TrickGesturePairs";
 
 
 export default function SettingsLayout() {
-  const tricks = ["one", "two", "sit", "stand"]
+  const tricks = ["open chrome", "mute volume", "raise volume", "lower volume"]
 
 
   const settingsStyle = {

@@ -1,5 +1,4 @@
 import React from "react"
-import Trick from "./Tricks";
 import HandButtons from "./HandButtons";
 
 export default function TrickGesturePair({trick}) {
@@ -11,10 +10,14 @@ export default function TrickGesturePair({trick}) {
     borderBottom: "1px solid #afb0b2"
   }
 
+  const trickContainer = {
+    flex: 1,
+  }
 
   const tricksStyle = {
-    flex: 1,
-    //backgroundColor: "green"
+    margin: "auto",
+    padding: "2vh 3vw",
+
   }
 
   const handButtonsStyle = {
@@ -24,8 +27,11 @@ export default function TrickGesturePair({trick}) {
 
   return (
     <div style={contentStyle}>
-        <div style={tricksStyle}>
-          <Trick trick={trick}/>
+        <div style={trickContainer}>
+          <div style={tricksStyle}>
+            {trick}
+          </div>
+
         </div>
         <div style={handButtonsStyle}>
           <HandButtons />
