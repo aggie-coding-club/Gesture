@@ -1,5 +1,6 @@
 import './App.css';
 import MainLayout from "./components/MainScreen/MainLayout";
+import SettingsLayout from "./components/Settings/SettingsLayout"
 
 function App() {
 
@@ -7,11 +8,18 @@ function App() {
     console.log("clicked", name)
   }
 
+  //return mainlayout
+  // return (
+  //   <div>
+  //     <MainLayout btnClick={btnClick}/>
+  //   </div>
+  // );
+
   return (
     <div>
-      <MainLayout btnClick={btnClick}/>
+      <SettingsLayout />
     </div>
-  );
+  )
 }
 
 export default App;

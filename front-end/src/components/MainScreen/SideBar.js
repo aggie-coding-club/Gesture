@@ -23,12 +23,7 @@ export default function SideBar({btnClick}) {
   }
   const cameraOptionStyle = {
     flex: 3,
-
-
   }
-
-
-
 
   return (
 
