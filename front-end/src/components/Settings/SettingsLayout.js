@@ -11,8 +11,15 @@ export default function SettingsLayout() {
     margin: 0
   }
 
+  const titleStyle = {
+    textAlign: "center"
+  }
+
   return (
     <div style={settingsStyle}>
+      <div style={titleStyle}>
+        <h1>SETTINGS</h1>
+      </div>
       <p>Ello?</p>
     </div>
   )
