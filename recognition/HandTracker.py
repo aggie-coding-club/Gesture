@@ -212,7 +212,7 @@ while True:
                 currGests[hand] = gestures[hand]
             # keep only the 3 previous Gestures
             prevGests[hand].append(gestures[hand])
-            prevGests[hand] = prevGests[hand][-3:]
+            prevGests[hand] = prevGests[hand][-frames_until_change:]
 
     # Used for fps calculation
     currTime = time.time()
