@@ -162,22 +162,6 @@ def getHand(handedness):
     else:
         return 'Left'
 
-def logFile(file, leftGestures, rightGestures):
-    '''
-    Used for testing the same gesture output in HandEvents.py, not currently used
-    '''
-    left = 'null'
-    if leftGestures:
-        left = f'"{leftGestures[0]}"'
-    right = 'null'
-    if rightGestures:
-        right = f'"{rightGestures[0]}"'
-    file.write(f'{{"left":{left}, "right":{right}}}\n')
-
-# outFile = open('log.txt', 'w') 
-# Used this command for HandEvents.py for testing
-# cat log.txt | jq -s "map(.right)" -cM > log.json
-
 prevGests = {
     "right": [],
     "left": [],
