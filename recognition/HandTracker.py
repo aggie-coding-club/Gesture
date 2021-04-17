@@ -160,6 +160,22 @@ def getHand(handedness):
     else:
         return 'Left'
 
+def logFile(file, leftGestures, rightGestures):
+    # left = ", ".join(f'"{x}"' for x in leftGestures)
+    # right = ", ".join(f'"{x}"' for x in rightGestures)
+    # file.write(f'{{ "time":{time.time()}, "left":[{left}], "right":[{right}]}}\n')
+    left = 'null'
+    if leftGestures:
+        left = f'"{leftGestures[0]}"'
+    right = 'null'
+    if rightGestures:
+        right = f'"{rightGestures[0]}"'
+    file.write(f'{{"left":{left}, "right":{right}}}\n')
+
+outFile = open('log.txt', 'w') 
+# Used this command for HandEvents.py for testing
+# cat log.txt | jq -s "map(.right)" -cM > log.json
+
 frame_count = 0
 while True:
     """
@@ -191,6 +207,7 @@ while True:
             #mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
             mpDraw.draw_landmarks(img, handLms)
         
+        logFile(outFile, leftPrevGestures, rightPrevGestures)
         # averages 'frames_to_average' amount of frames before deciding on the gesture
         if frame_count > (frames_to_average - 1):
             if (len(rightPrevGestures) != 0 and all(x == rightPrevGestures[0] for x in rightPrevGestures)):
@@ -215,7 +232,3 @@ while True:
     #out.write(img)
 
     cv2.waitKey(1)
-
-
-
-
