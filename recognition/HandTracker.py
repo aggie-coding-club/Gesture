@@ -186,6 +186,8 @@ while True:
     imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     results = hands.process(imgRGB)
 
+    leftPrevGestures = []
+    rightPrevGestures = []
     # if there are hands in frame, calculate which fingers are open and draw the landmarks for each hand
     if results.multi_hand_landmarks:
         gestures = {}
