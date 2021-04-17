@@ -19,10 +19,8 @@ export default function SettingsLayout() {
     textAlign: "center",
   }
 
-  const contentStyle = {
-    display: "flex",
-    backgroundColor: "white",
-    textAlign: "center"
+  const pairStyle = {
+    margin: "0 5vw 0 5vw"
   }
 
 
@@ -31,7 +29,7 @@ export default function SettingsLayout() {
       <div style={titleStyle}>
         <h1>SETTINGS</h1>
       </div>
-      <div style={contentStyle}>
+      <div style={pairStyle}>
         <TrickGesturesPairs tricks={tricks}/>
       </div>
     </div>

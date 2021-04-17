@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Tricks({trick}) {
+export default function Trick({trick}) {
 
 
   return (
