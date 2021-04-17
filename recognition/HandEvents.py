@@ -1,3 +1,4 @@
+# Only used for testing log file made by logFile function in HandEvents.py
 # %%
 import json
 inFile = open("log.json")

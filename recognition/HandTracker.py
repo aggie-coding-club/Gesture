@@ -14,8 +14,10 @@ hCam = int(cap.get(4))
 # For testing, write output to video
 #out = cv2.VideoWriter('output.mp4',cv2.VideoWriter_fourcc('M','J','P','G'), 30, (wCam,hCam))
 
-# Sets up list to use for averaging the gesture
-frames_to_average = 5 # number of frames to average
+# Number of consecutive frames a gesture has to be detected before it changes
+# Lower the number the faster it changes, but the more jumpy it is
+# Higher the number the slower it changes, but the less jumpy it is
+frames_until_change = 3
 prevGestures = [] # gestures calculated in previous frames
 
 # Getting media-pipe ready
@@ -161,9 +163,9 @@ def getHand(handedness):
         return 'Left'
 
 def logFile(file, leftGestures, rightGestures):
-    # left = ", ".join(f'"{x}"' for x in leftGestures)
-    # right = ", ".join(f'"{x}"' for x in rightGestures)
-    # file.write(f'{{ "time":{time.time()}, "left":[{left}], "right":[{right}]}}\n')
+    '''
+    Used for testing the same gesture output in HandEvents.py, not currently used
+    '''
     left = 'null'
     if leftGestures:
         left = f'"{leftGestures[0]}"'
@@ -172,10 +174,18 @@ def logFile(file, leftGestures, rightGestures):
         right = f'"{rightGestures[0]}"'
     file.write(f'{{"left":{left}, "right":{right}}}\n')
 
-outFile = open('log.txt', 'w') 
+# outFile = open('log.txt', 'w') 
 # Used this command for HandEvents.py for testing
 # cat log.txt | jq -s "map(.right)" -cM > log.json
 
+prevGests = {
+    "right": [],
+    "left": [],
+}
+currGests = {
+    "right": None,
+    "left": None,
+}
 frame_count = 0
 while True:
     """
@@ -192,30 +202,33 @@ while True:
     imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     results = hands.process(imgRGB)
 
-    leftPrevGestures = []
-    rightPrevGestures = []
     # if there are hands in frame, calculate which fingers are open and draw the landmarks for each hand
     if results.multi_hand_landmarks:
+        gestures = {}
         for handLms, handedness in zip(results.multi_hand_landmarks, results.multi_handedness):
             fingers = straightFingers(handLms, img)
             hand = getHand(handedness)
             if hand == "Left":
-                leftPrevGestures.append(gesture(fingers))
+                gestures['left'] = gesture(fingers)
             else:
-                rightPrevGestures.append(gesture(fingers))
+                gestures['right'] = gesture(fingers)
             frame_count += 1
             #mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
             mpDraw.draw_landmarks(img, handLms)
         
-        logFile(outFile, leftPrevGestures, rightPrevGestures)
-        # averages 'frames_to_average' amount of frames before deciding on the gesture
-        if frame_count > (frames_to_average - 1):
-            if (len(rightPrevGestures) != 0 and all(x == rightPrevGestures[0] for x in rightPrevGestures)):
-                print('Right: ', rightPrevGestures[0])
-            if (len(leftPrevGestures) != 0 and all(x == leftPrevGestures[0] for x in leftPrevGestures)):
-                print('Left: ', leftPrevGestures[0])
-            prevGestures = []
-            frame_count = 0
+        # logFile(outFile, leftPrevGestures, rightPrevGestures)
+        # print(f"{frame_count}, {gestures}, {len(results.multi_hand_landmarks)}")
+        for hand in ['left', 'right']:
+            if not hand in gestures:
+                continue
+            # if gesture is diff from currGesture and the previous 3 gestures are the same as the current gesture
+            # too much gesture, it is not a word anymore
+            if(gestures[hand] != currGests[hand] and all(x == gestures[hand] for x in prevGests[hand])):
+                print(f'{hand} "Key Down": {gestures[hand]}')
+                currGests[hand] = gestures[hand]
+            # keep only the 3 previous Gestures
+            prevGests[hand].append(gestures[hand])
+            prevGests[hand] = prevGests[hand][-3:]
 
     # Used for fps calculation
     currTime = time.time()
