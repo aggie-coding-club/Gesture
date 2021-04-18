@@ -6,7 +6,8 @@ import GestureBox from "./GestureBox";
 export default function HandButtons() {
 
   const [borderClr, setBorderClr] = useState("none");
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
+  const [buttonName, setButtonName] = useState(-1); //FIXME: should read in from file
 
   function handleClick() {
     //if button clicked, outline border
@@ -17,6 +18,10 @@ export default function HandButtons() {
   function closeModal() {
     setShowModal(false)
     setBorderClr("none")
+  }
+
+  function newSetting(newGesture) {
+    setButtonName(newGesture);
   }
 
   const btnStyle = {
@@ -58,7 +63,7 @@ export default function HandButtons() {
 
   return (
     <div>
-      <button style={btnStyle} onClick={handleClick}> Button </button>
+      <button style={btnStyle} onClick={handleClick}> {buttonName} </button>
         <Modal
           isOpen={showModal}
           contentLabel="Minimal example"
@@ -66,7 +71,6 @@ export default function HandButtons() {
           ariaHideApp={false}
           style={{
             overlay: {
-              //backgroundColor: 'papayawhip'
               margin: 0,
               padding: 0
             },
@@ -81,19 +85,19 @@ export default function HandButtons() {
         >
           <div style={modalContainer}>
             <div style={row}>
-              <GestureBox name={1} />
-              <GestureBox name={2}/>
-              <GestureBox name={3}/>
+              <GestureBox name={1} newSetting={newSetting}/>
+              <GestureBox name={2} newSetting={newSetting}/>
+              <GestureBox name={3} newSetting={newSetting}/>
             </div>
             <div style={row}>
-              <GestureBox name={4} />
-              <GestureBox name={5} />
-              <GestureBox name={6} />
+              <GestureBox name={4} newSetting={newSetting}/>
+              <GestureBox name={5} newSetting={newSetting}/>
+              <GestureBox name={6} newSetting={newSetting}/>
             </div>
             <div style={row}>
-              <GestureBox name={7} />
-              <GestureBox name={8} />
-              <GestureBox name={9} />
+              <GestureBox name={7} newSetting={newSetting}/>
+              <GestureBox name={8} newSetting={newSetting}/>
+              <GestureBox name={9} newSetting={newSetting}/>
             </div>
           </div>
 

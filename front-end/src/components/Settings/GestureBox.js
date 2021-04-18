@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-export default function GestureBox({name}) {
+export default function GestureBox({name, newSetting}) {
   const [theBackground, setTheBackground] = useState("#081a2d")
 
   const innerGrid = {
@@ -17,10 +17,12 @@ export default function GestureBox({name}) {
 
   function handleClick() {
     if(theBackground == "#081a2d") {
-      setTheBackground("#2d0808");
+      setTheBackground("#b81212");
     } else {
       setTheBackground("#081a2d")
     }
+
+    newSetting(name)
   }
   return (
     <div onClick={handleClick} style={innerGrid}>
