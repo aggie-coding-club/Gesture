@@ -42,12 +42,15 @@ export default function HandButtons() {
         style={{
           overlay: {
             //backgroundColor: 'papayawhip'
+            margin: 0,
+            padding: 0
           },
           content: {
             backgroundColor: "red",
             height: "20vh",
-            width: "10vw",
-            margin: "10vw"
+            width: "20vh",
+            margin: "30vh auto",
+
           }
         }}
       >

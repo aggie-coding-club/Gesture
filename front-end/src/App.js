@@ -8,7 +8,7 @@ function App() {
     console.log("clicked", name)
   }
 
-  //return mainlayout
+  //return main layout
   // return (
   //   <div>
   //     <MainLayout btnClick={btnClick}/>
