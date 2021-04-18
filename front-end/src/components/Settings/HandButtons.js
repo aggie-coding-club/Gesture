@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import Modal from 'react-modal'
+import GestureBox from "./GestureBox";
 
 
 export default function HandButtons() {
@@ -80,37 +81,19 @@ export default function HandButtons() {
         >
           <div style={modalContainer}>
             <div style={row}>
-              <div style={innerGrid}>
-                <div style={gestures}>1</div>
-              </div>
-              <div style={innerGrid}>
-                <div style={gestures}>2</div>
-              </div>
-              <div style={innerGrid}>
-                <div style={gestures}>3</div>
-              </div>
+              <GestureBox name={1} />
+              <GestureBox name={2}/>
+              <GestureBox name={3}/>
             </div>
             <div style={row}>
-              <div style={innerGrid}>
-                <div style={gestures}>4</div>
-              </div>
-              <div style={innerGrid}>
-                <div style={gestures}>5</div>
-              </div>
-              <div style={innerGrid}>
-                <div style={gestures}>6</div>
-              </div>
+              <GestureBox name={4} />
+              <GestureBox name={5} />
+              <GestureBox name={6} />
             </div>
             <div style={row}>
-              <div style={innerGrid}>
-                <div style={gestures}>7</div>
-              </div>
-              <div style={innerGrid}>
-                <div style={gestures}>8</div>
-              </div>
-              <div style={innerGrid}>
-                <div style={gestures}>9</div>
-              </div>
+              <GestureBox name={7} />
+              <GestureBox name={8} />
+              <GestureBox name={9} />
             </div>
           </div>
 
