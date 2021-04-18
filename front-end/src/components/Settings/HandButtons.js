@@ -3,11 +3,13 @@ import Modal from 'react-modal'
 import GestureBox from "./GestureBox";
 
 
-export default function HandButtons() {
+export default function HandButtons({initialBtnName}) {
 
   const [borderClr, setBorderClr] = useState("none");
   const [showModal, setShowModal] = useState(false);
-  const [buttonName, setButtonName] = useState(-1); //FIXME: should read in from file
+  const [buttonName, setButtonName] = useState(initialBtnName); //FIXME: should read in from file
+  const [redNum, setRedNum] = useState(-2);
+
 
   function handleClick() {
     //if button clicked, outline border
@@ -22,6 +24,8 @@ export default function HandButtons() {
 
   function newSetting(newGesture) {
     setButtonName(newGesture);
+    setRedNum(newGesture)
+    //setTimeout(function(){ setShowModal(false) }, 500);
   }
 
   const btnStyle = {
@@ -85,19 +89,19 @@ export default function HandButtons() {
         >
           <div style={modalContainer}>
             <div style={row}>
-              <GestureBox name={1} newSetting={newSetting}/>
-              <GestureBox name={2} newSetting={newSetting}/>
-              <GestureBox name={3} newSetting={newSetting}/>
+              <GestureBox name={1} newSetting={newSetting} redNum={redNum}/>
+              <GestureBox name={2} newSetting={newSetting} redNum={redNum}/>
+              <GestureBox name={3} newSetting={newSetting} redNum={redNum}/>
             </div>
             <div style={row}>
-              <GestureBox name={4} newSetting={newSetting}/>
-              <GestureBox name={5} newSetting={newSetting}/>
-              <GestureBox name={6} newSetting={newSetting}/>
+              <GestureBox name={4} newSetting={newSetting} redNum={redNum}/>
+              <GestureBox name={5} newSetting={newSetting} redNum={redNum}/>
+              <GestureBox name={6} newSetting={newSetting} redNum={redNum}/>
             </div>
             <div style={row}>
-              <GestureBox name={7} newSetting={newSetting}/>
-              <GestureBox name={8} newSetting={newSetting}/>
-              <GestureBox name={9} newSetting={newSetting}/>
+              <GestureBox name={7} newSetting={newSetting} redNum={redNum}/>
+              <GestureBox name={8} newSetting={newSetting} redNum={redNum}/>
+              <GestureBox name={9} newSetting={newSetting} redNum={redNum}/>
             </div>
           </div>
 

@@ -3,11 +3,14 @@ import TrickGesturePair from "./TrickGesturePair";
 
 export default function TrickGesturesPairs({tricks}) {
 
+
   return (
     <div>
       {
-        tricks.map((trick) => (
-          <TrickGesturePair trick={trick} />
+        tricks.map((trick, index) => (
+
+          <TrickGesturePair trick={trick} initialBtnName={index+1}/>
+
         ))
       }
     </div>
