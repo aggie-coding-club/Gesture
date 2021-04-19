@@ -1,0 +1,24 @@
+{
+  "settings": {
+    "openChrome": {
+      "id": 1,
+      "name": "Open Chrome",
+      "keyCode": 1
+    },
+    "muteVolume": {
+      "id": 2,
+      "name": "Open Chrome",
+      "keyCode": 2
+    },
+    "raiseVolume": {
+      "id": 3,
+      "name": "Open Chrome",
+      "keyCode": 3
+    },
+    "lowerVolume": {
+      "id": 4,
+      "name": "Open Chrome",
+      "keyCode": 5
+    }
+  }
+}
