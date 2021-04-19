@@ -12,11 +12,7 @@ export default function Options({name, btnClick}) {
     cursor: "pointer",
     overflow: "hidden",
     outline: "none",
-
-
   }
-
-
 
   function toggleChange() {
     btnClick(name);

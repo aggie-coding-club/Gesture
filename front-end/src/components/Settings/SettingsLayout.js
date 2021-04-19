@@ -5,6 +5,7 @@ import TrickGesturesPairs from "./TrickGesturePairs";
 
 export default function SettingsLayout() {
   const tricks = ["open chrome", "mute volume", "raise volume", "lower volume"]
+  const defaultNum = [1, 2, 3, 4, 5, 6, 7, 8, 9] //FIXME: should be read from file
 
 
   const settingsStyle = {
@@ -30,7 +31,7 @@ export default function SettingsLayout() {
         <h1>SETTINGS</h1>
       </div>
       <div style={pairStyle}>
-        <TrickGesturesPairs tricks={tricks}/>
+        <TrickGesturesPairs tricks={tricks} defaultNum={defaultNum}/>
       </div>
     </div>
   )
