@@ -24,9 +24,7 @@ export default function SettingsLayout() {
     margin: "0 5vw 0 5vw"
   }
 
-  function newSetting(index, newNum) {
-    // let index = 0;
-    // let newNum = 100;
+  function changeSettings(index, newNum) {
 
     let copy = data;
     copy[index][1] = newNum;
@@ -35,7 +33,7 @@ export default function SettingsLayout() {
   }
 
   function displayData() {
-    console.log(data[0][1]);
+    console.log(data);
   }
 
 
@@ -45,10 +43,10 @@ export default function SettingsLayout() {
         <h1>SETTINGS</h1>
       </div>
       <div style={pairStyle}>
-        <TrickGesturesPairs tricks={tricks} defaultNum={defaultNum} data={data}/>
+        <TrickGesturesPairs changeSettings={changeSettings} data={data}/>
       </div>
       <div>
-        <button onClick={newSetting}>Change data</button>
+        <button onClick={changeSettings}>Change data</button>
         <button onClick={displayData}>See data</button>
       </div>
     </div>
