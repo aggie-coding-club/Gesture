@@ -59,10 +59,6 @@ export default function HandButtons({dat, changeSettings}) {
     color: "white",
   }
 
-  const gestures = {
-    padding: "5vh"
-
-  }
 
   return (
     <div>

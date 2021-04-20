@@ -25,17 +25,14 @@ export default function SettingsLayout() {
   }
 
   function changeSettings(index, newNum) {
-
     let copy = data;
     copy[index][1] = newNum;
-
     setData(copy);
   }
 
   function displayData() {
     console.log(data);
   }
-
 
   return (
     <div style={settingsStyle}>
