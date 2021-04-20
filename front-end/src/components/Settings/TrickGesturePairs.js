@@ -1,7 +1,7 @@
 import React from 'react'
 import TrickGesturePair from "./TrickGesturePair";
 
-export default function TrickGesturesPairs({tricks, defaultNum}) {
+export default function TrickGesturesPairs({tricks, defaultNum, data}) {
 
 
   return (
@@ -9,7 +9,7 @@ export default function TrickGesturesPairs({tricks, defaultNum}) {
       {
         tricks.map((trick, index) => (
 
-          <TrickGesturePair trick={trick} initialBtnName={defaultNum[index]}/>
+          <TrickGesturePair trick={trick} initialBtnName={data[index][1]} dat={data[index]} key={data[index][2]}/>
 
         ))
       }

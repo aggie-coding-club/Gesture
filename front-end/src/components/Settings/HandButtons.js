@@ -3,11 +3,11 @@ import Modal from 'react-modal'
 import GestureBox from "./GestureBox";
 
 
-export default function HandButtons({initialBtnName}) {
+export default function HandButtons({ dat}) {
 
   const [borderClr, setBorderClr] = useState("none");
   const [showModal, setShowModal] = useState(false);
-  const [buttonName, setButtonName] = useState(initialBtnName); //FIXME: should read in from file
+  const [buttonName, setButtonName] = useState(dat[1]); //FIXME: should read in from file
   const [redNum, setRedNum] = useState(-2);
 
 
