@@ -9,7 +9,7 @@ export default function TrickGesturesPairs({tricks, defaultNum, data}) {
       {
         tricks.map((trick, index) => (
 
-          <TrickGesturePair trick={trick} initialBtnName={data[index][1]} dat={data[index]} key={data[index][2]}/>
+          <TrickGesturePair trick={trick} initialBtnName={defaultNum} dat={data[index]} key={data[index][2]}/>
 
         ))
       }

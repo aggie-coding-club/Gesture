@@ -3,7 +3,7 @@ import Modal from 'react-modal'
 import GestureBox from "./GestureBox";
 
 
-export default function HandButtons({ dat}) {
+export default function HandButtons({dat}) {
 
   const [borderClr, setBorderClr] = useState("none");
   const [showModal, setShowModal] = useState(false);
