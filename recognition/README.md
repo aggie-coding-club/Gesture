@@ -1,6 +1,5 @@
 
 # Hand Gesture Recognition
-
   
 
 ## Dependencies
@@ -10,18 +9,40 @@ Dependencies can be installed using: `pip install -r requirements.txt`
 
 ## Using Gesture Recognition
 
-  
+### Setup
 
-`python3 HandTracker.py`
+`camera_index` - Default is 0, but if you camera is not recognized your index may be 1
+
+### Commands
+
+`python HandTracker.py`
 
 - Uses computer's default camera to detect hand gestures
 
-## Advanced Configuration
+`python HandTracker.py -m mouse`
+
+- Uses gesture recognition to control the mouse
+
+## Using features
+
+### Basics
+
+- Keep your palm facing the camera when making hand gestures
+
+### Mouse Control
+
+- Start HandTracker.py in mouse control mode with the `-m mouse` flag
+- The mouse control currently works on an anchor system
+- When the camera sees a "Thumbs Up", it sets that position as the anchor
+- Keep a thumbs up and move your hand away from the anchor to see the mouse move.
+- Change to a "Fist" when you want to click
+
+## Notes for Developers
 
 ### Averaging Frames
-- frames_to_average: number of frames to look at before determining a hand gesture (all must match). Note the following:
-     - With a higher `frames_to_average`, the script may be slow to recognize a gesture.
-     - With a lower `frames_to_average`, the script will be very fast, but may have mistakes.
+- frames_until_change: number of frames to look at before determining a hand gesture (all must match). Note the following:
+     - With a higher `frames_until_change`, the script may be slow to recognize a gesture.
+     - With a lower `frames_until_change`, the script will be very fast, but may have mistakes.
 
 ### Adding / Editing Gestures
 - When adding or editing a gesture in the `gesture` function, keep the following in mind: 
