@@ -166,6 +166,38 @@ def getHand(handedness):
     else:
         return 'Left'
 
+#Handles the entering and exiting of mouse-movement mode and also handles mouse clicks
+def mouseModeHandler(hand, currGests, gestures, results, mouseHand):
+    # Enters mouse movement mode on thumbs up gesture, setting a mouse anchor point at that position
+    if(hand == mouseHand and currGests[hand] != "Thumbs Up" and currGests[hand] != "Fist" and gestures[hand] == "Thumbs Up"):
+        print("Entering mouse mode at (" + str(results.multi_hand_landmarks[0].landmark[0].x) + ", " + str(results.multi_hand_landmarks[0].landmark[0].y) + ")")
+        #print(mouseAnchor)
+        #mouseAnchor = [results.multi_hand_landmarks[0].landmark[0].x, results.multi_hand_landmarks[0].landmark[0].y]
+        #print(mouseAnchor)
+        return [results.multi_hand_landmarks[0].landmark[0].x, results.multi_hand_landmarks[0].landmark[0].y]
+        
+    # Leave mouse mode when gesture isn't thumbs up or fist anymore
+    if (hand == mouseHand and (currGests[hand] == "Thumbs Up" or currGests[hand] == "Fist") and gestures[hand] != "Fist" and gestures[hand] != "Thumbs Up"):
+        print("Exiting mouse mode.")
+        #mouseAnchor = [-1,-1]
+        return [-1,-1]
+    
+    # Clicks the mouse upon a fist gesture while in mouse-movement mode
+    if(hand == mouseHand and currGests[hand] == "Thumbs Up" and gestures[hand] == "Fist"):
+        pyautogui.click()
+        print("Click!")
+        
+    return mouseAnchor
+
+
+       
+#Moves the mouse while in mouse-movement mode (a.k.a. when mouseAnchor isn't [-1,-1])
+#If distance from mouse anchor point is far enough, start moving the mouse in that direction.
+def moveMouse(results):
+    if(mouseAnchor != [-1,-1] and ((results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0])**2 + (results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1])**2)**0.5 > 0.05):
+        print("Moving mouse")
+        pyautogui.moveTo(pyautogui.position()[0] - ((results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0])*200), pyautogui.position()[1] + ((results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1])*200))
+
 prevGests = {
     "right": [],
     "left": [],
@@ -196,7 +228,6 @@ while True:
     if results.multi_hand_landmarks:
         gestures = {}
         
-        
         for handLms, handedness in zip(results.multi_hand_landmarks, results.multi_handedness):
             fingers = straightFingers(handLms, img)
             hand = getHand(handedness)
@@ -213,33 +244,15 @@ while True:
         for hand in ['left', 'right']:
             if not hand in gestures:
                 continue
-                
-            #Moves the mouse while in mouse-movement mode (a.k.a. when mouseAnchor isn't [-1,-1])
-            #If distance from mouse anchor point is far enough, start moving the mouse in that direction.
-            if(mouseAnchor != [-1,-1] and ((results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0])**2 + (results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1])**2)**0.5 > 0.05):
-                print("Moving mouse")
-                pyautogui.moveTo(pyautogui.position()[0] - ((results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0])*200), pyautogui.position()[1] + ((results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1])*200))
-                
+            #Moves mouse if in mouse mode
+            moveMouse(results)
+            
             # if gesture is diff from currGesture and the previous 3 gestures are the same as the current gesture
             # too much gesture, it is not a word anymore
             if(gestures[hand] != currGests[hand] and all(x == gestures[hand] for x in prevGests[hand])):
                 print(f'{hand} "Key Down": {gestures[hand]}')
-                
-                # Enters mouse movement mode on thumbs up gesture, setting a mouse anchor point at that position
-                if(hand == "right" and currGests[hand] != "Thumbs Up" and currGests[hand] != "Fist" and gestures[hand] == "Thumbs Up"):
-                    print("Entering mouse mode at (" + str(results.multi_hand_landmarks[0].landmark[0].x) + ", " + str(results.multi_hand_landmarks[0].landmark[0].y) + ")")
-                    mouseAnchor = [results.multi_hand_landmarks[0].landmark[0].x, results.multi_hand_landmarks[0].landmark[0].y]
-                    
-                # Clicks the mouse upon fist gesture following thumbs up gesture
-                if(hand == "right" and currGests[hand] == "Thumbs Up" and gestures[hand] == "Fist"):
-                    pyautogui.click()
-                    print("Click!")
-
-                # Leave mouse mode when gesture isn't thumbs up or fist anymore
-                if(hand == "right" and (currGests[hand] == "Thumbs Up" or currGests[hand] == "Fist") and gestures[hand] != "Fist" and gestures[hand] != "Thumbs Up"):
-                    print("Exiting mouse mode.")
-                    mouseAnchor = [-1,-1]
-                
+                #Handles mouse-movement mode through mouseModeHandler function
+                mouseAnchor = mouseModeHandler(hand, currGests, gestures, results, "right");
                 currGests[hand] = gestures[hand]
                 
             # keep only the 3 previous Gestures
