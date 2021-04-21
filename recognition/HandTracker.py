@@ -47,7 +47,7 @@ def parse_arguments():
     p.add_argument('-m', type=str, help='The mode that the recognition will control for (ie. mouse)')
 
     return p.parse_args()
-
+ 
 def dotProduct(v1, v2):
     return v1[0]*v2[0] + v1[1]*v2[1]
 
@@ -212,7 +212,6 @@ def moveMouse(results):
         print("Moving mouse")
         pyautogui.moveTo(pyautogui.position()[0] - ((results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0])*200), pyautogui.position()[1] + ((results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1])*200))
 
-
 # Preparing arguments for main
 args = parse_arguments() # parsing arguments
 
@@ -271,9 +270,11 @@ while True:
             # too much gesture, it is not a word anymore
             if(gestures[hand] != currGests[hand] and all(x == gestures[hand] for x in prevGests[hand])):
                 print(f'{hand}: {gestures[hand]}')
+                
                 if (args.m == 'mouse'):
                     # Handles mouse-movement mode through mouseModeHandler function
                     mouseAnchor = mouseModeHandler(hand, currGests, gestures, results, "right")
+
                 currGests[hand] = gestures[hand]
                 
             # keep only the 3 previous Gestures
