@@ -216,9 +216,9 @@ while True:
                 
             #Moves the mouse while in mouse-movement mode 
             #If distance from mouse anchor point is far enough, start moving the mouse in that direction.
-            if(mouseAnchor != [-1,-1] and ((results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0])**2 + (results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1])**2)**0.5 > 0.15):
+            if(mouseAnchor != [-1,-1] and ((results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0])**2 + (results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1])**2)**0.5 > 0.05):
                 print("Moving mouse")
-                pyautogui.moveTo(pyautogui.position()[0] - (results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0]) * 100, pyautogui.position()[1] - (results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1]) * 100)
+                pyautogui.moveTo(pyautogui.position()[0] - ((results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0])*200), pyautogui.position()[1] + ((results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1])*200))
                 
             # if gesture is diff from currGesture and the previous 3 gestures are the same as the current gesture
             # too much gesture, it is not a word anymore
