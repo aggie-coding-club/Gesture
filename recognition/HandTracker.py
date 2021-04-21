@@ -6,7 +6,7 @@ import pyautogui
 import time
 
 # Getting openCV ready
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 
 # Dimensions of the camera output window
 wCam = int(cap.get(3))
