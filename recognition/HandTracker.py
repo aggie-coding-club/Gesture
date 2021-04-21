@@ -2,10 +2,11 @@
 import cv2
 import mediapipe as mp
 import numpy as np
+import pyautogui
 import time
 
 # Getting openCV ready
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 # Dimensions of the camera output window
 wCam = int(cap.get(3))
@@ -29,6 +30,9 @@ mpDraw = mp.solutions.drawing_utils
 prevTime = 0
 currTime = 0
 fpsList = []
+
+# Mouse movement anchor
+mouseAnchor = [-1,-1]
 
 def dotProduct(v1, v2):
     return v1[0]*v2[0] + v1[1]*v2[1]
@@ -191,6 +195,8 @@ while True:
     # if there are hands in frame, calculate which fingers are open and draw the landmarks for each hand
     if results.multi_hand_landmarks:
         gestures = {}
+        
+        
         for handLms, handedness in zip(results.multi_hand_landmarks, results.multi_handedness):
             fingers = straightFingers(handLms, img)
             hand = getHand(handedness)
@@ -207,15 +213,39 @@ while True:
         for hand in ['left', 'right']:
             if not hand in gestures:
                 continue
+                
+            #Moves the mouse while in mouse-movement mode 
+            #If distance from mouse anchor point is far enough, start moving the mouse in that direction.
+            if(mouseAnchor != [-1,-1] and ((results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0])**2 + (results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1])**2)**0.5 > 0.15):
+                print("Moving mouse")
+                pyautogui.moveTo(pyautogui.position()[0] - (results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0]) * 100, pyautogui.position()[1] - (results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1]) * 100)
+                
             # if gesture is diff from currGesture and the previous 3 gestures are the same as the current gesture
             # too much gesture, it is not a word anymore
             if(gestures[hand] != currGests[hand] and all(x == gestures[hand] for x in prevGests[hand])):
                 print(f'{hand} "Key Down": {gestures[hand]}')
+                
+                # Enters mouse movement mode on thumbs up gesture
+                if(hand == "right" and currGests[hand] != "Thumbs Up" and currGests[hand] != "Fist" and gestures[hand] == "Thumbs Up"):
+                    print("Entering mouse mode at (" + str(results.multi_hand_landmarks[0].landmark[0].x) + ", " + str(results.multi_hand_landmarks[0].landmark[0].y) + ")")
+                    mouseAnchor = [results.multi_hand_landmarks[0].landmark[0].x, results.multi_hand_landmarks[0].landmark[0].y]
+                    
+                # Clicks the mouse upon fist gesture following thumbs up gesture
+                if(hand == "right" and currGests[hand] == "Thumbs Up" and gestures[hand] == "Fist"):
+                    pyautogui.click()
+                    print("Click!")
+
+                # Leave mouse mode
+                if(hand == "right" and currGests[hand] == "Thumbs Up" and gestures[hand] != "Fist" and gestures[hand] != "Thumbs Up"):
+                    print("Exiting mouse mode.")
+                    mouseAnchor = [-1,-1]
+                
                 currGests[hand] = gestures[hand]
+                
             # keep only the 3 previous Gestures
             prevGests[hand].append(gestures[hand])
             prevGests[hand] = prevGests[hand][-frames_until_change:]
-
+            
     # Used for fps calculation
     currTime = time.time()
     fpsList = calcFPS(prevTime, currTime, fpsList)
