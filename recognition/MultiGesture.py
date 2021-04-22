@@ -1,5 +1,4 @@
 from Emitter import event 
-##
 class MultiGesture():
     def __init__(self, name, gestures):
         self.name = name
@@ -26,6 +25,13 @@ class MultiGesture():
             event.emit("multigesture", gest=self.name)
             self.on = 0
 
+counting = ["1 finger", "Peace", "3 fingers", "4 fingers", "Open Hand"]
+
+countToFive = MultiGesture("Count to 5", counting)
+event.on("start", countToFive.on_start_gest)
+
+countDown = MultiGesture("Count Down from 5",list(reversed(counting)))
+event.on("start", countDown.on_start_gest)
 # %%
 # m = MultiGesture(["1 finger", "2 finger"], lambda: print("counting"))
 # m.on_keydown("left", "1 finger")
@@ -54,11 +60,3 @@ class MultiGesture():
 
 # event.emit("key down", hand="right", gest="1 finger")
 # event.emit("key down", hand="right", gest="2 finger")
-
-# %%
-counting = ["Peace", "3 fingers", "4 fingers", "Open Hand"]
-countToFive = MultiGesture("Count to 5", counting)
-event.on("start", countToFive.on_start_gest)
-
-# for g in counting:
-#     event.emit("start", hand="right", gest=g)
