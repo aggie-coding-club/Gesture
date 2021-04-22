@@ -28,15 +28,17 @@ def testAction():
 def logGest(hand, gest):
     print(f"start gesture: {hand} {gest}")
 
+@event.on("multigesture")
+def logMultiGest(gest):
+    print(f"Made gesture: {gest}")
+
 # gesture modes like mouse movement or quite mode
 ##
 class MultiGesture():
-    def __init__(self, gestures, action, time_diff=1):
+    def __init__(self, name, gestures):
+        self.name = name
         self.gestures = gestures
-        self.action = action
-        self.time_diff = time_diff
         self.on = 0
-        self.time_last = None
 
     def on_start_gest(self, hand, gest):
         # print(self.on)
@@ -55,7 +57,7 @@ class MultiGesture():
             self.on = 0
 
         if self.on == len(self.gestures):
-            self.action()
+            event.emit("multigesture", gest=self.name)
             self.on = 0
 
 # %%
@@ -88,5 +90,9 @@ class MultiGesture():
 # event.emit("key down", hand="right", gest="2 finger")
 
 # %%
-countToFive = MultiGesture(["Peace", "3 fingers", "4 fingers", "Open Hand"], lambda: print("Counted to 5"))
-event.on("start", countToFive.on_start_gest)
+# counting = ["Peace", "3 fingers", "4 fingers", "Open Hand"]
+# countToFive = MultiGesture("Count to 5", counting)
+# event.on("start", countToFive.on_start_gest)
+
+# for g in counting:
+#     event.emit("start", hand="right", gest=g)
