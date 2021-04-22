@@ -7,15 +7,15 @@ import time
 
 event = EventEmitter()
 
-# key down event, when the gesture is first made
+# start event, when the gesture is first made
 # :hand: left or right
 # :gest: the gesture
-@event.on("key down")
+@event.on("start")
 def openProject(hand, gest):
     if hand == 'right' and gest == "Rock & Roll":
            webbrowser.open("https://github.com/aggie-coding-club/Vision-Controls", new=1) 
 
-@event.on("key down")
+@event.on("start")
 def closeProgram(hand, gest):
     if hand == 'left' and gest == "Thumbs Down":
         pyautogui.hotkey('alt', 'f4')
@@ -24,9 +24,9 @@ def closeProgram(hand, gest):
 def testAction():
     print("asdf")
 
-@event.on("key down")
+@event.on("start")
 def logGest(hand, gest):
-    print(f"{hand} key down: {gest}")
+    print(f"start gesture: {hand} {gest}")
 
 # gesture modes like mouse movement or quite mode
 ##
@@ -38,7 +38,7 @@ class MultiGesture():
         self.on = 0
         self.time_last = None
 
-    def on_keydown(self, hand, gest):
+    def on_start_gest(self, hand, gest):
         # print(self.on)
         if type(self.gestures[self.on]) == str:
             if self.gestures[self.on] == gest: # doesn't matter which hand
@@ -89,4 +89,4 @@ class MultiGesture():
 
 # %%
 countToFive = MultiGesture(["Peace", "3 fingers", "4 fingers", "Open Hand"], lambda: print("Counted to 5"))
-event.on("key down", countToFive.on_keydown)
+event.on("start", countToFive.on_start_gest)

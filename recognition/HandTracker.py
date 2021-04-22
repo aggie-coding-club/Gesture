@@ -218,7 +218,8 @@ while True:
             # if gesture is diff from currGesture and the previous 3 gestures are the same as the current gesture
             # too much gesture, it is not a word anymore
             if(gestures[hand] != currGests[hand] and all(x == gestures[hand] for x in prevGests[hand])):
-                event.emit("key down", hand=hand, gest=gestures[hand])
+                # event.emit("end", hand=hand, gest=currGests[hand]) ## doesn't do anything yet
+                event.emit("start", hand=hand, gest=gestures[hand])
                 currGests[hand] = gestures[hand]
             # keep only the 3 previous Gestures
             prevGests[hand].append(gestures[hand])
