@@ -11,7 +11,6 @@ event = EventEmitter()
 # :hand: left or right
 # :gest: the gesture
 
-
 @event.on("key down")
 def openProject(hand, gest):
     if hand == 'right' and gest == "Rock & Roll":
@@ -19,7 +18,7 @@ def openProject(hand, gest):
 
 @event.on("key down")
 def closeProgram(hand, gest):
-    if hand == 'left' and gest == "Rock & Roll":
+    if hand == 'left' and gest == "Thumbs Down":
         pyautogui.hotkey('alt', 'f4')
 
 @event.on("test")

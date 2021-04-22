@@ -41,17 +41,23 @@ def normalize(v):
     v[1] = v[1] / mag
     return v
 
-def gesture(f):
+def gesture(f, hand):
     """
     Uses the open fingers list to recognize gestures
     :param f: list of open fingers (+ num) and closed fingers (- num)
+    :param hand: hand information
     :return: string representing the gesture that is detected
     """
-    #print("Thumb is at:", f[0])
+
     if f[1] > 0 > f[2] and f[4] > 0 > f[3]:
         return "Rock & Roll"
     elif f[0] > 0 and (f[1] < 0 and f[2] < 0 and f[3] < 0 and f[4] < 0):
-        return "Thumbs Up"
+        thumb_tip = hand.landmark[4]
+        thumb_base = hand.landmark[2]
+        if thumb_tip.y < thumb_base.y: # Y goes from top to bottom instead of bottom to top
+            return "Thumbs Up"
+        else:
+            return "Thumbs Down"
     elif f[0] < 0 and f[1] > 0 and f[2] < 0 and (f[3] < 0 and f[4] < 0):
         return "1 finger"
     elif f[0] < 0 and f[1] > 0 and f[2] > 0 and (f[3] < 0 and f[4] < 0):
@@ -197,9 +203,9 @@ while True:
             fingers = straightFingers(handLms, img)
             hand = getHand(handedness)
             if hand == "Left":
-                gestures['left'] = gesture(fingers)
+                gestures['left'] = gesture(fingers, handLms)
             else:
-                gestures['right'] = gesture(fingers)
+                gestures['right'] = gesture(fingers, handLms)
             frame_count += 1
             #mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
             mpDraw.draw_landmarks(img, handLms)
