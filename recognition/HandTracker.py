@@ -4,6 +4,8 @@ import mediapipe as mp
 import numpy as np
 import time
 
+from Actions import event
+
 # Getting openCV ready
 cap = cv2.VideoCapture(0)
 
@@ -210,7 +212,7 @@ while True:
             # if gesture is diff from currGesture and the previous 3 gestures are the same as the current gesture
             # too much gesture, it is not a word anymore
             if(gestures[hand] != currGests[hand] and all(x == gestures[hand] for x in prevGests[hand])):
-                print(f'{hand} "Key Down": {gestures[hand]}')
+                event.emit("key down", hand=hand, gest=gestures[hand])
                 currGests[hand] = gestures[hand]
             # keep only the 3 previous Gestures
             prevGests[hand].append(gestures[hand])
