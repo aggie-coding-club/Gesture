@@ -4,7 +4,7 @@ import mediapipe as mp
 import numpy as np
 import time
 
-from Actions import event
+from Emitter import event
 
 # Getting openCV ready
 cap = cv2.VideoCapture(0)
