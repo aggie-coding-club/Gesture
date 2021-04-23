@@ -7,6 +7,8 @@ import time
 import argparse
 import config
 
+from Emitter import event
+
 # Getting openCV ready
 cap = cv2.VideoCapture(config.settings["camera_index"])
 
@@ -57,17 +59,23 @@ def normalize(v):
     v[1] = v[1] / mag
     return v
 
-def gesture(f):
+def gesture(f, hand):
     """
     Uses the open fingers list to recognize gestures
     :param f: list of open fingers (+ num) and closed fingers (- num)
+    :param hand: hand information
     :return: string representing the gesture that is detected
     """
-    #print("Thumb is at:", f[0])
+
     if f[1] > 0 > f[2] and f[4] > 0 > f[3]:
         return "Rock & Roll"
     elif f[0] > 0 and (f[1] < 0 and f[2] < 0 and f[3] < 0 and f[4] < 0):
-        return "Thumbs Up"
+        thumb_tip = hand.landmark[4]
+        thumb_base = hand.landmark[2]
+        if thumb_tip.y < thumb_base.y: # Y goes from top to bottom instead of bottom to top
+            return "Thumbs Up"
+        else:
+            return "Thumbs Down"
     elif f[0] < 0 and f[1] > 0 and f[2] < 0 and (f[3] < 0 and f[4] < 0):
         return "1 finger"
     elif f[0] < 0 and f[1] > 0 and f[2] > 0 and (f[3] < 0 and f[4] < 0):
@@ -249,9 +257,9 @@ while True:
             fingers = straightFingers(handLms, img)
             hand = getHand(handedness)
             if hand == "Left":
-                gestures['left'] = gesture(fingers)
+                gestures['left'] = gesture(fingers, handLms)
             else:
-                gestures['right'] = gesture(fingers)
+                gestures['right'] = gesture(fingers, handLms)
             frame_count += 1
             #mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
             mpDraw.draw_landmarks(img, handLms)
@@ -269,12 +277,13 @@ while True:
             # if gesture is diff from currGesture and the previous 3 gestures are the same as the current gesture
             # too much gesture, it is not a word anymore
             if(gestures[hand] != currGests[hand] and all(x == gestures[hand] for x in prevGests[hand])):
-                print(f'{hand}: {gestures[hand]}')
+                # event.emit("end", hand=hand, gest=currGests[hand]) ## doesn't do anything yet
+                event.emit("start", hand=hand, gest=gestures[hand])
                 
                 if (args.m == 'mouse'):
                     # Handles mouse-movement mode through mouseModeHandler function
                     mouseAnchor = mouseModeHandler(hand, currGests, gestures, results, "right")
-
+                    
                 currGests[hand] = gestures[hand]
                 
             # keep only the 3 previous Gestures
@@ -295,4 +304,7 @@ while True:
     # Used for testing, writing video to output
     #out.write(img)
 
-    cv2.waitKey(1)
+    if cv2.waitKey(1) == 27:
+        break
+cap.release()
+cv2.destroyAllWindows()
