@@ -1,6 +1,7 @@
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
 
+
 function createWindow() {
   const win = new BrowserWindow({
     width: 800,
@@ -17,8 +18,10 @@ function createWindow() {
   //build app ----- UNCOMMENT TO BUILD APP --------
   //win.loadURL(`file://${path.join(__dirname, '../build/index.html')}`)
 
+  win.loadURL(`file://${path.join(__dirname, '../public/index.html')}`)
+
   //developer -------COMMENT TO BUILD APP --------
-  win.loadURL('http://localhost:3000/')
+  //win.loadURL('http://localhost:3000/')
 }
 
 app.whenReady().then(createWindow)
