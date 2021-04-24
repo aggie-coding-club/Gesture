@@ -1,6 +1,7 @@
 import React from "react"
 import Options from "./Options";
 import CameraOption from "./CameraOption";
+import { Link } from "react-router-dom";
 
 
 export default function SideBar({btnClick}) {
@@ -34,9 +35,17 @@ export default function SideBar({btnClick}) {
       </div>
       <div style={optionWrapper}>
         <div style={optionStyle}>
-          <Options btnClick={btnClick} name={"Settings"}/>
-          <Options btnClick={btnClick} name={"Profile"}/>
-          <Options btnClick={btnClick} name={"About"}/>
+          <Link to="/settings">
+            <Options btnClick={btnClick} name={"Settings"}/>
+          </Link>
+          <Link to="">
+            <Options btnClick={btnClick} name={"Profile"}/>
+          </Link>
+          <Link to="">
+            <Options btnClick={btnClick} name={"About"}/>
+          </Link>
+          
+          
         </div>
         <div style={cameraOptionStyle}>
           <CameraOption btnClick={btnClick} />
