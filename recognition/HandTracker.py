@@ -218,7 +218,7 @@ def mouseModeHandler(detectedHand, currGests, gestures, results, mouseHand):
 def moveMouse(results):
     if(args.m == 'anchorMouse'):
         if(mouseAnchor != [-1,-1] and ((results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0])**2 + (results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1])**2)**0.5 > 0.025):
-            pyautogui.moveTo(pyautogui.position()[0] - ((results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0])*30), pyautogui.position()[1] + ((results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1])*30))
+            pyautogui.moveTo(pyautogui.position()[0] - ((results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0])*abs(results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0])*1000), pyautogui.position()[1] + (((results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1])*abs(results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1]))*1000))
     
     if(args.m == 'absoluteMouse' and mouseAnchor != [-1,-1]):
         if(len(wristPositionHistory) == 10):
