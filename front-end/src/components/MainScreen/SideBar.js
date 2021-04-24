@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 import settingsPic from "../../assets/settings.png"
 import profilePic from  "../../assets/profile.png"
 import aboutPic from "../../assets/about.png"
+import logo from "../../assets/logo.png"
 
 
 export default function SideBar({btnClick}) {
 
-  const logo = {
+  const logoStyle = {
     height: "10vh",
     paddingLeft: "1vw"
   }
@@ -18,8 +19,8 @@ export default function SideBar({btnClick}) {
     display: "flex",
     flexDirection: "column",
 
-    margin: "10vh 0 10vh 0",
-    alignItems: "center"
+    margin: "10vh 5vw",
+
   }
   const optionStyle = {
     flex: 1,
@@ -33,8 +34,8 @@ export default function SideBar({btnClick}) {
 
 
     <div>
-      <div style={logo}>
-        <p>VISIONS CONTROL</p>
+      <div style={logoStyle}>
+        <img src={logo} alt="logo" width="40%" height="auto"/>
       </div>
       <div style={optionWrapper}>
         <div style={optionStyle}>
