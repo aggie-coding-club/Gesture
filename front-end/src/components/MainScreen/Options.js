@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function Options({name, btnClick}) {
+export default function Options({name, btnClick, imagePic}) {
   const anOptionStyle = {
     padding: "5vh 0 5vh 0",
   }
@@ -19,6 +19,7 @@ export default function Options({name, btnClick}) {
   }
   return (
     <div style={anOptionStyle}>
+      <img src={imagePic} alt={name} width="30px" height="30px"/>
       <button style={btnStyle} onClick={toggleChange}>{name}</button>
 
     </div>
