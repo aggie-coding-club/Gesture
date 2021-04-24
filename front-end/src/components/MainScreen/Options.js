@@ -3,6 +3,7 @@ import React from "react"
 export default function Options({name, btnClick, imagePic}) {
   const anOptionStyle = {
     padding: "5vh 0 5vh 0",
+
   }
 
   const btnStyle = {
@@ -14,13 +15,27 @@ export default function Options({name, btnClick, imagePic}) {
     outline: "none",
   }
 
+  const imageStyle = {
+    padding: "0 10px 0 0",
+  }
+
+  const tagNameStyle = {
+    marginTop: "10px",
+    float: "right"
+  }
+
   function toggleChange() {
     btnClick(name);
   }
   return (
     <div style={anOptionStyle}>
-      <img src={imagePic} alt={name} width="30px" height="30px"/>
-      <button style={btnStyle} onClick={toggleChange}>{name}</button>
+
+      <button style={btnStyle} onClick={toggleChange}>
+        <img src={imagePic} alt={name} width="30px" height="30px" style={imageStyle}/>
+        <div style={tagNameStyle}>
+          {name}
+        </div>
+      </button>
 
     </div>
   )
