@@ -33,6 +33,7 @@ fpsList = []
 
 # Mouse movement anchor
 mouseAnchor = [-1,-1]
+pyautogui.PAUSE = 0
 
 def dotProduct(v1, v2):
     return v1[0]*v2[0] + v1[1]*v2[1]
