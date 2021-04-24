@@ -290,9 +290,6 @@ while True:
                 continue
 
             #Moves mouse if in mouse mode
-            moveMouse(results)
-
-            #Moves mouse if in mouse mode
             if (args.m == 'anchorMouse' or args.m == 'absoluteMouse'):
                 moveMouse(results)
             
@@ -301,8 +298,6 @@ while True:
             if(gestures[hand] != currGests[hand] and all(x == gestures[hand] for x in prevGests[hand])):
 
                 print(f'{hand} "Key Down": {gestures[hand]}')
-                #Handles mouse-movement mode through mouseModeHandler function
-                mouseAnchor = mouseModeHandler(hand, currGests, gestures, results, "right");
 
                 # event.emit("end", hand=hand, gest=currGests[hand]) ## doesn't do anything yet
                 event.emit("start", hand=hand, gest=gestures[hand])
