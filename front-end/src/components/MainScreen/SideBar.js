@@ -6,6 +6,7 @@ import settingsPic from "../../assets/settings.png"
 import profilePic from  "../../assets/profile.png"
 import aboutPic from "../../assets/about.png"
 import logo from "../../assets/logo.png"
+import cameraPic from "../../assets/webcam.png"
 
 
 export default function SideBar({btnClick}) {
@@ -52,7 +53,7 @@ export default function SideBar({btnClick}) {
 
         </div>
         <div style={cameraOptionStyle}>
-          <CameraOption btnClick={btnClick} />
+          <CameraOption btnClick={btnClick} icon={cameraPic}/>
         </div>
       </div>
 
