@@ -17,29 +17,20 @@ export default function SideBar({btnClick}) {
   }
 
   const optionWrapper = {
-    display: "flex",
-    flexDirection: "column",
-
-    margin: "10vh 5vw",
-
+    margin: "15vh 2.5vw",
   }
-  const optionStyle = {
-    flex: 1,
 
-  }
   const cameraOptionStyle = {
-    flex: 3,
+    margin: "15vh 3vw 0 0"
   }
 
   return (
-
-
     <div>
       <div style={logoStyle}>
         <img src={logo} alt="logo" width="40%" height="auto"/>
       </div>
       <div style={optionWrapper}>
-        <div style={optionStyle}>
+        <div>
           <Link to="/settings">
             <Options btnClick={btnClick} name={"Settings"} imagePic={settingsPic}/>
           </Link>

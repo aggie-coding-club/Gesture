@@ -2,7 +2,7 @@ import React from "react"
 
 export default function Options({name, btnClick, imagePic}) {
   const anOptionStyle = {
-    padding: "5vh 0 5vh 0",
+    padding: "2.5vh",
 
   }
 
