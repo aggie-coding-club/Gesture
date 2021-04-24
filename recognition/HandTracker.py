@@ -4,9 +4,13 @@ import mediapipe as mp
 import numpy as np
 import pyautogui
 import time
+import argparse
+import config
+
+from Emitter import event
 
 # Getting openCV ready
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(config.settings["camera_index"])
 
 # Dimensions of the camera output window
 wCam = int(cap.get(3))
@@ -35,6 +39,18 @@ fpsList = []
 mouseAnchor = [-1,-1]
 pyautogui.PAUSE = 0
 
+def parse_arguments():
+    """Parses Arguments
+    -m: mode that gesture will be recognized for
+    """
+    # Setting up the argument parser
+    p = argparse.ArgumentParser(description='Used to parse options for hand tracking')
+
+    # -v flag is the path to the video, -m flag is the background subtraction method
+    p.add_argument('-m', type=str, help='The mode that the recognition will control for (ie. mouse)')
+
+    return p.parse_args()
+ 
 def dotProduct(v1, v2):
     return v1[0]*v2[0] + v1[1]*v2[1]
 
@@ -44,17 +60,23 @@ def normalize(v):
     v[1] = v[1] / mag
     return v
 
-def gesture(f):
+def gesture(f, hand):
     """
     Uses the open fingers list to recognize gestures
     :param f: list of open fingers (+ num) and closed fingers (- num)
+    :param hand: hand information
     :return: string representing the gesture that is detected
     """
-    #print("Thumb is at:", f[0])
+
     if f[1] > 0 > f[2] and f[4] > 0 > f[3]:
         return "Rock & Roll"
     elif f[0] > 0 and (f[1] < 0 and f[2] < 0 and f[3] < 0 and f[4] < 0):
-        return "Thumbs Up"
+        thumb_tip = hand.landmark[4]
+        thumb_base = hand.landmark[2]
+        if thumb_tip.y < thumb_base.y: # Y goes from top to bottom instead of bottom to top
+            return "Thumbs Up"
+        else:
+            return "Thumbs Down"
     elif f[0] < 0 and f[1] > 0 and f[2] < 0 and (f[3] < 0 and f[4] < 0):
         return "1 finger"
     elif f[0] < 0 and f[1] > 0 and f[2] > 0 and (f[3] < 0 and f[4] < 0):
@@ -189,8 +211,6 @@ def mouseModeHandler(hand, currGests, gestures, results, mouseHand):
         print("Click!")
         
     return mouseAnchor
-
-
        
 #Moves the mouse while in mouse-movement mode (a.k.a. when mouseAnchor isn't [-1,-1])
 #If distance from mouse anchor point is far enough, start moving the mouse in that direction.
@@ -198,6 +218,9 @@ def moveMouse(results):
     if(mouseAnchor != [-1,-1] and ((results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0])**2 + (results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1])**2)**0.5 > 0.05):
         print("Moving mouse")
         pyautogui.moveTo(pyautogui.position()[0] - ((results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0])*200), pyautogui.position()[1] + ((results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1])*200))
+
+# Preparing arguments for main
+args = parse_arguments() # parsing arguments
 
 prevGests = {
     "right": [],
@@ -233,9 +256,9 @@ while True:
             fingers = straightFingers(handLms, img)
             hand = getHand(handedness)
             if hand == "Left":
-                gestures['left'] = gesture(fingers)
+                gestures['left'] = gesture(fingers, handLms)
             else:
-                gestures['right'] = gesture(fingers)
+                gestures['right'] = gesture(fingers, handLms)
             frame_count += 1
             #mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
             mpDraw.draw_landmarks(img, handLms)
@@ -245,15 +268,29 @@ while True:
         for hand in ['left', 'right']:
             if not hand in gestures:
                 continue
+
             #Moves mouse if in mouse mode
             moveMouse(results)
+
+            #Moves mouse if in mouse mode
+            if (args.m == 'mouse'):
+                moveMouse(results)
             
             # if gesture is diff from currGesture and the previous 3 gestures are the same as the current gesture
             # too much gesture, it is not a word anymore
             if(gestures[hand] != currGests[hand] and all(x == gestures[hand] for x in prevGests[hand])):
+
                 print(f'{hand} "Key Down": {gestures[hand]}')
                 #Handles mouse-movement mode through mouseModeHandler function
                 mouseAnchor = mouseModeHandler(hand, currGests, gestures, results, "right");
+
+                # event.emit("end", hand=hand, gest=currGests[hand]) ## doesn't do anything yet
+                event.emit("start", hand=hand, gest=gestures[hand])
+                
+                if (args.m == 'mouse'):
+                    # Handles mouse-movement mode through mouseModeHandler function
+                    mouseAnchor = mouseModeHandler(hand, currGests, gestures, results, "right")
+                    
                 currGests[hand] = gestures[hand]
                 
             # keep only the 3 previous Gestures
@@ -274,4 +311,7 @@ while True:
     # Used for testing, writing video to output
     #out.write(img)
 
-    cv2.waitKey(1)
+    if cv2.waitKey(1) == 27:
+        break
+cap.release()
+cv2.destroyAllWindows()
