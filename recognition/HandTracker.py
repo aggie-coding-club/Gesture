@@ -39,6 +39,7 @@ fpsList = []
 mouseAnchor = [-1,-1]
 wristPositionHistory = []
 pyautogui.PAUSE = 0
+pyautogui.FAILSAFE = False
 
 screenWidth, screenHeight = pyautogui.size()
 
