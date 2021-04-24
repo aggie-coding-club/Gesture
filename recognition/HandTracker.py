@@ -37,6 +37,7 @@ fpsList = []
 
 # Mouse movement anchor
 mouseAnchor = [-1,-1]
+wristPositionHistory = []
 pyautogui.PAUSE = 0
 
 screenWidth, screenHeight = pyautogui.size()
@@ -218,13 +219,25 @@ def moveMouse(results):
         if(mouseAnchor != [-1,-1] and ((results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0])**2 + (results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1])**2)**0.5 > 0.025):
             pyautogui.moveTo(pyautogui.position()[0] - ((results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0])*30), pyautogui.position()[1] + ((results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1])*30))
     
-    if(args.m == 'absoluteMouse'):
-        if(mouseAnchor != [-1,-1]):
-            print("Screen resolution: " + str(screenWidth) + ", " + str(screenHeight))
-            #print("NewCoords: " + str((pyautogui.position()[0] - 0.5)) + " , " + str((pyautogui.position()[1] - 0.5)))
-            #print("NewCoords: " + str((pyautogui.position()[0] - 0.5)*screenWidth + screenWidth/2) + " , " + str((pyautogui.position()[1] - 0.5)*screenHeight + screenHeight/2))
-            pyautogui.moveTo(-(results.multi_hand_landmarks[0].landmark[0].x - 0.5)*2*screenWidth + screenWidth/2, (results.multi_hand_landmarks[0].landmark[0].y - 0.5)*2*screenHeight + screenHeight/2)
-            #pyautogui.moveTo(screenWidth/2, screenHeight/2)
+    if(args.m == 'absoluteMouse' and mouseAnchor != [-1,-1]):
+        if(len(wristPositionHistory) == 10):
+            wristPositionHistory.pop(0)
+            wristPositionHistory.append((results.multi_hand_landmarks[0].landmark[0].x, results.multi_hand_landmarks[0].landmark[0].y))
+        else:
+            wristPositionHistory.append((results.multi_hand_landmarks[0].landmark[0].x, results.multi_hand_landmarks[0].landmark[0].y))
+    
+        avgx = 0
+        avgy = 0
+        
+        for i in wristPositionHistory:
+            avgx += i[0]
+            avgy += i[1]
+        
+        avgx /= len(wristPositionHistory)
+        avgy /= len(wristPositionHistory)
+        
+        pyautogui.moveTo(-(avgx - 0.5)*2*screenWidth + screenWidth/2, (avgy - 0.5)*2*screenHeight + screenHeight/2)
+
 
 # Preparing arguments for main
 args = parse_arguments() # parsing arguments
