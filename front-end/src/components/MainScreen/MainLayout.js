@@ -2,7 +2,11 @@ import React from "react"
 import SideBar from "./SideBar";
 import CameraScreen from "./CameraScreen";
 
-export default function MainLayout({btnClick}) {
+export default function MainLayout() {
+
+  const btnClick = (name) => {
+    console.log("clicked", name)
+  }
 
   const flexContainer = {
     display: "flex",
