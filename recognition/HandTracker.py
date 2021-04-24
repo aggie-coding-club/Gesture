@@ -215,9 +215,9 @@ def mouseModeHandler(hand, currGests, gestures, results, mouseHand):
 #Moves the mouse while in mouse-movement mode (a.k.a. when mouseAnchor isn't [-1,-1])
 #If distance from mouse anchor point is far enough, start moving the mouse in that direction.
 def moveMouse(results):
-    if(mouseAnchor != [-1,-1] and ((results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0])**2 + (results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1])**2)**0.5 > 0.05):
+    if(mouseAnchor != [-1,-1] and ((results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0])**2 + (results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1])**2)**0.5 > 0.025):
         print("Moving mouse")
-        pyautogui.moveTo(pyautogui.position()[0] - ((results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0])*200), pyautogui.position()[1] + ((results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1])*200))
+        pyautogui.moveTo(pyautogui.position()[0] - ((results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0])*30), pyautogui.position()[1] + ((results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1])*30))
 
 # Preparing arguments for main
 args = parse_arguments() # parsing arguments
