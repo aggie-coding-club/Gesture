@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function CameraOption({btnClick}) {
+export default function CameraOption({btnClick, icon}) {
   function toggleChange() {
     btnClick("Camera");
   }
@@ -16,14 +16,35 @@ export default function CameraOption({btnClick}) {
     cursor: "pointer",
     overflow: "hidden",
     outline: "none",
-    padding: "2vh 5vw",
     margin: "auto",
-    borderRadius: "10px"
+    borderRadius: "10px",
+    display: "flex",
+    flexDirection: "row"
+  }
+
+  const imageStyle = {
+    backgroundColor: "#144586",
+    padding: "1vh 1vw"
+  }
+
+  const wordStyle = {
+    padding: "1vh 3vw"
+  }
+
+  const word = {
+    marginTop: "1vh"
   }
 
   return(
     <div style={btnContainer}>
-      <button style={btnStyle} onClick={toggleChange}>Camera</button>
+      <button style={btnStyle} onClick={toggleChange}>
+        <div style={imageStyle}>
+          <img src={icon} alt="camera" height="auto" width="25px"/>
+        </div>
+        <div style={wordStyle}>
+          <p style={word}>Camera</p>
+        </div>
+      </button>
     </div>
   )
 }

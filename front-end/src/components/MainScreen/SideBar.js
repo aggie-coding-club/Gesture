@@ -2,53 +2,49 @@ import React from "react"
 import Options from "./Options";
 import CameraOption from "./CameraOption";
 import { Link } from "react-router-dom";
+import settingsPic from "../../assets/settings.png"
+import profilePic from  "../../assets/profile.png"
+import aboutPic from "../../assets/about.png"
+import logo from "../../assets/logo.png"
+import cameraPic from "../../assets/webcam.png"
 
 
 export default function SideBar({btnClick}) {
 
-  const logo = {
+  const logoStyle = {
     height: "10vh",
     paddingLeft: "1vw"
   }
 
   const optionWrapper = {
-    display: "flex",
-    flexDirection: "column",
-
-    margin: "10vh 0 10vh 0",
-    alignItems: "center"
+    margin: "15vh 2.5vw",
   }
-  const optionStyle = {
-    flex: 1,
 
-  }
   const cameraOptionStyle = {
-    flex: 3,
+    margin: "15vh 3vw 0 0"
   }
 
   return (
-
-
     <div>
-      <div style={logo}>
-        <p>VISIONS CONTROL</p>
+      <div style={logoStyle}>
+        <img src={logo} alt="logo" width="40%" height="auto"/>
       </div>
       <div style={optionWrapper}>
-        <div style={optionStyle}>
+        <div>
           <Link to="/settings">
-            <Options btnClick={btnClick} name={"Settings"}/>
+            <Options btnClick={btnClick} name={"Settings"} imagePic={settingsPic}/>
           </Link>
           <Link to="">
-            <Options btnClick={btnClick} name={"Profile"}/>
+            <Options btnClick={btnClick} name={"Profile"} imagePic={profilePic}/>
           </Link>
           <Link to="">
-            <Options btnClick={btnClick} name={"About"}/>
+            <Options btnClick={btnClick} name={"About"} imagePic={aboutPic}/>
           </Link>
-          
-          
+
+
         </div>
         <div style={cameraOptionStyle}>
-          <CameraOption btnClick={btnClick} />
+          <CameraOption btnClick={btnClick} icon={cameraPic}/>
         </div>
       </div>
 
