@@ -1,17 +1,40 @@
 import React, {useState} from 'react'
-import TrickGesturesPairs from "./TrickGesturePairs";
+import backgroundPic from "../../assets/background.png"
+import SideBar from "./SideBar.js"
+import TrickGesturesPairs from "./TrickGesturePairs"
 import configData from "../../data/config.json"
 
 export default function SettingsLayout() {
+
   const [data, setData] = useState(configData.settings);
 
+  const btnClick = (name) => {
+    console.log("clicked", name)
+  }
 
+  const flexContainer = {
+    display: "flex",
+    backgroundImage: `url(${backgroundPic})`,
+    margin: 0,
+    padding: 0,
+    backgroundColor: "#090e18",
+
+  }
+
+  const sideScreen = {
+    //background: "#090e18",
+    color: "#afb0b2",
+    flex: 1,
+    height: "100vh"
+  }
+  
   const settingsStyle = {
     backgroundColor: "#090e18",
     color: "#afb0b2",
     height: "100vh",
     padding: 0,
     margin: 0,
+    flex: 3
   }
 
   const titleStyle = {
@@ -33,13 +56,21 @@ export default function SettingsLayout() {
   }
 
   return (
-    <div style={settingsStyle}>
-      <div style={titleStyle}>
-        <h1>SETTINGS</h1>
+    <div style={flexContainer}>
+
+      <div style={sideScreen}>
+        <SideBar btnClick={btnClick}/>
       </div>
-      <div style={pairStyle}>
-        <TrickGesturesPairs changeSettings={changeSettings} data={data}/>
+
+      <div style={settingsStyle}>
+        <div style={titleStyle}>
+          <h1>SETTINGS</h1>
+        </div>
+        <div style={pairStyle}>
+          <TrickGesturesPairs changeSettings={changeSettings} data={data}/>
+        </div>
       </div>
+
     </div>
   )
 }
