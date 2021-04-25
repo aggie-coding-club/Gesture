@@ -18,10 +18,10 @@ function createWindow() {
   //build app ----- UNCOMMENT TO BUILD APP --------
   //win.loadURL(`file://${path.join(__dirname, '../build/index.html')}`)
 
-  win.loadURL(`file://${path.join(__dirname, '../public/index.html')}`)
+  //win.loadURL(`file://${path.join(__dirname, '../public/index.html')}`)
 
   //developer -------COMMENT TO BUILD APP --------
-  //win.loadURL('http://localhost:3000/')
+  win.loadURL('http://localhost:3000/')
 }
 
 app.whenReady().then(createWindow)
