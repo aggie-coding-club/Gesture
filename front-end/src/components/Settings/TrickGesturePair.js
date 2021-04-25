@@ -1,7 +1,8 @@
 import React from "react"
 import HandButtons from "./HandButtons";
 
-export default function TrickGesturePair({trick, initialBtnName}) {
+export default function TrickGesturePair({dat, changeSettings}) {
+  let trick = dat[0]
   const contentStyle = {
     display: "flex",
     textAlign: "center",
@@ -34,7 +35,7 @@ export default function TrickGesturePair({trick, initialBtnName}) {
 
         </div>
         <div style={handButtonsStyle}>
-          <HandButtons initialBtnName={initialBtnName}/>
+          <HandButtons dat={dat} changeSettings={changeSettings}/>
         </div>
     </div>
 

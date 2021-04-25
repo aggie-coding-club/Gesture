@@ -1,0 +1,8 @@
+{
+  "settings":[
+    ["Open Chrome", 1, 1],
+    ["Mute Volume", 254, 2],
+    ["Lower Volume", 3, 3],
+    ["Raise Volume", 4, 4]
+  ]
+}

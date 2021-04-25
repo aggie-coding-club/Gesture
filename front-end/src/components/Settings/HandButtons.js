@@ -3,11 +3,10 @@ import Modal from 'react-modal'
 import GestureBox from "./GestureBox";
 
 
-export default function HandButtons({initialBtnName}) {
+export default function HandButtons({dat, changeSettings}) {
 
   const [borderClr, setBorderClr] = useState("none");
   const [showModal, setShowModal] = useState(false);
-  const [buttonName, setButtonName] = useState(initialBtnName); //FIXME: should read in from file
   const [redNum, setRedNum] = useState(-2);
 
 
@@ -23,7 +22,7 @@ export default function HandButtons({initialBtnName}) {
   }
 
   function newSetting(newGesture) {
-    setButtonName(newGesture);
+    changeSettings(dat[2] - 1, newGesture)
     setRedNum(newGesture)
     //setTimeout(function(){ setShowModal(false) }, 500);
   }
@@ -60,14 +59,10 @@ export default function HandButtons({initialBtnName}) {
     color: "white",
   }
 
-  const gestures = {
-    padding: "5vh"
-
-  }
 
   return (
     <div>
-      <button style={btnStyle} onClick={handleClick}> {buttonName} </button>
+      <button style={btnStyle} onClick={handleClick}> {dat[1]} </button>
         <Modal
           isOpen={showModal}
           contentLabel="Minimal example"

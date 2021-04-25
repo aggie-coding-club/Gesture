@@ -1,11 +1,9 @@
 import React, {useState} from 'react'
 import TrickGesturesPairs from "./TrickGesturePairs";
-
-
+import configData from "../../data/config.json"
 
 export default function SettingsLayout() {
-  const tricks = ["open chrome", "mute volume", "raise volume", "lower volume"]
-  const defaultNum = [1, 2, 3, 4, 5, 6, 7, 8, 9] //FIXME: should be read from file
+  const [data, setData] = useState(configData.settings);
 
 
   const settingsStyle = {
@@ -24,6 +22,15 @@ export default function SettingsLayout() {
     margin: "0 5vw 0 5vw"
   }
 
+  function changeSettings(index, newNum) {
+    let copy = data;
+    copy[index][1] = newNum;
+    setData(copy);
+  }
+
+  function displayData() {
+    console.log(data);
+  }
 
   return (
     <div style={settingsStyle}>
@@ -31,7 +38,7 @@ export default function SettingsLayout() {
         <h1>SETTINGS</h1>
       </div>
       <div style={pairStyle}>
-        <TrickGesturesPairs tricks={tricks} defaultNum={defaultNum}/>
+        <TrickGesturesPairs changeSettings={changeSettings} data={data}/>
       </div>
     </div>
   )
