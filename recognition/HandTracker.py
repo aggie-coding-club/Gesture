@@ -308,13 +308,13 @@ while True:
             if(gestures[hand] != currGests[hand] and all(x == gestures[hand] for x in prevGests[hand])):
 
                 print(f'{hand} : {gestures[hand]}')
-
-                # event.emit("end", hand=hand, gest=currGests[hand]) ## doesn't do anything yet
-                event.emit("start", hand=hand, gest=gestures[hand])
                 
                 if (args.m == 'anchorMouse' or args.m == 'absoluteMouse'):
                     # Handles mouse-movement mode through mouseModeHandler function
                     mouseAnchor = mouseModeHandler(hand, currGests, gestures, results, "right")
+                else:
+                    # event.emit("end", hand=hand, gest=currGests[hand]) ## doesn't do anything yet
+                    event.emit("start", hand=hand, gest=gestures[hand])
                     
                 currGests[hand] = gestures[hand]
                 

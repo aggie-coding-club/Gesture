@@ -18,11 +18,11 @@ def openProject(hand, gest):
     for x in config.actions.keys():
         if (config.actions[x][2] == 'x'): return
 
-        if config.actions[x][2].startswith("http"):
+        elif config.actions[x][2].startswith("http"):
             if (config.actions[x][0].lower() == hand.lower() and config.actions[x][1].lower() == gest.lower()):
                 webbrowser.open(config.actions[x][2])
 
-        if (config.actions[x][0].lower() == hand.lower() and config.actions[x][1].lower() == gest.lower()):
+        elif (config.actions[x][0].lower() == hand.lower() and config.actions[x][1].lower() == gest.lower()):
             try:
                 app.openProgram(config.actions[x][2])
             except:
