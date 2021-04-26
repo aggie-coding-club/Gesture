@@ -27,13 +27,14 @@ export default function SettingsLayout() {
     flex: 1,
     height: "100vh"
   }
-  
+
   const settingsStyle = {
-    backgroundColor: "#090e18",
+    background: "#3a414d",
     color: "#afb0b2",
-    height: "100vh",
+    height: "98vh",
+    borderRadius: "25px",
+    margin: "1vh 1vh 1vh 0",
     padding: 0,
-    margin: 0,
     flex: 3
   }
 
@@ -49,10 +50,6 @@ export default function SettingsLayout() {
     let copy = data;
     copy[index][1] = newNum;
     setData(copy);
-  }
-
-  function displayData() {
-    console.log(data);
   }
 
   return (
