@@ -10,7 +10,8 @@ import config
 from Emitter import event
 
 # Getting openCV ready
-cap = cv2.VideoCapture(config.settings["camera_index"])
+#cap = cv2.VideoCapture(config.settings["camera_index"])
+cap = cv2.VideoCapture("test_files/hand.mp4")
 #Camera detection
 if cap is None or not cap.isOpened():
     pyautogui.alert('Your camera is unavailable. Try to fix this issue and try again!', 'Error')
@@ -56,7 +57,7 @@ def parse_arguments():
     p.add_argument('-m', type=str, help='The mode that the recognition will control for (ie. mouse)')
 
     return p.parse_args()
- 
+
 def dotProduct(v1, v2):
     return v1[0]*v2[0] + v1[1]*v2[1]
 
@@ -74,8 +75,15 @@ def gesture(f, hand):
     :return: string representing the gesture that is detected
     """
 
-    if f[1] > 0 > f[2] and f[4] > 0 > f[3]:
+    if f[0] > 0 and f[1] > 0 and 0 > f[2] and f[4] > 0 and 0 > f[3]:
         return "Rock & Roll"
+    elif f[0] < 0 and f[1] > 0 and f[2] < 0 and f[3] < 0 and f[4] > 0:
+        index_tip = hand.landmark[8]
+        index_base = hand.landmark[5]
+        if index_tip.y < index_base.y: # Y goes from top to bottom instead of bottom to top
+            return "Horns Down"
+        else:
+            return "No Gesture"
     elif f[0] > 0 and (f[1] < 0 and f[2] < 0 and f[3] < 0 and f[4] < 0):
         thumb_tip = hand.landmark[4]
         thumb_base = hand.landmark[2]
@@ -300,7 +308,7 @@ while True:
             # too much gesture, it is not a word anymore
             if(gestures[hand] != currGests[hand] and all(x == gestures[hand] for x in prevGests[hand])):
 
-                print(f'{hand} "Key Down": {gestures[hand]}')
+                print(f'{hand} : {gestures[hand]}')
 
                 # event.emit("end", hand=hand, gest=currGests[hand]) ## doesn't do anything yet
                 event.emit("start", hand=hand, gest=gestures[hand])
