@@ -6,6 +6,7 @@ import pyautogui
 import time
 import argparse
 import config
+import math
 
 from Emitter import event
 
@@ -64,6 +65,22 @@ def normalize(v):
     v[1] = v[1] / mag
     return v
 
+def angle_between(a,b,c):
+    '''
+    Gets angle ABC from points
+
+    cos(theta) = (u*v)/ (|u| |v|)
+    '''
+    BA = (a.x - b.x, a.y-b.y, a.z-b.z)
+    BC = (c.x - b.x, c.y-b.y, c.z-b.z)
+
+    dot = BA[0] * BC[0] + BA[1] * BC[1] + BA[2] * BC[2]
+    BA_mag = math.sqrt(BA[0]**2 + BA[1]**2 + BA[2]**2)
+    BC_mag = math.sqrt(BC[0]**2 + BC[1]**2 + BC[2]**2)
+
+    angle = math.acos(dot/(BA_mag*BC_mag))
+    return angle
+
 def gesture(f, hand):
     """
     Uses the open fingers list to recognize gestures
@@ -86,7 +103,13 @@ def gesture(f, hand):
     elif f[0] < 0 and f[1] > 0 and f[2] > 0 and (f[3] < 0 and f[4] < 0):
         return "Peace"
     elif f[0] > 0 and f[1] > 0 and f[2] > 0 and f[3] > 0 and f[4] > 0:
-        return "Open Hand"
+        mid_tip = hand.landmark[12]
+        ring_tip = hand.landmark[16]
+        wrist = hand.landmark[0]
+        if angle_between(mid_tip, wrist, ring_tip) > 0.3:
+            return 'Vulcan Salute'
+        else:
+            return "Open Hand"
     elif f[0] < 0 and f[1] < 0 and f[2] < 0 and f[3] < 0 and f[4] < 0:
         return "Fist"
     elif f[0] < 0 and f[1] > 0 and f[2] > 0 and f[3] > 0 and f[4] > 0: 
@@ -292,7 +315,6 @@ while True:
             #mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
             mpDraw.draw_landmarks(img, handLms)
         
-        # logFile(outFile, leftPrevGestures, rightPrevGestures)
         # print(f"{frame_count}, {gestures}, {len(results.multi_hand_landmarks)}")
         for hand in ['left', 'right']:
             if not hand in gestures:
