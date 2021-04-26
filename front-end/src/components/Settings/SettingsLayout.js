@@ -30,7 +30,7 @@ export default function SettingsLayout() {
 
   const settingsStyle = {
     background: "#3a414d",
-    color: "#afb0b2",
+    color: "#090e18",
     height: "98vh",
     borderRadius: "25px",
     margin: "1vh 1vh 1vh 0",

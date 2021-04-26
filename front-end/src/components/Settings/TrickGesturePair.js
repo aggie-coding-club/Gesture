@@ -8,7 +8,7 @@ export default function TrickGesturePair({dat, changeSettings}) {
     textAlign: "center",
     padding: "3vh 0",
 
-    borderBottom: "1px solid #afb0b2"
+    borderBottom: "1px solid #090e18"
   }
 
   const trickContainer = {
@@ -23,14 +23,13 @@ export default function TrickGesturePair({dat, changeSettings}) {
 
   const handButtonsStyle = {
     flex: 1,
-    //backgroundColor: "red"
   }
 
   return (
     <div style={contentStyle}>
         <div style={trickContainer}>
           <div style={tricksStyle}>
-          {trick}
+            <h4>{trick}</h4>
           </div>
 
         </div>
