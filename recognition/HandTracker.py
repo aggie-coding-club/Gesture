@@ -130,6 +130,11 @@ def straightFingers(hand, img):
     fingerTipIDs = [4, 8, 12, 16, 20]  # list of the id's for the finger tip landmarks
     openFingers = []
     lms = hand.landmark  # 2d list of all 21 landmarks with there respective x, an y coordinates
+
+    # Draws the blue part
+    palm_connections = filter(lambda x: x[1] in [0,1,2,5,6,9,10,13,14,17,18], mpHands.HAND_CONNECTIONS)
+    mpDraw.draw_landmarks(img,hand, connections=palm_connections, connection_drawing_spec=mpDraw.DrawingSpec(color=(255,0,0)))
+
     for id in fingerTipIDs:
         if id == 4: # This is for the thumb calculation, because it works differently than the other fingers
             x2, y2 = lms[id].x, lms[id].y  # x, and y of the finger tip
@@ -152,11 +157,11 @@ def straightFingers(hand, img):
             cx, cy = int(lms[id].x * wCam), int(lms[id].y * hCam)
             cx2, cy2 = int(lms[id-2].x * wCam), int(lms[id-2].y * hCam)
             cx0, cy0 = int(lms[0].x * wCam), int(lms[0].y * hCam)
-            cv2.line(img, (cx0, cy0), (cx2, cy2), (255, 0, 0), 2)
+            finger_connections = filter(lambda x: id-2 <= x[0] and x[0] <= id, mpHands.HAND_CONNECTIONS) # gets the connections only for the thumb
             if dotProduct(fv, pv) >= .65:
-                cv2.line(img, (cx, cy), (cx2, cy2), (0, 255, 0), 2)
+                mpDraw.draw_landmarks(img,hand, connections=finger_connections)
             else:
-                cv2.line(img, (cx, cy), (cx2, cy2), (0, 0, 255), 2)
+                mpDraw.draw_landmarks(img,hand, connections=finger_connections, connection_drawing_spec=mpDraw.DrawingSpec(color=(0,0,255)))
 
         else: # for any other finger (not thumb)
             x2, y2 = lms[id].x, lms[id].y  # x, and y of the finger tip
@@ -172,11 +177,14 @@ def straightFingers(hand, img):
             cx, cy = int(lms[id].x * wCam), int(lms[id].y * hCam)
             cx2, cy2 = int(lms[id-2].x * wCam), int(lms[id-2].y * hCam)
             cx0, cy0 = int(lms[0].x * wCam), int(lms[0].y * hCam)
-            cv2.line(img, (cx0, cy0), (cx2, cy2), (255, 0, 0), 2)
+
+            # Connections from tip to first knuckle from base
+            finger_connections = [(id-1, id),
+                                  (id-2, id-1)]
             if dotProduct(fv, pv) >= 0:
-                cv2.line(img, (cx, cy), (cx2, cy2), (0, 255, 0), 2)
+                mpDraw.draw_landmarks(img,hand, connections=finger_connections)
             else:
-                cv2.line(img, (cx, cy), (cx2, cy2), (0, 0, 255), 2)
+                mpDraw.draw_landmarks(img,hand, connections=finger_connections, connection_drawing_spec=mpDraw.DrawingSpec(color=(0,0,255)))
             # cv2.circle(img, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
     return openFingers
 
