@@ -1,7 +1,13 @@
 import React, {useState} from 'react'
 import Modal from 'react-modal'
 import GestureBox from "./GestureBox";
-
+import fist from "../../assets/gestures/fist.png";
+import onefinger from "../../assets/gestures/one-finger.png";
+import peace from "../../assets/gestures/peace.png";
+import threefingers from "../../assets/gestures/three-fingers.png";
+import fourfingers from "../../assets/gestures/four-fingers.png";
+import openhand from "../../assets/gestures/open-hand.png";
+import rocknroll from "../../assets/gestures/rock-and-roll.png";
 
 export default function HandButtons({dat, changeSettings}) {
 
@@ -60,9 +66,14 @@ export default function HandButtons({dat, changeSettings}) {
   }
 
 
+  const imgFormat = {
+    width: "auto",
+    height: "3vh"
+  }
+
   return (
     <div>
-      <button style={btnStyle} onClick={handleClick}> {dat[1]} </button>
+      <button style={btnStyle} onClick={handleClick}> <img style={imgFormat} src={dat[1]}></img> </button>
         <Modal
           isOpen={showModal}
           contentLabel="Minimal example"
@@ -84,17 +95,17 @@ export default function HandButtons({dat, changeSettings}) {
         >
           <div style={modalContainer}>
             <div style={row}>
-              <GestureBox name={1} newSetting={newSetting} redNum={redNum}/>
-              <GestureBox name={2} newSetting={newSetting} redNum={redNum}/>
-              <GestureBox name={3} newSetting={newSetting} redNum={redNum}/>
+              <GestureBox name={onefinger} newSetting={newSetting} redNum={redNum}/>
+              <GestureBox name={peace} newSetting={newSetting} redNum={redNum}/>
+              <GestureBox name={threefingers} newSetting={newSetting} redNum={redNum}/>
             </div>
             <div style={row}>
-              <GestureBox name={4} newSetting={newSetting} redNum={redNum}/>
-              <GestureBox name={5} newSetting={newSetting} redNum={redNum}/>
-              <GestureBox name={6} newSetting={newSetting} redNum={redNum}/>
+              <GestureBox name={fourfingers} newSetting={newSetting} redNum={redNum}/>
+              <GestureBox name={openhand} newSetting={newSetting} redNum={redNum}/>
+              <GestureBox name={fist} newSetting={newSetting} redNum={redNum}/>
             </div>
             <div style={row}>
-              <GestureBox name={7} newSetting={newSetting} redNum={redNum}/>
+              <GestureBox name={rocknroll} newSetting={newSetting} redNum={redNum}/>
               <GestureBox name={8} newSetting={newSetting} redNum={redNum}/>
               <GestureBox name={9} newSetting={newSetting} redNum={redNum}/>
             </div>

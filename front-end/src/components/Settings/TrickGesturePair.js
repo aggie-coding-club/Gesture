@@ -30,7 +30,7 @@ export default function TrickGesturePair({dat, changeSettings}) {
     <div style={contentStyle}>
         <div style={trickContainer}>
           <div style={tricksStyle}>
-            {trick}
+          {trick}
           </div>
 
         </div>
