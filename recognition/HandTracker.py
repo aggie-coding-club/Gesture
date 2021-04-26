@@ -10,8 +10,7 @@ import config
 from Emitter import event
 
 # Getting openCV ready
-#cap = cv2.VideoCapture(config.settings["camera_index"])
-cap = cv2.VideoCapture("test_files/hand.mp4")
+cap = cv2.VideoCapture(config.settings["camera_index"])
 #Camera detection
 if cap is None or not cap.isOpened():
     pyautogui.alert('Your camera is unavailable. Try to fix this issue and try again!', 'Error')
