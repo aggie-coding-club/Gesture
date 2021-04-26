@@ -204,18 +204,18 @@ def getHand(handedness):
 
 #Handles entering and exiting mouse-movement mode and also handles mouse clicks
 def mouseModeHandler(detectedHand, currGests, gestures, results, mouseHand):
-    # Enters mouse movement mode on thumbs up gesture, setting a mouse anchor point at that position
-    if(detectedHand == mouseHand and currGests[detectedHand] != "Thumbs Up" and currGests[detectedHand] != "Fist" and gestures[detectedHand] == "Thumbs Up"):
+	# Enters mouse movement mode on Gig Em gesture, setting a mouse anchor point at that position
+    if(detectedHand == mouseHand and currGests[detectedHand] != "Gig Em" and currGests[detectedHand] != "Fist" and gestures[detectedHand] == "Gig Em"):
         print("Entering mouse mode at (" + str(results.multi_hand_landmarks[0].landmark[0].x) + ", " + str(results.multi_hand_landmarks[0].landmark[0].y) + ")")
         return [results.multi_hand_landmarks[0].landmark[0].x, results.multi_hand_landmarks[0].landmark[0].y]
         
-    # Leave mouse mode when gesture isn't thumbs up or fist anymore
-    if (detectedHand == mouseHand and (currGests[detectedHand] == "Thumbs Up" or currGests[detectedHand] == "Fist") and gestures[detectedHand] != "Fist" and gestures[hand] != "Thumbs Up"):
+    # Leave mouse mode when gesture isn't Gig Em or fist anymore
+    if (detectedHand == mouseHand and (currGests[detectedHand] == "Gig Em" or currGests[detectedHand] == "Fist") and gestures[detectedHand] != "Fist" and gestures[hand] != "Gig Em"):
         print("Exiting mouse mode.")
         return [-1,-1]
     
     # Clicks the mouse upon a fist gesture while in mouse-movement mode
-    if(detectedHand == mouseHand and currGests[detectedHand] == "Thumbs Up" and gestures[detectedHand] == "Fist"):
+    if(detectedHand == mouseHand and currGests[detectedHand] == "Gig Em" and gestures[detectedHand] == "Fist"):
         pyautogui.click()
         print("Click!")
         
