@@ -36,8 +36,7 @@ export default function HandButtons({dat, changeSettings}) {
   const btnStyle = {
     cursor: "pointer",
     border: borderClr,
-    color: "#afb0b2",
-    backgroundColor: "#162440",
+    backgroundColor: "#3800ff",
     padding: "2vh 3vw",
     outline: "none",
     borderRadius: "10px"
