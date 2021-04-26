@@ -22,7 +22,7 @@ actions = {
         "Gig Em",
         "https://github.com/aggie-coding-club/Vision-Controls"
     ],
-    "close": [
+    "close": [ # Closes application that you are currently on. (Caution: you can close out of this application with this too)
         "Right",
         "1 finger",
         "x"
