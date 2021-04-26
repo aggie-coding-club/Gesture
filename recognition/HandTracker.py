@@ -74,20 +74,20 @@ def gesture(f, hand):
     :return: string representing the gesture that is detected
     """
 
-    if f[0] > 0 and f[1] > 0 and 0 > f[2] and f[4] > 0 and 0 > f[3]:
-        return "Rock & Roll"
-    elif f[0] < 0 and f[1] > 0 and f[2] < 0 and f[3] < 0 and f[4] > 0:
+    if f[1] > 0 and f[2] < 0 and f[3] < 0 and f[4] > 0:
         index_tip = hand.landmark[8]
         index_base = hand.landmark[5]
-        if index_tip.y < index_base.y: # Y goes from top to bottom instead of bottom to top
+        if index_tip.y > index_base.y: # Y goes from top to bottom instead of bottom to top
             return "Horns Down"
+        elif f[0] > 0:
+            return "Rock and Roll"
         else:
             return "No Gesture"
     elif f[0] > 0 and (f[1] < 0 and f[2] < 0 and f[3] < 0 and f[4] < 0):
         thumb_tip = hand.landmark[4]
         thumb_base = hand.landmark[2]
         if thumb_tip.y < thumb_base.y: # Y goes from top to bottom instead of bottom to top
-            return "Thumbs Up"
+            return "Gig Em"
         else:
             return "Thumbs Down"
     elif f[0] < 0 and f[1] > 0 and f[2] < 0 and (f[3] < 0 and f[4] < 0):

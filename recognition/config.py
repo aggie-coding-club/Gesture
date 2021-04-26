@@ -7,7 +7,7 @@ Each action is formatted:
 Options for hands: Left, Right
 
 Options for gestures: 
-1 finger, Peace, 3 fingers, 4 fingers, Open Hand, Fist, Thumbs Up, Thumbs Down, Rock and Roll, Horns Down
+1 finger, Peace, 3 fingers, 4 fingers, Open Hand, Fist, Gig Em, Thumbs Down, Rock and Roll, Horns Down
 
 There are some examples already written below.
 '''
@@ -19,7 +19,7 @@ actions = {
     ],
     "Vision-Controls": [
         "Right",
-        "Thumbs Up",
+        "Gig Em",
         "https://github.com/aggie-coding-club/Vision-Controls"
     ],
     "close": [
