@@ -56,7 +56,7 @@ def parse_arguments():
     p.add_argument('-m', type=str, help='The mode that the recognition will control for (ie. mouse)')
 
     return p.parse_args()
- 
+
 def dotProduct(v1, v2):
     return v1[0]*v2[0] + v1[1]*v2[1]
 
@@ -74,13 +74,20 @@ def gesture(f, hand):
     :return: string representing the gesture that is detected
     """
 
-    if f[1] > 0 > f[2] and f[4] > 0 > f[3]:
-        return "Rock & Roll"
+    if f[1] > 0 and f[2] < 0 and f[3] < 0 and f[4] > 0:
+        index_tip = hand.landmark[8]
+        index_base = hand.landmark[5]
+        if index_tip.y > index_base.y: # Y goes from top to bottom instead of bottom to top
+            return "Horns Down"
+        elif f[0] > 0:
+            return "Rock and Roll"
+        else:
+            return "No Gesture"
     elif f[0] > 0 and (f[1] < 0 and f[2] < 0 and f[3] < 0 and f[4] < 0):
         thumb_tip = hand.landmark[4]
         thumb_base = hand.landmark[2]
         if thumb_tip.y < thumb_base.y: # Y goes from top to bottom instead of bottom to top
-            return "Thumbs Up"
+            return "Gig Em"
         else:
             return "Thumbs Down"
     elif f[0] < 0 and f[1] > 0 and f[2] < 0 and (f[3] < 0 and f[4] < 0):
@@ -197,18 +204,18 @@ def getHand(handedness):
 
 #Handles entering and exiting mouse-movement mode and also handles mouse clicks
 def mouseModeHandler(detectedHand, currGests, gestures, results, mouseHand):
-    # Enters mouse movement mode on thumbs up gesture, setting a mouse anchor point at that position
-    if(detectedHand == mouseHand and currGests[detectedHand] != "Thumbs Up" and currGests[detectedHand] != "Fist" and gestures[detectedHand] == "Thumbs Up"):
+	# Enters mouse movement mode on Gig Em gesture, setting a mouse anchor point at that position
+    if(detectedHand == mouseHand and currGests[detectedHand] != "Gig Em" and currGests[detectedHand] != "Fist" and gestures[detectedHand] == "Gig Em"):
         print("Entering mouse mode at (" + str(results.multi_hand_landmarks[0].landmark[0].x) + ", " + str(results.multi_hand_landmarks[0].landmark[0].y) + ")")
         return [results.multi_hand_landmarks[0].landmark[0].x, results.multi_hand_landmarks[0].landmark[0].y]
         
-    # Leave mouse mode when gesture isn't thumbs up or fist anymore
-    if (detectedHand == mouseHand and (currGests[detectedHand] == "Thumbs Up" or currGests[detectedHand] == "Fist") and gestures[detectedHand] != "Fist" and gestures[hand] != "Thumbs Up"):
+    # Leave mouse mode when gesture isn't Gig Em or fist anymore
+    if (detectedHand == mouseHand and (currGests[detectedHand] == "Gig Em" or currGests[detectedHand] == "Fist") and gestures[detectedHand] != "Fist" and gestures[hand] != "Gig Em"):
         print("Exiting mouse mode.")
         return [-1,-1]
     
     # Clicks the mouse upon a fist gesture while in mouse-movement mode
-    if(detectedHand == mouseHand and currGests[detectedHand] == "Thumbs Up" and gestures[detectedHand] == "Fist"):
+    if(detectedHand == mouseHand and currGests[detectedHand] == "Gig Em" and gestures[detectedHand] == "Fist"):
         pyautogui.click()
         print("Click!")
         
@@ -300,14 +307,14 @@ while True:
             # too much gesture, it is not a word anymore
             if(gestures[hand] != currGests[hand] and all(x == gestures[hand] for x in prevGests[hand])):
 
-                print(f'{hand} "Key Down": {gestures[hand]}')
-
-                # event.emit("end", hand=hand, gest=currGests[hand]) ## doesn't do anything yet
-                event.emit("start", hand=hand, gest=gestures[hand])
+                print(f'{hand} : {gestures[hand]}')
                 
                 if (args.m == 'anchorMouse' or args.m == 'absoluteMouse'):
                     # Handles mouse-movement mode through mouseModeHandler function
                     mouseAnchor = mouseModeHandler(hand, currGests, gestures, results, "right")
+                else:
+                    # event.emit("end", hand=hand, gest=currGests[hand]) ## doesn't do anything yet
+                    event.emit("start", hand=hand, gest=gestures[hand])
                     
                 currGests[hand] = gestures[hand]
                 
