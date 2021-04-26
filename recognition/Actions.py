@@ -19,7 +19,8 @@ def openProject(hand, gest):
         if (config.actions[x][2] == 'x'): return
 
         if config.actions[x][2].startswith("http"):
-            webbrowser.open(config.actions[x][2])
+            if (config.actions[x][0].lower() == hand.lower() and config.actions[x][1].lower() == gest.lower()):
+                webbrowser.open(config.actions[x][2])
 
         if (config.actions[x][0].lower() == hand.lower() and config.actions[x][1].lower() == gest.lower()):
             try:
