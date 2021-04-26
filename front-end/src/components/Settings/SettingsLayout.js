@@ -27,17 +27,6 @@ export default function SettingsLayout() {
     flex: 1,
     height: "100vh"
   }
-  
-  const settingsStyle = {
-    backgroundColor: "#090e18",
-  }
-
-  const sideScreen = {
-    //background: "#090e18",
-    color: "#afb0b2",
-    flex: 1,
-    height: "100vh"
-  }
 
   const settingsStyle = {
     background: "#3a414d",
