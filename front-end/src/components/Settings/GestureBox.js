@@ -18,7 +18,12 @@ export default function GestureBox({name, newSetting, redNum}) {
   }
 
   const gestures = {
-    padding: "5vh"
+    padding: "5vh",
+  }
+
+  const imgFormat = {
+    width: "auto",
+    height: "3vh"
   }
 
   function handleClick() {
@@ -27,7 +32,7 @@ export default function GestureBox({name, newSetting, redNum}) {
 
   return (
     <div onClick={handleClick} style={innerGrid}>
-      <div style={gestures}>{name}</div>
+      <div style={gestures}><img style={imgFormat} src={name}></img></div>
     </div>
   )
 }
