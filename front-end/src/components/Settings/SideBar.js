@@ -1,7 +1,7 @@
 import React from "react"
-import Options from "./Options";
-import CameraOption from "./CameraOption";
+import Options from "../MainScreen/Options";
 import { Link } from "react-router-dom";
+import homePic from "../../assets/home.png"
 import settingsPic from "../../assets/settings.png"
 import profilePic from  "../../assets/profile.png"
 import aboutPic from "../../assets/about.png"
@@ -31,8 +31,8 @@ export default function SideBar({btnClick}) {
       </div>
       <div style={optionWrapper}>
         <div>
-          <Link to="/settings">
-            <Options btnClick={btnClick} name={"Settings"} imagePic={settingsPic}/>
+          <Link to="">
+            <Options btnClick={btnClick} name={"Home"} imagePic={homePic}/>
           </Link>
           <Link to="">
             <Options btnClick={btnClick} name={"Profile"} imagePic={profilePic}/>
@@ -42,9 +42,6 @@ export default function SideBar({btnClick}) {
           </Link>
 
 
-        </div>
-        <div style={cameraOptionStyle}>
-          <CameraOption btnClick={btnClick} icon={cameraPic}/>
         </div>
       </div>
 

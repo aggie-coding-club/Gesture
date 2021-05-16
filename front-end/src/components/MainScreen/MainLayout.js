@@ -1,25 +1,33 @@
 import React from "react"
 import SideBar from "./SideBar";
 import CameraScreen from "./CameraScreen";
+import backgroundPic from "../../assets/background.png"
 
-export default function MainLayout({btnClick}) {
+export default function MainLayout() {
+
+  const btnClick = (name) => {
+    console.log("clicked", name)
+  }
 
   const flexContainer = {
     display: "flex",
+    backgroundImage: `url(${backgroundPic})`,
+    margin: 0,
+    padding: 0,
     backgroundColor: "#090e18",
 
   }
 
   const sideScreen = {
-    background: "#090e18",
+    //background: "#090e18",
     color: "#afb0b2",
-    width: "20vw",
+    flex: 1,
     height: "98vh",
 
   }
   const cameraScreen = {
     background: "#3a414d",
-    width: "80vw",
+    flex: 3,
     height: "98vh",
     color: "#afb0b2",
     borderRadius: "25px",
