@@ -30,6 +30,7 @@ export default function HandButtons({dat, changeSettings}) {
   function newSetting(newGesture) {
     changeSettings(dat[2] - 1, newGesture)
     setRedNum(newGesture)
+    console.log(newGesture);
     //setTimeout(function(){ setShowModal(false) }, 500);
   }
 
@@ -105,8 +106,8 @@ export default function HandButtons({dat, changeSettings}) {
             </div>
             <div style={row}>
               <GestureBox name={rocknroll} newSetting={newSetting} redNum={redNum}/>
-              <GestureBox name={8} newSetting={newSetting} redNum={redNum}/>
-              <GestureBox name={9} newSetting={newSetting} redNum={redNum}/>
+              <GestureBox name={0} newSetting={newSetting} redNum={redNum}/>
+              <GestureBox name={0} newSetting={newSetting} redNum={redNum}/>
             </div>
           </div>
 

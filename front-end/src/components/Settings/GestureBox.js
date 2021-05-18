@@ -9,6 +9,7 @@ export default function GestureBox({name, newSetting, redNum}) {
     theBackground ="#081a2d"
   }
 
+
   const innerGrid = {
     flex: 1,
     textAlign: "center",
@@ -30,9 +31,18 @@ export default function GestureBox({name, newSetting, redNum}) {
     newSetting(name)
   }
 
-  return (
-    <div onClick={handleClick} style={innerGrid}>
-      <div style={gestures}><img style={imgFormat} src={name}></img></div>
-    </div>
-  )
+  if(name) {
+    return (
+      <div onClick={handleClick} style={innerGrid}>
+        <div style={gestures}><img style={imgFormat} src={name}></img></div>
+      </div>
+    )
+  } else {
+    return (
+      <div onClick={handleClick} style={innerGrid}>
+        <div style={gestures}>-</div>
+      </div>
+    )
+  }
+
 }
