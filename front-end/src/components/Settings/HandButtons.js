@@ -19,6 +19,7 @@ export default function HandButtons({dat, changeSettings}) {
   function handleClick() {
     //if button clicked, outline border
     setBorderClr("1px solid white");
+    setRedNum(dat[1]);
     setShowModal(true);
   }
 
