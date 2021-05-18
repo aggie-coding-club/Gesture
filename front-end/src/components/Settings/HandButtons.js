@@ -30,8 +30,6 @@ export default function HandButtons({dat, changeSettings}) {
   function newSetting(newGesture) {
     changeSettings(dat[2] - 1, newGesture)
     setRedNum(newGesture)
-    console.log(newGesture);
-    //setTimeout(function(){ setShowModal(false) }, 500);
   }
 
   const btnStyle = {
@@ -48,7 +46,8 @@ export default function HandButtons({dat, changeSettings}) {
     flexDirection: "column",
     padding: 0,
     margin: 0,
-    height: "100%"
+    height: "100%",
+    borderRadius: "25px"
   }
 
   const row = {
@@ -57,14 +56,6 @@ export default function HandButtons({dat, changeSettings}) {
     display: "flex",
     flexDirection: "row"
   }
-
-  const innerGrid = {
-    flex: 1,
-    textAlign: "center",
-    borderRight: "1px solid white",
-    color: "white",
-  }
-
 
   const imgFormat = {
     width: "auto",
@@ -86,6 +77,7 @@ export default function HandButtons({dat, changeSettings}) {
             },
             content: {
               backgroundColor: "#081a2d",
+              borderRadius: "25px",
               height: "42vh",
               width: "42vh",
               margin: "30vh auto",
