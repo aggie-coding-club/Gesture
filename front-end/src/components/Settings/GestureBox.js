@@ -31,7 +31,7 @@ export default function GestureBox({name, newSetting, redNum}) {
     newSetting(name)
   }
 
-  if(name) {
+  if(!Number.isInteger(name)) {
     return (
       <div onClick={handleClick} style={innerGrid}>
         <div style={gestures}><img style={imgFormat} src={name}></img></div>
