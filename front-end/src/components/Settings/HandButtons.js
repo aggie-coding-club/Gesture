@@ -16,6 +16,7 @@ export default function HandButtons({dat, changeSettings}) {
   const [redNum, setRedNum] = useState(-2);
 
 
+
   function handleClick() {
     //if button clicked, outline border
     setBorderClr("1px solid white");
@@ -63,9 +64,30 @@ export default function HandButtons({dat, changeSettings}) {
     height: "3vh"
   }
 
+  const dashStyle = {
+    color: "#afb0b2"
+
+  }
+
+
+  function iconButton() {
+    if (!Number.isInteger(dat[1])) {
+
+      return (  <button style={btnStyle} onClick={handleClick}> <img style={imgFormat} src={dat[1]}></img> </button>)
+    } else {
+
+      return (
+        <button style={btnStyle} onClick={handleClick}>
+          <h3 style={dashStyle}>---</h3>
+        </button>
+      )
+    }
+  }
+
+
   return (
     <div>
-      <button style={btnStyle} onClick={handleClick}> <img style={imgFormat} src={dat[1]}></img> </button>
+      {iconButton()}
         <Modal
           isOpen={showModal}
           contentLabel="Minimal example"
