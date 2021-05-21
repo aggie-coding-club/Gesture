@@ -90,13 +90,14 @@ export default function HandButtons({dat, changeSettings}) {
       {iconButton()}
         <Modal
           isOpen={showModal}
-          contentLabel="Minimal example"
+          contentLabel="Icon selector"
           onRequestClose={closeModal}
           ariaHideApp={false}
           style={{
             overlay: {
               margin: 0,
-              padding: 0
+              padding: 0,
+              backgroundColor: "rgba(145,209,255, 0.5)"
             },
             content: {
               backgroundColor: "#081a2d",
