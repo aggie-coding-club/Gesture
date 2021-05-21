@@ -54,7 +54,7 @@ export default function HandButtons({dat, changeSettings}) {
 
   const row = {
     flex: 1,
-    border: "1px solid white",
+    border: "1px solid #96B4F2",
     display: "flex",
     flexDirection: "row"
   }
@@ -101,7 +101,7 @@ export default function HandButtons({dat, changeSettings}) {
             },
             content: {
               backgroundColor: "#081a2d",
-              border: "3px white solid",
+              border: "3px #E1DDFC solid",
               borderRadius: "25px",
               height: "44vh",
               width: "44vh",

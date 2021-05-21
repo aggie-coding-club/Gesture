@@ -13,7 +13,7 @@ export default function GestureBox({name, newSetting, redNum}) {
   const innerGrid = {
     flex: 1,
     textAlign: "center",
-    borderRight: "1px solid white",
+   borderRight: "1px solid #96B4F2",
     color: "white",
     background: theBackground,
   }
