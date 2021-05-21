@@ -101,11 +101,13 @@ export default function HandButtons({dat, changeSettings}) {
             },
             content: {
               backgroundColor: "#081a2d",
+              border: "3px white solid",
               borderRadius: "25px",
-              height: "42vh",
-              width: "42vh",
+              height: "44vh",
+              width: "44vh",
               margin: "30vh auto",
-              padding: 0
+              padding: 0,
+              overflow: "hidden"
             }
           }}
         >
