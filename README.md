@@ -1,65 +1,52 @@
-# Vision-Controls
+# Vision Controls
+> Gesture Recognition Software.
 
-# Getting Started - FRONTEND
+## Table of contents
+* [General info](#general-info)
+* [Screenshots](#screenshots)
+* [Technologies](#technologies)
+* [Setup](#setup)
+* [Features](#features)
+* [Extra](#extra)
 
-We will be combining React and Electron for this project! To test out this repository, run these commands:
-
-- **git clone https://github.com/aggie-coding-club/Vision-Controls.git**
-
-    Clones git repository to your computer
-    Note: run this command in directory you want to project to show up in
-    
-- **cd Vision-Controls**
-
-    Travel in your terminal into whatever the repository is called - I believe it will be called ElectronAndReact
-
-- **npm install --global yarn**
-    
-    Installs yarn onto your computer
-
-- **yarn install**
-
-    Installs all the dependencies you need to work on the project.
-    
-- **cd front-end**
-
-    Travel to directory where frontend will be working in
+## General info
+![Logo](./assets/readme/logo.png)
+Vision Controls is a desktop application that allows the user to control various applications through hand gestures.
 
 
-- **yarn start** or **npm run start**
+## Screenshots
+![MainGUI](./assets/readme/ss1.png)
 
-    Gets your React app up and running on  http://localhost:3000/ 
+![Setting](./assets/readme/ss2.png)
 
-- **npm run electron-start**
+![Gesture Grid](./assets/readme/ss3.png)
 
-    Starts up and electron and opens up an app window.\
-    Note: only run this command until AFTER **yarn start** has finished running.\
-      - Electron is grabbing whatever you are running on your localhost and displaying it on your Electron window.\
-      - Consequences: only an empty screen will show up because it could not grab anything from the localhost
+## Technologies
+* React
+* Electron
+* OpenCV
 
-## Bundle Electron App
- 
- - **cd front-end**
- - **yarn install** or **npm install**
- - **npm run preelectron-pack**
- - **npm run electron-pack**
+## Setup
+1. Clone the repo
+```sh
+git clone https://github.com/aggie-coding-club/Vision-Controls
+```
+2. cd Vision-Controls
 
+3. npm install --global yarn
 
-## Learn More React
+4. cd front-end
 
-Offical React.js [Website](https://reactjs.org/).
-  -  React App [documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+5. yarn start
 
-Youtube Tutorials on React:
-  - [React JS Crash Course 2021](https://www.youtube.com/watch?v=w7ejDZ8SWv8&ab_channel=TraversyMedia) - Travesty Media
-  - [Learn React JS - Full Course for Beginners - Tutorial 2019](https://www.youtube.com/watch?v=DLX62G4lc44) - FreeCodeCamp.org
+6. npm run electron-start (separate console)
 
+## Features
+* Full scan of home directory or directed scan of any folder along with sub folders.
+* Full backup of any specified directory (including entire drive).
+* Integrated password manager, that includes secure login.
 
+## Extra
 
-## Learn More Electron
+This project is managed by Aggie Coding Club.
 
-Official Electron.js [Website](https://www.electronjs.org/)
-  - [Documentation](https://www.electronjs.org/docs)
-  - [Quick start guide](https://www.electronjs.org/docs/tutorial/quick-start)
- 
- 
