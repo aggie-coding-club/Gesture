@@ -6,9 +6,9 @@ export default function TrickGesturePair({ dat, changeSettings }) {
   const contentStyle = {
     display: "flex",
     textAlign: "center",
-    padding: "2vh 0",
+    padding: "2vh 10vh",
 
-    borderBottom: "1px solid #090e18",
+    borderBottom: "1px solid gray",
   };
 
   const trickContainer = {
@@ -22,7 +22,7 @@ export default function TrickGesturePair({ dat, changeSettings }) {
     fontFamily: "Oxygen",
     fontWeight: "normal",
     fontStyle: "italic",
-    fontSize: 15,
+    fontSize: 13,
   };
 
   const handButtonsStyle = {

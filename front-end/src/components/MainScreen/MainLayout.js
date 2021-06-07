@@ -1,7 +1,6 @@
 import React from "react";
 import SideBar from "./SideBar";
 import CameraScreen from "./CameraScreen";
-import backgroundPic from "../../assets/background.png";
 
 export default function MainLayout() {
   const btnClick = (name) => {
@@ -10,14 +9,13 @@ export default function MainLayout() {
 
   const flexContainer = {
     display: "flex",
-    // backgroundImage: `url(${backgroundPic})`,
     margin: 0,
     padding: 0,
     backgroundColor: "#090e18",
   };
 
   const sideScreen = {
-    //background: "#090e18",
+    // background: "#090e18",
     color: "#afb0b2",
     flex: 1,
     height: "98vh",

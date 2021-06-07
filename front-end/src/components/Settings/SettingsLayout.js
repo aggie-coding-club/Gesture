@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import backgroundPic from "../../assets/background.png";
 import SideBar from "./SideBar.js";
 import TrickGesturesPairs from "./TrickGesturePairs";
 import configData from "../../data/config.json";
@@ -13,7 +12,6 @@ export default function SettingsLayout() {
 
   const flexContainer = {
     display: "flex",
-    // backgroundImage: `url(${backgroundPic})`,
     margin: 0,
     padding: 0,
     backgroundColor: "#090e18",
@@ -27,10 +25,10 @@ export default function SettingsLayout() {
   };
 
   const settingsStyle = {
-    background: "#3a414d",
-    color: "#090e18",
+    // background: "#3a414d",
+    // color: "#090e18",
     height: "98vh",
-    borderRadius: "25px",
+    // borderRadius: "25px",
     margin: "1vh 1vh 1vh 0",
     padding: 0,
     flex: 3,
@@ -42,11 +40,12 @@ export default function SettingsLayout() {
     letterSpacing: "0.3em",
     fontFamily: "Oxygen",
     fontWeight: "bold",
-    fontSize: 17,
+    fontSize: 13,
+    margin: "8vh 0 3vh",
   };
 
   const pairStyle = {
-    margin: "0 5vw 0 5vw",
+    margin: "0 7vw 0 7vw",
   };
 
   function changeSettings(index, newNum) {
@@ -60,7 +59,6 @@ export default function SettingsLayout() {
       <div style={sideScreen}>
         <SideBar btnClick={btnClick} />
       </div>
-
       <div style={settingsStyle}>
         <div style={titleStyle}>
           <h1>SETTINGS</h1>
