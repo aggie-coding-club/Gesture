@@ -10,16 +10,17 @@
 * [Extra](#extra)
 
 ## General info
-![Logo](./assets/readme/logo.png)
+<img src="./assets/readme/logo.png" width="292.5" height="292.5" />
+
 Vision Controls is a desktop application that allows the user to control various applications through hand gestures.
 
 
 ## Screenshots
-![MainGUI](./assets/readme/ss1.png)
+<img src="./assets/readme/ss1.png" width="713.25" height="456.75" />
 
-![Setting](./assets/readme/ss2.png)
+<img src="./assets/readme/ss2.png" width="713.25" height="456.75" />
 
-![Gesture Grid](./assets/readme/ss3.png)
+<img src="./assets/readme/ss3.png" width="713.25" height="456.75" />
 
 ## Technologies
 * React
