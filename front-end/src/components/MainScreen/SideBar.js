@@ -19,7 +19,7 @@ export default function SideBar({ btnClick }) {
   };
 
   const cameraOptionStyle = {
-    margin: "15vh 3vw 0 0",
+    margin: "23vh 1vw 0 0",
   };
 
   return (
