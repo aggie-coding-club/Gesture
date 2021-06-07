@@ -30,9 +30,6 @@ export default function SideBar({ btnClick }) {
           <Link to="">
             <Options btnClick={btnClick} name={"Home"} imagePic={homePic} />
           </Link>
-          <Link to="">
-            <Options btnClick={btnClick} name={"About"} imagePic={aboutPic} />
-          </Link>
         </div>
       </div>
     </div>
