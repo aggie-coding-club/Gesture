@@ -10,7 +10,7 @@
 * [Extra](#extra)
 
 ## General info
-<img src="./assets/readme/logo.png" width="292.5" height="292.5" />
+<img src="./assets/readme/logo.png" width="259.4" height="200" />
 
 Vision Controls is a desktop application that allows the user to control various applications through hand gestures.
 
@@ -43,9 +43,9 @@ git clone https://github.com/aggie-coding-club/Vision-Controls
 6. npm run electron-start (separate console)
 
 ## Features
-* Full scan of home directory or directed scan of any folder along with sub folders.
-* Full backup of any specified directory (including entire drive).
-* Integrated password manager, that includes secure login.
+* Full Desktop UI Using React and Electron
+* Gesture Recognition through Python with OpenCV 
+* Settings page to change application preference / gesture recognition
 
 ## Extra
 
