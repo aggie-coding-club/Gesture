@@ -18,12 +18,12 @@ export default function GestureBox({ name, newSetting, redNum }) {
   };
 
   const gestures = {
-    padding: "5vh",
+    padding: "4vh",
   };
 
   const imgFormat = {
     width: "auto",
-    height: "3vh",
+    height: "4vh",
   };
 
   function handleClick() {

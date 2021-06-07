@@ -87,7 +87,7 @@ export default function HandButtons({ dat, changeSettings }) {
             backgroundColor: "#081a2d",
             height: "42vh",
             width: "42vh",
-            margin: "30vh auto",
+            margin: "auto auto",
             padding: 0,
           },
         }}
