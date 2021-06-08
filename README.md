@@ -1,65 +1,63 @@
-# Vision-Controls
+# Vision Controls
+> Gesture Recognition Software.
 
-# Getting Started - FRONTEND
+## Table of contents
+* [General info](#general-info)
+* [Screenshots](#screenshots)
+* [Tech Stack](#tech-stack)
+* [Setup](#setup)
+* [Features](#features)
+* [Extra](#extra)
 
-We will be combining React and Electron for this project! To test out this repository, run these commands:
+## General info
+<img src="./assets/readme/logo.png" width="259.4" height="200" />
 
-- **git clone https://github.com/aggie-coding-club/Vision-Controls.git**
-
-    Clones git repository to your computer
-    Note: run this command in directory you want to project to show up in
-    
-- **cd Vision-Controls**
-
-    Travel in your terminal into whatever the repository is called - I believe it will be called ElectronAndReact
-
-- **npm install --global yarn**
-    
-    Installs yarn onto your computer
-
-- **yarn install**
-
-    Installs all the dependencies you need to work on the project.
-    
-- **cd front-end**
-
-    Travel to directory where frontend will be working in
+Vision Controls is a desktop application that allows the user to control various applications through hand gestures.
 
 
-- **yarn start** or **npm run start**
+## Screenshots
+<img src="./assets/readme/ss1.png" width="713.25" height="456.75" />
 
-    Gets your React app up and running on  http://localhost:3000/ 
+<img src="./assets/readme/ss2.png" width="713.25" height="456.75" />
 
-- **npm run electron-start**
+<img src="./assets/readme/ss3.png" width="713.25" height="456.75" />
 
-    Starts up and electron and opens up an app window.\
-    Note: only run this command until AFTER **yarn start** has finished running.\
-      - Electron is grabbing whatever you are running on your localhost and displaying it on your Electron window.\
-      - Consequences: only an empty screen will show up because it could not grab anything from the localhost
+<img src="./assets/readme/ss4.png" width="516" height="432.75" />
 
-## Bundle Electron App
- 
- - **cd front-end**
- - **yarn install** or **npm install**
- - **npm run preelectron-pack**
- - **npm run electron-pack**
+## Tech Stack
+**Frontend**
 
+* JS
+* React
+* Electron
 
-## Learn More React
+**Backend**
 
-Offical React.js [Website](https://reactjs.org/).
-  -  React App [documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+* Python
+* Flask
+* OpenCV
 
-Youtube Tutorials on React:
-  - [React JS Crash Course 2021](https://www.youtube.com/watch?v=w7ejDZ8SWv8&ab_channel=TraversyMedia) - Travesty Media
-  - [Learn React JS - Full Course for Beginners - Tutorial 2019](https://www.youtube.com/watch?v=DLX62G4lc44) - FreeCodeCamp.org
+## Setup
+1. Clone the repo
+```sh
+git clone https://github.com/aggie-coding-club/Vision-Controls
+```
+2. cd Vision-Controls
 
+3. npm install --global yarn
 
+4. cd front-end
 
-## Learn More Electron
+5. yarn start
 
-Official Electron.js [Website](https://www.electronjs.org/)
-  - [Documentation](https://www.electronjs.org/docs)
-  - [Quick start guide](https://www.electronjs.org/docs/tutorial/quick-start)
- 
- 
+6. npm run electron-start (separate console)
+
+## Features
+* Full Desktop UI Using React and Electron
+* Gesture Recognition / mouse movement through Python with OpenCV 
+* Settings page to change application preference / gestures
+
+## Extra
+
+This project is managed by Aggie Coding Club.
+
