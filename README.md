@@ -4,7 +4,7 @@
 ## Table of contents
 * [General info](#general-info)
 * [Screenshots](#screenshots)
-* [Technologies](#technologies)
+* [Tech Stack](#tech-stack)
 * [Setup](#setup)
 * [Features](#features)
 * [Extra](#extra)
@@ -22,9 +22,19 @@ Vision Controls is a desktop application that allows the user to control various
 
 <img src="./assets/readme/ss3.png" width="713.25" height="456.75" />
 
-## Technologies
+<img src="./assets/readme/ss4.png" width="516" height="432.75" />
+
+## Tech Stack
+**Frontend**
+
+* JS
 * React
 * Electron
+
+**Backend**
+
+* Python
+* Flask
 * OpenCV
 
 ## Setup
@@ -44,8 +54,8 @@ git clone https://github.com/aggie-coding-club/Vision-Controls
 
 ## Features
 * Full Desktop UI Using React and Electron
-* Gesture Recognition through Python with OpenCV 
-* Settings page to change application preference / gesture recognition
+* Gesture Recognition / mouse movement through Python with OpenCV 
+* Settings page to change application preference / gestures
 
 ## Extra
 
