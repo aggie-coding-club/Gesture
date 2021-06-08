@@ -16,13 +16,17 @@ Vision Controls is a desktop application that allows the user to control various
 
 
 ## Screenshots
-<img src="./assets/readme/ss1.png" width="713.25" height="456.75" />
+<!-- <img src="./assets/readme/ss1.png" width="713.25" height="456.75" /> -->
+![ss1](./assets/readme/ss1.png)
 
-<img src="./assets/readme/ss2.png" width="713.25" height="462" />
+<!-- <img src="./assets/readme/ss2.png" width="713.25" height="462" /> -->
+![ss1](./assets/readme/ss2.png)
 
-<img src="./assets/readme/ss3.png" width="713.25" height="459.75" />
+<!-- <img src="./assets/readme/ss3.png" width="713.25" height="459.75" /> -->
+![ss1](./assets/readme/ss3.png)
 
-<img src="./assets/readme/ss4.png" width="516" height="432.75" />
+<!-- <img src="./assets/readme/ss4.png" width="516" height="432.75" /> -->
+![ss1](./assets/readme/ss4.png)
 
 ## Tech Stack
 **Frontend**
