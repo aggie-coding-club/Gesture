@@ -15,7 +15,7 @@
     "Willy Ovalle <https://github.com/wovalle>"
   ],
   "license": "MIT",
-  "main": "oldMain.js",
+  "main": "oldElectronMain.js",
   "scripts": {
     "prod": "webpack --config webpack.build.config.js && electron --noDevServer .",
     "dev": "webpack-dev-server --hot --host 0.0.0.0 --port 4000 --config=./webpack.dev.config.js",
