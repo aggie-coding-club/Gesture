@@ -25,10 +25,7 @@ export default function SettingsLayout() {
   };
 
   const settingsStyle = {
-    // background: "#3a414d",
-    // color: "#090e18",
     height: "98vh",
-    // borderRadius: "25px",
     margin: "1vh 1vh 1vh 0",
     padding: 0,
     flex: 3,
@@ -45,7 +42,7 @@ export default function SettingsLayout() {
   };
 
   const pairStyle = {
-    margin: "0 7vw 0 7vw",
+    margin: "0 7vw 0 0",
   };
 
   function changeSettings(index, newNum) {

@@ -3,6 +3,9 @@ import React from "react"
 export default function Options({name, btnClick, imagePic}) {
   const anOptionStyle = {
     padding: "2.5vh",
+   // backgroundColor: "red",
+    //margin: "10px 0 ",
+   // flex: 1,
 
   }
 
