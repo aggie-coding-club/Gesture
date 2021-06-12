@@ -38,7 +38,7 @@ export default function MainLayout() {
       </div>
       <div style={cameraScreen}>
         <VideoModal/>
-        <CameraScreen />
+        {/* <CameraScreen /> */}
       </div>
     </div>
   );
@@ -46,17 +46,15 @@ export default function MainLayout() {
 
 const VideoModal = () => {
   const videoStyle = {
-    height: "100%",
-    width: "100%",
+    height: "480px",
+    width: "640px",
     border: "none",
-    position: "relative", 
-    left: "-10px",
-    top: "-10px",
+    position: "relative",
   };
 
   return <iframe 
       style={videoStyle} 
-      src={'http://127.0.0.1:5000/'} 
+      src={'http://127.0.0.1:5000/video_feed'} 
       scrolling={"no"}>
     </iframe>
 }
