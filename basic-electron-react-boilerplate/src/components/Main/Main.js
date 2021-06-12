@@ -1,5 +1,6 @@
 import MainLayout from "../MainScreen/MainLayout";
-import SettingsLayout from "../Settings/SettingsLayout"
+import SettingsLayout from "../Settings/SettingsLayout";
+import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 export default function Main() {

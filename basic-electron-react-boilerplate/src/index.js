@@ -11,10 +11,10 @@ function Test() {
 }
 
 render((
-    // <BrowserRouter>
-    //   <App />
-    // </BrowserRouter>
-  <Test />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+
   ), document.getElementById('app')
 );
 

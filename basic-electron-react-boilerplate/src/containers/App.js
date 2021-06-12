@@ -1,4 +1,4 @@
-
+import React from 'react'
 import Main from "../components/Main/Main"
 function Test() {
   return (
@@ -10,9 +10,10 @@ function App() {
 
   return (
 
-    <div className="App">
-      <h1>yoohoo </h1>
+    <div>
+      <Test />
       <Main />
+
     </div>
   );
 
