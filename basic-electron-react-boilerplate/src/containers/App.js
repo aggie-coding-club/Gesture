@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-import '../assets/css/App.css';
 
-import HelloWorld from '../components/App/HelloWorld';
+import HelloWorld from '../componentsOld/App/HelloWorld';
 
 class App extends Component {
   render() {
     return (
       <div>
+        <div></div>
         <HelloWorld />
       </div>
     );

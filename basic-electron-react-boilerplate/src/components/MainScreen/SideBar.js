@@ -1,10 +1,11 @@
 import React from "react";
-import Options from "../MainScreen/Options";
+import Options from "./Options";
+import CameraOption from "./CameraOption";
 import { Link } from "react-router-dom";
-import homePic from "../../assets/home.png";
-import profilePic from "../../assets/profile.png";
+import settingsPic from "../../assets/settings.png";
 import aboutPic from "../../assets/about.png";
 import logo from "../../assets/logo.png";
+import cameraPic from "../../assets/webcam.png";
 
 export default function SideBar({ btnClick }) {
   const logoStyle = {
@@ -17,7 +18,7 @@ export default function SideBar({ btnClick }) {
   };
 
   const cameraOptionStyle = {
-    margin: "15vh 3vw 0 0",
+    margin: "23vh 1vw 0 0",
   };
 
   return (
@@ -27,9 +28,15 @@ export default function SideBar({ btnClick }) {
       </div>
       <div style={optionWrapper}>
         <div>
-          <Link to="">
-            <Options btnClick={btnClick} name={"Home"} imagePic={homePic} />
+          <Link to="/settings">
+            <Options btnClick={btnClick} name={"Settings"} imagePic={settingsPic} />
           </Link>
+          <Link to="">
+            <Options btnClick={btnClick} name={"About"} imagePic={aboutPic} />
+          </Link>
+        </div>
+        <div style={cameraOptionStyle}>
+          <CameraOption btnClick={btnClick} icon={cameraPic} />
         </div>
       </div>
     </div>
