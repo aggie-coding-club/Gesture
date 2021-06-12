@@ -54,7 +54,7 @@ const VideoModal = () => {
 
   return <iframe 
       style={videoStyle} 
-      src={'http://127.0.0.1:5000/video_feed'} 
+      src={'http://localhost:5000/video_feed'} 
       scrolling={"no"}>
     </iframe>
 }
