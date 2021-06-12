@@ -14,9 +14,17 @@ export default function CameraScreen() {
     opacity: 0.4
   }
 
+  const videoStyle = {
+    height: "500px",
+    width: "100%",
+    border: "none",
+    overflow: "hidden"
+  }
+
   return (
     <div style={camera}>
-      <img style={cameraOffStyle} src={CameraOff}></img>
+      <iframe style={videoStyle} src={'http://127.0.0.1:5000/'}></iframe>
+      {/* <img style={cameraOffStyle} src={CameraOff}></img> */}
     </div>
   )
 }

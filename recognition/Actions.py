@@ -1,7 +1,7 @@
 # %%
 import webbrowser
-import pyautogui
-import time
+# import pyautogui
+# import time
 import application_launch as app
 import config
 
@@ -28,10 +28,10 @@ def openProject(hand, gest):
             except:
                 print("No program at path:", config.actions[x][2])
 
-@event.on("start")
-def closeProgram(hand, gest):
-    if (config.actions["close"][0].lower() == hand.lower() and config.actions["close"][1].lower() == gest.lower()):
-        pyautogui.hotkey('alt', 'f4')
+# @event.on("start")
+# def closeProgram(hand, gest):
+#     if (config.actions["close"][0].lower() == hand.lower() and config.actions["close"][1].lower() == gest.lower()):
+#         pyautogui.hotkey('alt', 'f4')
 
 
 @event.on("test")
