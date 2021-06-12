@@ -1,10 +1,13 @@
-import React from "react"
+import React, { useState } from "react";
 
 export default function CameraOption({btnClick, icon}) {
-  const [shown, setShown] = React.useState(false)
+  const [visible, setVisible] = useState('http://localhost:5000/video_feed')
 
   function toggleChange() {
-    btnClick("Camera");
+    if (visible == 'http://localhost:5000/video_feed')
+      setVisible('http://localhost:5000/off')
+    else
+    setVisible('http://localhost:5000/video_feed')
   }
 
   const btnContainer = {
@@ -37,35 +40,36 @@ export default function CameraOption({btnClick, icon}) {
     marginTop: "1vh"
   }
 
+  const videoStyle = {
+    height: "480px",
+    width: "640px",
+    border: "none",
+    position: "absolute",
+    top: "5px",
+    right: "5px",
+    height: "98vh",
+    borderRadius: "25px",
+  };
+
   return(
-    <div style={btnContainer}>
-      {/* {shown ? <VideoModal/> : null}
-      <button style={btnStyle} onClick={() => setShown(!shown)}> */}
-      <button style={btnStyle} onClick={toggleChange}>
-        <div style={imageStyle}>
-          <img src={icon} alt="camera" height="auto" width="25px"/>
-        </div>
-        <div style={wordStyle}>
-          <p style={word}>Camera</p>
-        </div>
-      </button>
-    </div>
+    <React.Fragment>
+        <div style={btnContainer}>
+        <button style={btnStyle} onClick={toggleChange}>
+          <div style={imageStyle}>
+            <img src={icon} alt="camera" height="auto" width="25px"/>
+          </div>
+          <div style={wordStyle}>
+            <p style={word}>Camera</p>
+          </div>
+        </button>
+      </div>
+      <div>
+        <iframe 
+          style={videoStyle} 
+          src={visible} 
+          scrolling={"no"}>
+        </iframe>
+      </div>
+    </React.Fragment>
   )
 }
-
-// const VideoModal = () => {
-//   const videoStyle = {
-//     height: "100%",
-//     width: "100%",
-//     border: "none",
-//     position: "relative", 
-//     left: "-10px",
-//     top: "-10px",
-//   };
-
-//   return <iframe 
-//       style={videoStyle} 
-//       src={'http://127.0.0.1:5000/'} 
-//       scrolling={"no"}>
-//     </iframe>
-// }
