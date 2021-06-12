@@ -20,6 +20,7 @@ export default function MainLayout() {
     flex: 1,
     height: "98vh",
   };
+
   const cameraScreen = {
     background: "#3a414d",
     flex: 3,
@@ -27,6 +28,7 @@ export default function MainLayout() {
     color: "#afb0b2",
     borderRadius: "25px",
     margin: "1vh 1vh 1vh 0",
+    overflow: "hidden",
   };
 
   return (
@@ -35,8 +37,24 @@ export default function MainLayout() {
         <SideBar btnClick={btnClick} />
       </div>
       <div style={cameraScreen}>
-        <CameraScreen />
+        <VideoModal/>
+        {/* <CameraScreen /> */}
       </div>
     </div>
   );
+}
+
+const VideoModal = () => {
+  const videoStyle = {
+    height: "480px",
+    width: "640px",
+    border: "none",
+    position: "relative",
+  };
+
+  return <iframe 
+      style={videoStyle} 
+      src={'http://localhost:5000/video_feed'} 
+      scrolling={"no"}>
+    </iframe>
 }

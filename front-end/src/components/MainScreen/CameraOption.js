@@ -1,6 +1,8 @@
 import React from "react"
 
 export default function CameraOption({btnClick, icon}) {
+  const [shown, setShown] = React.useState(false)
+
   function toggleChange() {
     btnClick("Camera");
   }
@@ -37,6 +39,8 @@ export default function CameraOption({btnClick, icon}) {
 
   return(
     <div style={btnContainer}>
+      {/* {shown ? <VideoModal/> : null}
+      <button style={btnStyle} onClick={() => setShown(!shown)}> */}
       <button style={btnStyle} onClick={toggleChange}>
         <div style={imageStyle}>
           <img src={icon} alt="camera" height="auto" width="25px"/>
@@ -48,3 +52,20 @@ export default function CameraOption({btnClick, icon}) {
     </div>
   )
 }
+
+// const VideoModal = () => {
+//   const videoStyle = {
+//     height: "100%",
+//     width: "100%",
+//     border: "none",
+//     position: "relative", 
+//     left: "-10px",
+//     top: "-10px",
+//   };
+
+//   return <iframe 
+//       style={videoStyle} 
+//       src={'http://127.0.0.1:5000/'} 
+//       scrolling={"no"}>
+//     </iframe>
+// }

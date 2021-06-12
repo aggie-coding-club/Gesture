@@ -3,9 +3,10 @@ const path = require("path");
 
 function createWindow() {
   const win = new BrowserWindow({
-    width: 900,
-    height: 550,
+    width: 860,
+    height: 520,
     autoHideMenuBar: true,
+    resizable: false,
     webPreferences: {
       nodeIntegration: true,
     },
@@ -13,7 +14,7 @@ function createWindow() {
   });
 
   //to get access to Chrome dev tools -------COMMENT TO BUILD APP --------
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools();
 
   //build app ----- UNCOMMENT TO BUILD APP --------
   //win.loadURL(`file://${path.join(__dirname, '../build/index.html')}`)

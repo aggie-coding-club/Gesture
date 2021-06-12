@@ -4,3 +4,4 @@ numpy==1.20.1
 opencv-python==4.5.1.48
 pyautogui==0.9.52
 pymitter==0.3.0
+flask==2.0.1
