@@ -16,7 +16,7 @@ Vision Controls is a desktop application that allows the user to control various
 
 
 ## Screenshots
-![ss1](./assets/readme/main.png)
+![ss1](./assets/readme/main1.png)
 
 
 ## Tech Stack
