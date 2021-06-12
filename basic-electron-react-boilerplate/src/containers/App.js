@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
 
+import Main from "../components/Main/Main"
 
-import HelloWorld from '../componentsOld/App/HelloWorld';
+function App() {
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <div></div>
-        <HelloWorld />
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      <Main />
+    </div>
+  );
+
 }
 
 export default App;
+
