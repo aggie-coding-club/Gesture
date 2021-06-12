@@ -399,15 +399,11 @@ def video_feed():
     return Response(gen_video(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
-# @app.route('/')
-# def index():
-#     return render_template('index.html')
-
 @app.route('/off')
 def off():
     return ""
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(port=5000)
     # app.run(threaded=True, host="0.0.0.0", port=5003)

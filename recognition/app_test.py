@@ -26,10 +26,6 @@ def video_feed():
     return Response(gen_video(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
-# @app.route('/')
-# def index():
-#     return render_template('home.html')
-
 @app.route('/off')
 def off():
     return ""
