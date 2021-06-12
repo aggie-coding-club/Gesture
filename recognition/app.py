@@ -310,59 +310,59 @@ def gen_frames():
         success, img = cap.read()
 
         # If there are no more frames, break loop
-        # if img is None:
-        #     print("Video ended. Closing.")
-        #     break
+        if img is None:
+            print("Video ended. Closing.")
+            break
 
-        # imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        # results = hands.process(imgRGB)
+        imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        results = hands.process(imgRGB)
 
-        # # leftPrevGestures = []
-        # # rightPrevGestures = []
-        # # if there are hands in frame, calculate which fingers are open and draw the landmarks for each hand
-        # if results.multi_hand_landmarks:
-        #     gestures = {}
+        # leftPrevGestures = []
+        # rightPrevGestures = []
+        # if there are hands in frame, calculate which fingers are open and draw the landmarks for each hand
+        if results.multi_hand_landmarks:
+            gestures = {}
             
-        #     for handLms, handedness in zip(results.multi_hand_landmarks, results.multi_handedness):
-        #         fingers = straightFingers(handLms, img)
-        #         hand = getHand(handedness)
-        #         if hand == "Left":
-        #             gestures['left'] = gesture(fingers, handLms)
-        #         else:
-        #             gestures['right'] = gesture(fingers, handLms)
-        #         frame_count += 1
-        #         #mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
-        #         mpDraw.draw_landmarks(img, handLms)
+            for handLms, handedness in zip(results.multi_hand_landmarks, results.multi_handedness):
+                fingers = straightFingers(handLms, img)
+                hand = getHand(handedness)
+                if hand == "Left":
+                    gestures['left'] = gesture(fingers, handLms)
+                else:
+                    gestures['right'] = gesture(fingers, handLms)
+                frame_count += 1
+                #mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
+                mpDraw.draw_landmarks(img, handLms)
             
-        #     # print(f"{frame_count}, {gestures}, {len(results.multi_hand_landmarks)}")
-        #     for hand in ['left', 'right']:
-        #         if not hand in gestures:
-        #             continue
+            # print(f"{frame_count}, {gestures}, {len(results.multi_hand_landmarks)}")
+            for hand in ['left', 'right']:
+                if not hand in gestures:
+                    continue
 
-        #         #Moves mouse if in mouse mode
-        #         if (args.m == 'anchorMouse' or args.m == 'absoluteMouse'):
-        #             moveMouse(results)
+                #Moves mouse if in mouse mode
+                if (args.m == 'anchorMouse' or args.m == 'absoluteMouse'):
+                    moveMouse(results)
                 
-        #         # if gesture is diff from currGesture and the previous 3 gestures are the same as the current gesture
-        #         # too much gesture, it is not a word anymore
-        #         if(gestures[hand] != currGests[hand] and all(x == gestures[hand] for x in prevGests[hand])):
+                # if gesture is diff from currGesture and the previous 3 gestures are the same as the current gesture
+                # too much gesture, it is not a word anymore
+                if(gestures[hand] != currGests[hand] and all(x == gestures[hand] for x in prevGests[hand])):
 
-        #             # print(f'{hand} : {gestures[hand]}')
+                    # print(f'{hand} : {gestures[hand]}')
                     
-        #             if (args.m == 'anchorMouse' or args.m == 'absoluteMouse'):
-        #                 # Handles mouse-movement mode through mouseModeHandler function
-        #                 mouseAnchor = mouseModeHandler(hand, currGests, gestures, results, "right")
-        #             else:
-        #                 # event.emit("end", hand=hand, gest=currGests[hand]) ## doesn't do anything yet
-        #                 event.emit("start", hand=hand, gest=gestures[hand])
+                    if (args.m == 'anchorMouse' or args.m == 'absoluteMouse'):
+                        # Handles mouse-movement mode through mouseModeHandler function
+                        mouseAnchor = mouseModeHandler(hand, currGests, gestures, results, "right")
+                    else:
+                        # event.emit("end", hand=hand, gest=currGests[hand]) ## doesn't do anything yet
+                        event.emit("start", hand=hand, gest=gestures[hand])
                         
-        #             currGests[hand] = gestures[hand]
+                    currGests[hand] = gestures[hand]
                     
-        #         # keep only the 3 previous Gestures
-        #         prevGests[hand].append(gestures[hand])
-        #         prevGests[hand] = prevGests[hand][-frames_until_change:]
+                # keep only the 3 previous Gestures
+                prevGests[hand].append(gestures[hand])
+                prevGests[hand] = prevGests[hand][-frames_until_change:]
                 
-        # # Used for fps calculation
+        # Used for fps calculation
         # currTime = time.time()
         # fpsList = calcFPS(prevTime, currTime, fpsList)
         # prevTime = currTime
@@ -388,13 +388,11 @@ def gen_frames():
 
 @app.route('/video_feed')
 def video_feed():
-    #Video streaming route. Put this in the src attribute of an img tag
     return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 @app.route('/')
 def index():
-    """Video streaming home page."""
     return render_template('home.html')
 
 

@@ -3,10 +3,6 @@ import CameraOff from '../../assets/camera-off.png'
 
 export default function CameraScreen() {
 
-  const camera = {
-
-  }
-
   const cameraOffStyle = {
     height: "40vh",
     width: "auto",
@@ -14,17 +10,7 @@ export default function CameraScreen() {
     opacity: 0.4
   }
 
-  const videoStyle = {
-    height: "500px",
-    width: "100%",
-    border: "none",
-    overflow: "hidden"
-  }
-
   return (
-    <div style={camera}>
-      <iframe style={videoStyle} src={'http://127.0.0.1:5000/'}></iframe>
-      {/* <img style={cameraOffStyle} src={CameraOff}></img> */}
-    </div>
+    <img style={cameraOffStyle} src={CameraOff}></img>
   )
 }
