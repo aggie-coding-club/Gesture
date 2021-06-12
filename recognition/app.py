@@ -391,6 +391,16 @@ def gen_video():
         if cv2.waitKey(1) == 27:
             break
 
+
+def gen_off():
+    img = cv2.imread("../front-end/src/assets/camera-off2.png", 1)
+    ret, buffer = cv2.imencode('.jpg', img)
+    frame = buffer.tobytes()
+    yield (b'--frame\r\n'
+            b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+    # cv2.imshow("Video with Hand Detection", img)
+
 # cap.release()
 # cv2.destroyAllWindows()
 
@@ -401,7 +411,7 @@ def video_feed():
 
 @app.route('/off')
 def off():
-    return ""
+    return Response(gen_off(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 if __name__ == "__main__":

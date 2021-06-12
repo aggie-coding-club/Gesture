@@ -16,17 +16,8 @@ Vision Controls is a desktop application that allows the user to control various
 
 
 ## Screenshots
-<!-- <img src="./assets/readme/ss1.png" width="713.25" height="456.75" /> -->
-![ss1](./assets/readme/ss1.png)
+![ss1](./assets/readme/main.png)
 
-<!-- <img src="./assets/readme/ss2.png" width="713.25" height="462" /> -->
-![ss1](./assets/readme/ss2.png)
-
-<!-- <img src="./assets/readme/ss3.png" width="713.25" height="459.75" /> -->
-![ss1](./assets/readme/ss3.png)
-
-<!-- <img src="./assets/readme/ss4.png" width="516" height="432.75" /> -->
-![ss1](./assets/readme/ss4.png)
 
 ## Tech Stack
 **Frontend**
@@ -42,19 +33,25 @@ Vision Controls is a desktop application that allows the user to control various
 * OpenCV
 
 ## Setup
-1. Clone the repo
-```sh
-git clone https://github.com/aggie-coding-club/Vision-Controls
+General
 ```
-2. cd Vision-Controls
+git clone https://github.com/aggie-coding-club/Vision-Controls
+cd Vision-Controls
+npm install --global yarn
+yarn install
+```
 
-3. npm install --global yarn
-
-4. cd front-end
-
-5. yarn start
-
-6. npm run electron-start (separate console)
+Frontend
+```
+$ cd frontend
+yarn start
+npm run electron-start
+```
+Backend
+```
+$ pip install -r requirements.txt
+python recognition/app.py
+```
 
 ## Features
 * Full Desktop UI Using React and Electron
