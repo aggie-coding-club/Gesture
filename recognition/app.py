@@ -282,7 +282,7 @@ def moveMouse(results):
         pyautogui.moveTo(-(avgx - 0.5)*2*screenWidth + screenWidth/2, (avgy - 0.5)*2*screenHeight + screenHeight/2)
 
 
-def gen_frames():
+def gen_video():
     # Preparing arguments for main
     args = parse_arguments() # parsing arguments
 
@@ -296,9 +296,9 @@ def gen_frames():
     }
    
     # Vars used to calculate avg fps
-    prevTime = 0
-    currTime = 0
-    fpsList = []
+    # prevTime = 0
+    # currTime = 0
+    # fpsList = []
     frame_count = 0
 
 
@@ -388,7 +388,7 @@ def gen_frames():
 
 @app.route('/video_feed')
 def video_feed():
-    return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(gen_video(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 @app.route('/')
@@ -396,6 +396,6 @@ def index():
     return render_template('home.html')
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True, port=5000)
     # app.run(threaded=True, host="0.0.0.0", port=5003)

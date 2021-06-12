@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 camera = cv2.VideoCapture(0) 
 
-def gen_frames():
+def gen_video():
     while True:
         success, frame = camera.read()
         if not success:
@@ -19,7 +19,7 @@ def gen_frames():
 
 @app.route('/video_feed')
 def video_feed():
-    return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(gen_video(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 @app.route('/')
