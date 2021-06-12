@@ -7,7 +7,7 @@ export default function CameraOption({btnClick, icon}) {
     if (visible == 'http://localhost:5000/video_feed')
       setVisible('http://localhost:5000/off')
     else
-    setVisible('http://localhost:5000/video_feed')
+      setVisible('http://localhost:5000/video_feed')
   }
 
   const btnContainer = {
