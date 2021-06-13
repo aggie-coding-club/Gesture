@@ -10,13 +10,15 @@
 * [Extra](#extra)
 
 ## General info
-<img src="./assets/readme/logo.png" width="259.4" height="200" />
+<p align="center">
+    <img src="./assets/readme/logo.png" width="259.4" height="200" />
+</p>
 
 Vision Controls is a desktop application that allows the user to control various applications through hand gestures.
 
 
 ## Showcase
-![ss1](./assets/readme/main.png)
+![ss1](./assets/readme/main2.png)
 
 
 ## Tech Stack
