@@ -50,7 +50,7 @@ export default function SideBar({ btnClick }) {
             </Link>
           </div>
           <div style={optionStyle}>
-            <Link to="">
+            <Link to="/about">
               <Options btnClick={btnClick} name={"About"} imagePic={aboutPic} />
             </Link>
           </div>
