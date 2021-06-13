@@ -5,3 +5,6 @@ node_modules/
 recognition/test_files
 recognition/__pycache__
 recognition/config.py
+basic-electron-react-boilerplate/.idea
+basic-electron-react-boilerplate/node_modules
+
