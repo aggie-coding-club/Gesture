@@ -1,12 +1,12 @@
 {
-  "name": "basic-electron-react-boilerplate",
+  "name": "new-frontend",
   "version": "0.7.0",
-  "description": "Minimal and modern react+electron+webpack boilerplate",
+  "description": "Desktop Application that allows the user to control various applications through hand gestures",
   "author": "Keith Weaver",
-  "homepage": "https://github.com/keithweaver/basic-electron-react-boilerplate",
+  "homepage": "https://github.com/aggie-coding-club/Vision-Controls",
   "repository": {
     "type": "git",
-    "url": "https://github.com/keithweaver/basic-electron-react-boilerplate.git"
+    "url": "https://github.com/aggie-coding-club/Vision-Controls"
   },
   "contributors": [
     "Phillip Barbiero <https://github.com/pbarbiero>",
@@ -15,7 +15,7 @@
     "Willy Ovalle <https://github.com/wovalle>"
   ],
   "license": "MIT",
-  "main": "oldElectronMain.js",
+  "main": "electronMain.js",
   "scripts": {
     "prod": "webpack --config webpack.build.config.js && electron --noDevServer .",
     "dev": "webpack-dev-server --hot --host 0.0.0.0 --port 4000 --config=./webpack.dev.config.js",

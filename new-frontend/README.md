@@ -10,7 +10,7 @@ Production builds babel-minify is used, and ES2015/ES6 transpilation is provided
 If you like this project, check out [enhanced-electron-react-boilerplate](https://github.com/pbarbiero/enhanced-electron-react-boilerplate) which is this project with my take on additional modules (photon, redux, less, css modules etc) and my personal project structure (based on the redux ducks proposal) I suggest you give it a look if you want less of a minimalistic take on my starter kit.
 
 ### To get started:
-* Run `npm install`
+* Run `npm install` or  `yarn install`
 
 ##### Development
 * Run `npm run dev` to start webpack-dev-server. Electron will launch automatically after compilation.
