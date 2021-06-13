@@ -3,7 +3,7 @@
 
 ## Table of contents
 * [General info](#general-info)
-* [Screenshots](#screenshots)
+* [Showcase](#screenshots)
 * [Tech Stack](#tech-stack)
 * [Setup](#setup)
 * [Features](#features)
@@ -15,8 +15,8 @@
 Vision Controls is a desktop application that allows the user to control various applications through hand gestures.
 
 
-## Screenshots
-![ss1](./assets/readme/main1.png)
+## Showcase
+![ss1](./assets/readme/main2.png)
 
 
 ## Tech Stack
@@ -43,13 +43,13 @@ yarn install
 
 Frontend
 ```
-$ cd frontend
+cd frontend
 yarn start
 npm run electron-start
 ```
 Backend
 ```
-$ pip install -r requirements.txt
+pip install -r requirements.txt
 python recognition/app.py
 ```
 

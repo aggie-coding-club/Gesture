@@ -45,7 +45,7 @@ export default function CameraOption({btnClick, icon}) {
     width: "640px",
     border: "none",
     position: "absolute",
-    top: "5px",
+    top: "6px",
     right: "5px",
     height: "98vh",
     borderRadius: "25px",
