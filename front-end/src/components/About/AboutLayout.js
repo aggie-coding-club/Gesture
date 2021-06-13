@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import SideBar from "./SideBar.js";
 import configData from "../../data/config.json";
+import aboutImage from "../../assets/aboutimage.png"
+import { withRouter } from "react-router-dom";
 
 export default function SettingsLayout() {
   const [data, setData] = useState(configData.settings);
@@ -40,14 +42,20 @@ export default function SettingsLayout() {
     margin: "8vh 0 3vh",
   };
 
-  const pairStyle = {
-    margin: "0 7vw 0 0",
+  const textStyle = {
+    textAlign: "center",
+    letterSpacing: "0.1em",
+    color: "white",
+    fontFamily: "Oxygen",
+    fontWeight: "normal",
+    fontSize: 15,
+    margin: "3vh 5vh 0vh 2vh",
   };
 
-  function changeSettings(index, newNum) {
-    let copy = data;
-    copy[index][1] = newNum;
-    setData(copy);
+  const imageStyle = {
+    width: "90vh",
+    display: "block",
+    margin: "14vh 0vh 0vh 18vh",
   }
 
   return (
@@ -59,9 +67,10 @@ export default function SettingsLayout() {
         <div style={titleStyle}>
           <h1>ABOUT</h1>
         </div>
-        <div style={pairStyle}>
-          
+        <div style={textStyle}>
+          Vision Controls is a desktop application that allows the user to control various applications through hand gestures. This purpose of this project is to provide students with a way to work in a team setting and achieve something while doing it. This project is managed by the Aggie Coding Club.
         </div>
+        <img src={aboutImage} style={imageStyle}></img>
       </div>
     </div>
   );
