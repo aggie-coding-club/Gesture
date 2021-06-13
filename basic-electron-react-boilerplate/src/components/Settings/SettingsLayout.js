@@ -1,4 +1,4 @@
-import React, { useState, Component } from "react";
+import React, { Component } from "react";
 import SideBar from "./SideBar.js";
 import TrickGesturesPairs from "./TrickGesturePairs";
 import configData from "../../data/config.json";
@@ -68,7 +68,7 @@ export default class SettingsLayout extends Component {
             <h1>SETTINGS</h1>
           </div>
           <div style={pairStyle}>
-            {/*<TrickGesturesPairs changeSettings={this.changeSettings} data={this.state.data} />*/}
+            <TrickGesturesPairs changeSettings={this.changeSettings} data={this.state.data} />
           </div>
         </div>
       </div>
