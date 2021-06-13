@@ -25,7 +25,7 @@ class Hiya extends Component {
 
 export default function Main() {
     return (
-      <Hiya />
+      <SettingsLayout />
       // <Switch> {/* The Switch decides which component to show based on the current URL.*/}
       //   <Route exact path='/' component={MainLayout}></Route>
       //   <Route exact path='/settings' component={SettingsLayout}></Route>
