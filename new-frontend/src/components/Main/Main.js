@@ -2,7 +2,7 @@ import MainLayout from "../MainScreen/MainLayout";
 import SettingsLayout from "../Settings/SettingsLayout";
 import AboutLayout from "../About/AboutLayout";
 import React from 'react';
-import { Route, HashRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 
 export default function Main() {

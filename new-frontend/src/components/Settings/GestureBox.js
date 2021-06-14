@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 export default function GestureBox({ name, newSetting, redNum }) {
   // const [theBackground, setTheBackground] = useState("#081a2d")
