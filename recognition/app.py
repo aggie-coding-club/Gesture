@@ -3,7 +3,6 @@ import cv2
 import mediapipe as mp
 import numpy as np
 import pyautogui
-# import time
 import argparse
 import math
 
@@ -12,6 +11,7 @@ from flask import Flask, render_template, Response
 
 
 # import config
+# import time
 
 
 app = Flask(__name__)
@@ -19,12 +19,19 @@ app = Flask(__name__)
 
 # Getting openCV ready
 cap = cv2.VideoCapture(0)
+
+# restricting webcam size
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+
 #Camera detection
 if cap is None or not cap.isOpened():
     pyautogui.alert('Your camera is unavailable. Try to fix this issue and try again!', 'Error')
 # Dimensions of the camera output window
 wCam = int(cap.get(3))
 hCam = int(cap.get(4))
+
+print(wCam, hCam)
 
 # For testing, write output to video
 #out = cv2.VideoWriter('output.mp4',cv2.VideoWriter_fourcc('M','J','P','G'), 30, (wCam,hCam))
@@ -375,13 +382,24 @@ def gen_video():
         ret, buffer = cv2.imencode('.jpg', img)
         frame = buffer.tobytes()
         yield (b'--frame\r\n'
-                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
+                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
 
         # Used for testing, writing video to output
         #out.write(img)
 
         if cv2.waitKey(1) == 27:
             break
+
+
+def gen_off():
+    img = cv2.imread("../front-end/src/assets/camera-off2.png", 1)
+    ret, buffer = cv2.imencode('.jpg', img)
+    frame = buffer.tobytes()
+    yield (b'--frame\r\n'
+            b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+    # cv2.imshow("Video with Hand Detection", img)
 
 # cap.release()
 # cv2.destroyAllWindows()
@@ -391,11 +409,10 @@ def video_feed():
     return Response(gen_video(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
-@app.route('/')
-def index():
-    return render_template('home.html')
+@app.route('/off')
+def off():
+    return Response(gen_off(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
-    # app.run(threaded=True, host="0.0.0.0", port=5003)
+    app.run(port=5000)
