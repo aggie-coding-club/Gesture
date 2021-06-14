@@ -2,13 +2,11 @@ import React from 'react';
 import { render } from 'react-dom';
 import './index.css';
 import App from './containers/App';
-import { BrowserRouter } from 'react-router-dom';
+import Main from "./components/Main/Main"
 
 
 render((
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Main />
 
   ), document.getElementById('app')
 );
