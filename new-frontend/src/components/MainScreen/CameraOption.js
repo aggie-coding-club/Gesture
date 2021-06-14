@@ -7,7 +7,7 @@ export default class CameraOption extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+      camSource: 'http://localhost:5000/video_feed'
     }
     this.click = this.click.bind(this);
     this.handleRenderer = this.handleRenderer.bind(this);
@@ -28,15 +28,19 @@ export default class CameraOption extends Component {
   click(name) {
     console.log("click:", name);
     ipcRenderer.send(BUTTON_CLICK, name);
+    if (this.state.camSource == 'http://localhost:5000/video_feed')
+      this.setState({camSource: 'http://localhost:5000/off'})
+    else
+      this.setState({camSource: 'http://localhost:5000/video_feed'})
   }
 
 
-  toggleChange() {
-    // if (visible == 'http://localhost:5000/video_feed')
-    //   setVisible('http://localhost:5000/off')
-    // else
-    //   setVisible('http://localhost:5000/video_feed')
-  }
+  // toggleChange() {
+  //   if (visible == 'http://localhost:5000/video_feed')
+  //     this.setState({camSource: 'http://localhost:5000/off'})
+  //   else
+  //     this.setState({camSource: 'http://localhost:5000/video_feed'})
+  // }
 
   render() {
     const btnContainer = {
