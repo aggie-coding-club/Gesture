@@ -1,8 +1,8 @@
-import React from "react";
+import React, { Component } from 'react'
 import HandButtons from "./HandButtons";
+import Select from 'react-select'
 
-export default function TrickGesturePair({ dat, changeSettings }) {
-  let trick = dat[0];
+export default function TrickGesturePair({ dat, index, fullData, changeSettings }) {
   const contentStyle = {
     display: "flex",
     textAlign: "center",
@@ -15,24 +15,19 @@ export default function TrickGesturePair({ dat, changeSettings }) {
     flex: 1,
   };
 
-  const tricksStyle = {
-    margin: "auto",
-    padding: "3vh 3vw",
-    color: "white",
-    fontFamily: "Oxygen",
-    fontWeight: "normal",
-    fontStyle: "italic",
-    fontSize: 13,
-  };
-
   const handButtonsStyle = {
     flex: 1,
   };
 
+  const options = []
+  for (let i = 0; i < fullData.length; i++) {
+    options.push({ value: fullData[i][0], label: fullData[i][0] });
+  }
+
   return (
     <div style={contentStyle}>
       <div style={trickContainer}>
-        <div style={tricksStyle}>{trick}</div>
+        <Select value={options[index]} options={options} />
       </div>
       <div style={handButtonsStyle}>
         <HandButtons dat={dat} changeSettings={changeSettings} />
