@@ -33,6 +33,7 @@ function createWindow() {
     height: 520,
     autoHideMenuBar: true,
     resizable: false,
+    icon: "./src/assets/icon.png",
     webPreferences: {
       nodeIntegration: true,
     },

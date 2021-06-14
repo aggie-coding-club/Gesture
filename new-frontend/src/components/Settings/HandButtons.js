@@ -83,7 +83,7 @@ export default class HandButtons extends Component {
           <img style={imgFormat} src={this.props.dat[1]}></img>{" "}
         </button>
         <Modal
-          isOpen={this.showModal}
+          isOpen={this.state.showModal}
           contentLabel="Minimal example"
           onRequestClose={this.closeModal}
           ariaHideApp={false}
