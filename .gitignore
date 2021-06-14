@@ -1,6 +1,10 @@
 .idea
+.vscode
 node_modules/
 /sampleVideo
 recognition/test_files
 recognition/__pycache__
 recognition/config.py
+new-frontend/.idea
+new-frontend/node_modules
+

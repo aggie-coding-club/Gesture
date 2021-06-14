@@ -22,7 +22,7 @@ export default function MainLayout() {
   };
 
   const cameraScreen = {
-    background: "#3a414d",
+    // background: "#3a414d",
     flex: 3,
     height: "98vh",
     color: "#afb0b2",

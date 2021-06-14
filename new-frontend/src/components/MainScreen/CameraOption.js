@@ -1,0 +1,101 @@
+import React, { Component } from "react";
+import {ipcRenderer} from 'electron';
+import icon from "../../assets/webcam.png";
+const {BUTTON_CLICK, SEND_TO_RENDERER} = require('../../../utils/constants.js')
+
+export default class CameraOption extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      camSource: 'http://localhost:5000/video_feed'
+    }
+    this.handleRenderer = this.handleRenderer.bind(this);
+    this.toggleChange = this.toggleChange.bind(this);
+  }
+
+  //............Example of Electron sending message to React..............
+  componentDidMount() {
+    ipcRenderer.on(SEND_TO_RENDERER, this.handleRenderer);
+  }
+  componentWillUnmount() {
+    ipcRenderer.removeListener(SEND_TO_RENDERER, this.handleRenderer);
+  }
+  handleRenderer(event, data) {
+    console.log('renderer msg:', data);
+  }
+
+
+
+  toggleChange() {
+    if (this.state.camSource == 'http://localhost:5000/video_feed')
+      this.setState({camSource: 'http://localhost:5000/off'})
+    else
+      this.setState({camSource: 'http://localhost:5000/video_feed'})
+  }
+
+  render() {
+    const btnContainer = {
+      padding: "20vh 0 0vh 2vh"
+    }
+
+    const btnStyle = {
+      background: "#1250a4",
+      color: "white",
+      border: "none",
+      cursor: "pointer",
+      overflow: "hidden",
+      outline: "none",
+      margin: "auto",
+      borderRadius: "10px",
+      display: "flex",
+      flexDirection: "row",
+      height: "8vh",
+    }
+
+    const imageStyle = {
+      backgroundColor: "#144586",
+      padding: "1vh 1vw",
+      marginLeft: "-1vh"
+    }
+
+    const wordStyle = {
+      padding: "1vh 3vw"
+    }
+
+    const word = {
+      marginTop: "1vh"
+    }
+
+    const videoStyle = {
+      height: "480px",
+      width: "640px",
+      border: "none",
+      position: "absolute",
+      top: "5px",
+      right: "5px",
+      borderRadius: "25px",
+    };
+
+    return (
+      <div>
+        <div style={btnContainer}>
+          <button style={btnStyle} onClick={this.toggleChange}>
+            <div style={imageStyle}>
+              <img src={icon} alt="camera" height="auto" width="25px"/>
+            </div>
+            <div style={wordStyle}>
+              <p style={word}>Camera</p>
+            </div>
+          </button>
+        </div>
+        <div>
+          <iframe 
+            style={videoStyle} 
+            src={this.state.camSource} 
+            scrolling={"no"}>
+          </iframe>
+        </div>
+      </div>
+    )
+  }
+};

@@ -2,8 +2,6 @@ import React from "react";
 import Options from "../MainScreen/Options";
 import { Link } from "react-router-dom";
 import homePic from "../../assets/home.png";
-import profilePic from "../../assets/profile.png";
-import aboutPic from "../../assets/about.png";
 import logo from "../../assets/logo.png";
 
 export default function SideBar({ btnClick }) {
@@ -15,6 +13,7 @@ export default function SideBar({ btnClick }) {
   const optionWrapper = {
     margin: "15vh 2.5vw",
   };
+
 
   return (
     <div>
