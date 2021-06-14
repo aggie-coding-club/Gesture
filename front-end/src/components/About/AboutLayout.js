@@ -1,12 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import SideBar from "./SideBar.js";
-import configData from "../../data/config.json";
 import aboutImage from "../../assets/aboutimage.png"
-import { withRouter } from "react-router-dom";
 
-export default function SettingsLayout() {
-  const [data, setData] = useState(configData.settings);
-
+export default function AboutLayout() {
   const btnClick = (name) => {
     console.log("clicked", name);
   };
@@ -49,13 +45,13 @@ export default function SettingsLayout() {
     fontFamily: "Oxygen",
     fontWeight: "normal",
     fontSize: 15,
-    margin: "3vh 5vh 0vh 2vh",
+    margin: "5vh 5vh 0vh 2vh",
   };
 
   const imageStyle = {
-    width: "90vh",
+    width: "80vh",
     display: "block",
-    margin: "14vh 0vh 0vh 18vh",
+    margin: "14vh 0vh 0vh 22vh",
   }
 
   return (
