@@ -72,7 +72,7 @@ export default class SettingsLayout extends Component {
     };
 
     const pairStyle = {
-      margin: "0 7vw 0 7vw",
+      margin: "0 12vw 0 9vw",
     };
 
     return (

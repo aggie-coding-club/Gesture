@@ -7,16 +7,19 @@ export default function TrickGesturePair({ dat, index, fullData, changeSettings 
     display: "flex",
     textAlign: "center",
     padding: "2vh 10vh",
+    
 
     borderBottom: "1px solid gray",
   };
 
   const trickContainer = {
     flex: 1,
+    margin: "0vh 0vh 0vh 8vh"
   };
 
   const handButtonsStyle = {
     flex: 1,
+    margin: "0vh 0vh 0vh 5vh"
   };
 
   const options = []
@@ -27,7 +30,7 @@ export default function TrickGesturePair({ dat, index, fullData, changeSettings 
   return (
     <div style={contentStyle}>
       <div style={trickContainer}>
-        <Select value={options[index]} options={options} />
+        <Select maxMenuHeight={90} value={options[index]} options={options} />
       </div>
       <div style={handButtonsStyle}>
         <HandButtons dat={dat} changeSettings={changeSettings} />
