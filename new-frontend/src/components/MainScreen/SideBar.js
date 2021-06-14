@@ -3,7 +3,6 @@ import Options from "./Options";
 import CameraOption from "./CameraOption";
 import { Link } from "react-router-dom";
 import settingsPic from "../../assets/settings.png";
-import profilePic from "../../assets/profile.png";
 import aboutPic from "../../assets/about.png";
 import logo from "../../assets/logo.png";
 import cameraPic from "../../assets/webcam.png";
