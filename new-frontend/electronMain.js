@@ -13,6 +13,7 @@ const {
   CATCH_ON_MAIN,
   SEND_TO_RENDERER,
   CREATE_FILE,
+  BUTTON_CLICK
 } = require('./utils/constants')
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -72,17 +73,28 @@ function createWindow() {
   });
 }
 
-ipcMain.on(CATCH_ON_MAIN, (event, arg) => {
-  console.log('here 001', arg);
-  mainWindow.send(SEND_TO_RENDERER, 'pong');
+
+//Catch home button being clicked and send message to console
+//...Electron receiving message from React...
+ipcMain.on(BUTTON_CLICK, (event, arg) => {
+  console.log("This button was clicked", arg);
+  //...Electron sending message to React...
+  mainWindow.send(SEND_TO_RENDERER, 'Button Click received by Electron')
 })
 
-ipcMain.on(CREATE_FILE, (event, arg) => {
-  console.log("writing file...");
-  fs.writeFile('tmp.js', arg, function (err) {
-    console.log(err);
-  });
-})
+//...................EXAMPLES................................
+// ipcMain.on(CATCH_ON_MAIN, (event, arg) => {
+//   console.log('this button was clicked', arg);
+//   mainWindow.send(SEND_TO_RENDERER, 'pong');
+// })
+//
+// ipcMain.on(CREATE_FILE, (event, arg) => {
+//   console.log("writing file...");
+//   fs.writeFile('tmp.js', arg, function (err) {
+//     console.log(err);
+//   });
+// })
+//...........................................................
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

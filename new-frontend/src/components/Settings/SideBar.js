@@ -14,9 +14,6 @@ export default function SideBar({ btnClick }) {
     margin: "15vh 2.5vw",
   };
 
-  const cameraOptionStyle = {
-    margin: "15vh 3vw 0 0",
-  };
 
   return (
     <div>
