@@ -9,8 +9,8 @@ export default class CameraOption extends Component {
     this.state = {
       camSource: 'http://localhost:5000/video_feed'
     }
-    this.click = this.click.bind(this);
     this.handleRenderer = this.handleRenderer.bind(this);
+    this.toggleChange = this.toggleChange.bind(this);
   }
 
   //............Example of Electron sending message to React..............
@@ -24,23 +24,14 @@ export default class CameraOption extends Component {
     console.log('renderer msg:', data);
   }
 
-  //.........Example of React sending message to Electron..............
-  click(name) {
-    console.log("click:", name);
-    ipcRenderer.send(BUTTON_CLICK, name);
+
+
+  toggleChange() {
     if (this.state.camSource == 'http://localhost:5000/video_feed')
       this.setState({camSource: 'http://localhost:5000/off'})
     else
       this.setState({camSource: 'http://localhost:5000/video_feed'})
   }
-
-
-  // toggleChange() {
-  //   if (visible == 'http://localhost:5000/video_feed')
-  //     this.setState({camSource: 'http://localhost:5000/off'})
-  //   else
-  //     this.setState({camSource: 'http://localhost:5000/video_feed'})
-  // }
 
   render() {
     const btnContainer = {
@@ -63,7 +54,8 @@ export default class CameraOption extends Component {
 
     const imageStyle = {
       backgroundColor: "#144586",
-      padding: "1vh 1vw"
+      padding: "1vh 1vw",
+      marginLeft: "-1vh"
     }
 
     const wordStyle = {
@@ -79,16 +71,15 @@ export default class CameraOption extends Component {
       width: "640px",
       border: "none",
       position: "absolute",
-      top: "6px",
+      top: "5px",
       right: "5px",
-      height: "98vh",
       borderRadius: "25px",
     };
 
     return (
       <div>
         <div style={btnContainer}>
-          <button style={btnStyle} onClick={this.click}>
+          <button style={btnStyle} onClick={this.toggleChange}>
             <div style={imageStyle}>
               <img src={icon} alt="camera" height="auto" width="25px"/>
             </div>
@@ -100,7 +91,7 @@ export default class CameraOption extends Component {
         <div>
           <iframe 
             style={videoStyle} 
-            src={"http://localhost:5000/video_feed"} 
+            src={this.state.camSource} 
             scrolling={"no"}>
           </iframe>
         </div>

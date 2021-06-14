@@ -7,8 +7,8 @@ import { Switch, Route } from 'react-router-dom';
 
 export default function Main() {
     return (
-      <MainLayout />
-      // <SettingsLayout />
+      // <MainLayout />
+      <SettingsLayout />
       // <AboutLayout />
 
 

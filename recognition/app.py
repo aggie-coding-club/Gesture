@@ -393,7 +393,7 @@ def gen_video():
 
 
 def gen_off():
-    img = cv2.imread("../front-end/src/assets/camera-off2.png", 1)
+    img = cv2.imread("../new-frontend/src/assets/camera-off2.png", 1)
     ret, buffer = cv2.imencode('.jpg', img)
     frame = buffer.tobytes()
     yield (b'--frame\r\n'
