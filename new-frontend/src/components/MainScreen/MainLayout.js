@@ -37,26 +37,9 @@ export default function MainLayout() {
         <SideBar btnClick={btnClick} />
       </div>
       <div style={cameraScreen}>
-        <VideoModal/>
-        <CameraScreen />
+        {/* <VideoModal/> */}
+        {/* <CameraScreen /> */}
       </div>
     </div>
   );
-}
-
-const VideoModal = () => {
-  const videoStyle = {
-    height: "100%",
-    width: "100%",
-    border: "none",
-    position: "relative", 
-    left: "-10px",
-    top: "-10px",
-  };
-
-  return <iframe 
-      style={videoStyle} 
-      src={'http://127.0.0.1:5000/'} 
-      scrolling={"no"}>
-    </iframe>
 }
