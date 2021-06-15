@@ -50,14 +50,13 @@ export default class SettingsLayout extends Component {
 
     const sideScreen = {
       flex: 1,
-      height: "100vh",
     };
 
     const settingsStyle = {
-      height: "98vh",
-      margin: "1vh 1vh 1vh 0",
+      margin: "0vh 1vh 1vh 0",
       padding: 0,
       flex: 3,
+      height: "100vh",
     };
 
     const titleStyle = {
@@ -74,9 +73,6 @@ export default class SettingsLayout extends Component {
 
     return (
       <div style={flexContainer}>
-        <div style={sideScreen}>
-          <SideBar btnClick={this.click}/>
-        </div>
         <div style={settingsStyle}>
           <div style={titleStyle}>
             <h1>Settings</h1>
@@ -84,6 +80,9 @@ export default class SettingsLayout extends Component {
           <div style={pairStyle}>
             <TrickGesturesPairs changeSettings={this.changeSettings} data={this.state.data} />
           </div>
+        </div>
+        <div style={sideScreen}>
+          <SideBar btnClick={this.click}/>
         </div>
       </div>
     );

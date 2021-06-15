@@ -8,10 +8,12 @@ import logo from "../../assets/logo.png";
 import cameraPic from "../../assets/webcam.png";
 
 export default function SideBar({ btnClick }) { 
+  const remote = require('electron').remote;
+  
   const logoStyle = {
     height: "10vh",
     position: "relative",
-    top: "-3vh"
+    top: "-4vh"
   };
 
   const optionWrapper = {
@@ -36,10 +38,37 @@ export default function SideBar({ btnClick }) {
     flex: 1,
   };
 
+  const closeScreen = () => {
+    var window = remote.getCurrentWindow();
+    window.close(); 
+  }
+
+  const minimizeScreen = () => {
+    var window = remote.getCurrentWindow();
+    window.minimize(); 
+  }
+
+  const menuButtonStyle = {
+    color: "#111111",
+    backgroundColor: "transparent",
+    position: "relative",
+    left: "17.5vw",
+    top: "-7vh",
+    border: "none",
+    cursor: "pointer",
+    fontSize: 15,
+    fontFamily: "Oxygen",
+    fontWeight: "Bold"
+  }
+
   return (
     <div>
       <div style={logoStyle}>
         <img src={logo} alt="logo" width="54.5%" height="auto" />
+      </div>
+      <div>
+        <button style={menuButtonStyle} onClick={minimizeScreen}>—</button>
+        <button style={menuButtonStyle} onClick={closeScreen}>X</button>
       </div>
       <div style={optionWrapper}>
         <div style={minorOptions}>

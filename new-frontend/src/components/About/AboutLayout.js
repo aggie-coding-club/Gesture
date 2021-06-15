@@ -16,14 +16,13 @@ export default function AboutLayout() {
 
   const sideScreen = {
     flex: 1,
-    height: "100vh",
   };
 
   const settingsStyle = {
-    height: "98vh",
-    margin: "1vh 1vh 1vh 0",
+    margin: "0vh 1vh 1vh 0",
     padding: 0,
     flex: 3,
+    height: "100vh",
   };
 
   const titleStyle = {
@@ -52,9 +51,6 @@ export default function AboutLayout() {
 
   return (
     <div style={flexContainer}>
-      <div style={sideScreen}>
-        <SideBar btnClick={btnClick} />
-      </div>
       <div style={settingsStyle}>
         <div style={titleStyle}>
           <h1>About</h1>
@@ -63,6 +59,9 @@ export default function AboutLayout() {
           Vision Controls is a desktop application that allows the user to control various applications through hand gestures. This purpose of this project is to provide students with a way to work in a team setting and achieve something while doing it. This project is managed by the Aggie Coding Club.
         </div>
         <img src={aboutImage} style={imageStyle}></img>
+      </div>
+      <div style={sideScreen}>
+        <SideBar btnClick={btnClick} />
       </div>
     </div>
   );

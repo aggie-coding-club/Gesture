@@ -17,7 +17,6 @@ export default function Options({name, btnClick, imagePic}) {
 
   const imageStyle = {
     padding: "0 10px 0 0",
-    color: "#2f353b"
   }
 
   const tagNameStyle = {

@@ -35,7 +35,8 @@ export default class CameraOption extends Component {
 
   render() {
     const btnContainer = {
-      padding: "50vh 0vh 0vh 4vh"
+      // padding: "50vh 0vh 0vh 0vh"
+      margin: "50vh 0vh 0vh 3vh"
     }
 
     const btnStyle = {
@@ -45,7 +46,6 @@ export default class CameraOption extends Component {
       outline: "none",
       cursor: "pointer",
       overflow: "hidden",
-      margin: "auto",
       borderRadius: "10px",
       display: "flex",
       flexDirection: "row",
@@ -74,7 +74,7 @@ export default class CameraOption extends Component {
       border: "none",
       position: "absolute",
       top: "0px",
-      right: "-1px",
+      right: "24.5vw",
     };
 
     return (

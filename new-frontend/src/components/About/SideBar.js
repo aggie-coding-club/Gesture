@@ -8,18 +8,43 @@ export default function SideBar({ btnClick }) {
   const logoStyle = {
     height: "10vh",
     position: "relative",
-    top: "-3vh"
+    top: "-4vh"
   };
 
   const optionWrapper = {
-    margin: "18vh 2.5vw",
+    margin: "17vh 3vw",
   };
+
+  const closeScreen = () => {
+    var window = remote.getCurrentWindow();
+    window.close(); 
+  }
+
+  const minimizeScreen = () => {
+    var window = remote.getCurrentWindow();
+    window.minimize(); 
+  }
+
+  const menuButtonStyle = {
+    color: "#111111",
+    backgroundColor: "transparent",
+    position: "relative",
+    left: "17.5vw",
+    top: "-7vh",
+    border: "none",
+    cursor: "pointer",
+    fontSize: 15,
+    fontFamily: "Oxygen",
+    fontWeight: "Bold"
+  }
   
   return (
     <div>
       <div style={logoStyle}>
-        <img src={logo} alt="logo" width="53%" height="auto" />
+        <img src={logo} alt="logo" width="54.5%" height="auto" />
       </div>
+      <button style={menuButtonStyle} onClick={minimizeScreen}>—</button>
+      <button style={menuButtonStyle} onClick={closeScreen}>X</button>
       <div style={optionWrapper}>
         <div>
           <Link to="">

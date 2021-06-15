@@ -12,57 +12,54 @@ export default function MainLayout() {
     display: "flex",
     margin: 0,
     padding: 0,
-    backgroundColor: "#ececec",
+    backgroundColor: "black",
   };
 
   const sideScreen = {
-    // color: "#afb0b2",
     backgroundColor: "#ececec",
     flex: 1,
-    height: "100vh",
-    opacity: 1,
+    height: "100%",
   };
 
   const cameraScreen = {
     flex: 3,
     height: "98vh",
     color: "#afb0b2",
-    borderRadius: "25px",
     margin: "1vh 1vh 1vh 0",
     overflow: "hidden",
   };
 
-  const closeScreen = () => {
-    var window = remote.getCurrentWindow();
-    window.close(); 
-  }
+  // const closeScreen = () => {
+  //   var window = remote.getCurrentWindow();
+  //   window.close(); 
+  // }
 
-  const minimizeScreen = () => {
-    var window = remote.getCurrentWindow();
-    window.minimize(); 
-  }
+  // const minimizeScreen = () => {
+  //   var window = remote.getCurrentWindow();
+  //   window.minimize(); 
+  // }
 
-  const menuButtonStyle = {
-    color: "#ececec",
-    backgroundColor: "transparent",
-    position: "relative",
-    top: "-45vh",
-    right: "4vh",
-    margin: "1.5vh",
-    border: "none",
-    cursor: "pointer",
-    fontSize: 16,
-    fontFamily: "Oxygen",
-  }
+  // const menuButtonStyle = {
+  //   color: "black",
+  //   backgroundColor: "transparent",
+  //   position: "relative",
+  //   // top: "-45vh",
+  //   // right: "3vh",
+  //   margin: "1vh",
+  //   border: "none",
+  //   cursor: "pointer",
+  //   fontSize: 16,
+  //   fontFamily: "Oxygen",
+  // }
 
   return (
     <div style={flexContainer}>
+      <div style={cameraScreen}></div>
       <div style={sideScreen}>
         <SideBar btnClick={btnClick} />
       </div>
-      <div style={cameraScreen}></div>
-        <button style={menuButtonStyle} onClick={minimizeScreen}>—</button>
-        <button style={menuButtonStyle} onClick={closeScreen}>X</button>
+      {/* <button style={menuButtonStyle} onClick={minimizeScreen}>—</button>
+      <button style={menuButtonStyle} onClick={closeScreen}>X</button> */}
     </div>
   );
 }
