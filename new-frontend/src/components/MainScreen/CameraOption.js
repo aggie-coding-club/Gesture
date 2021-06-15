@@ -7,7 +7,7 @@ export default class CameraOption extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      camSource: 'http://localhost:5000/video_feed'
+      camSource: 'http://localhost:5000/off'
     }
     this.handleRenderer = this.handleRenderer.bind(this);
     this.toggleChange = this.toggleChange.bind(this);

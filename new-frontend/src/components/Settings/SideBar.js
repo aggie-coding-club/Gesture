@@ -9,7 +9,7 @@ export default function SideBar({ btnClick }) {
   const logoStyle = {
     height: "10vh",
     position: "relative",
-    top: "-4.5vh"
+    top: "-4.5vh",
   };
 
   const optionWrapper = {
@@ -19,7 +19,7 @@ export default function SideBar({ btnClick }) {
   return (
     <div>
       <div style={logoStyle}>
-        <img src={logo} alt="logo" width="54.5%" height="auto" />
+        {/* <img src={logo} alt="logo" width="54.5%" height="auto" /> */}
       </div>
       <div>
         <MenuButtons />

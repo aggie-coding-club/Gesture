@@ -1,5 +1,5 @@
 import React from "react";
-import SideBar from "./SideBar.js";
+import SideBar from "../Settings/SideBar.js";
 import aboutImage from "../../assets/aboutimage2.png"
 
 export default function AboutLayout() {

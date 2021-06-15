@@ -10,7 +10,6 @@ body {
 body {
   margin: 0;
   transform: scale(0.9);
-  /* border: 1px solid #ececec; */
   border-radius: 30px;
   -webkit-app-region: drag;
   -webkit-font-smoothing: antialiased;

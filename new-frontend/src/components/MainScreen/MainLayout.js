@@ -10,7 +10,7 @@ export default function MainLayout() {
     display: "flex",
     margin: 0,
     padding: 0,
-    backgroundColor: "black",
+    backgroundColor: "grey",
   };
 
   const sideScreen = {

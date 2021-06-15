@@ -17,6 +17,7 @@ export default function MenuButtons() {
       color: "#111111",
       backgroundColor: "transparent",
       border: "none",
+      outline: "none",
       cursor: "pointer",
       position: "relative",
       left: "17.5vw",
