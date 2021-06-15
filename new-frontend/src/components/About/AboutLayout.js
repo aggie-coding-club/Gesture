@@ -40,13 +40,13 @@ export default function AboutLayout() {
     fontFamily: "Oxygen",
     fontWeight: "normal",
     fontSize: 15,
-    margin: "-5vh 10vh 0vh 5vh",
+    margin: "-5vh 8vh 0vh 5vh",
   };
 
   const imageStyle = {
     width: "110vh",
     display: "block",
-    margin: "6vh 0vh 0vh 10vh",
+    margin: "6vh 0vh 0vh 12vh",
   }
 
   return (
