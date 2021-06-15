@@ -7,9 +7,7 @@ import aboutPic from "../../assets/about.png";
 import logo from "../../assets/logo.png";
 import cameraPic from "../../assets/webcam.png";
 
-export default function SideBar({ btnClick }) {
-
- 
+export default function SideBar({ btnClick }) { 
   const logoStyle = {
     height: "10vh",
     position: "relative",
@@ -27,7 +25,7 @@ export default function SideBar({ btnClick }) {
     flex: 2,
     display: "flex",
     flexDirection: "column",
-    marginTop: "5vh",
+    marginTop: "3vh"
   }
 
   const optionStyle = {
@@ -36,13 +34,12 @@ export default function SideBar({ btnClick }) {
 
   const cameraOptionStyle = {
     flex: 1,
-    marginRight: "3vw",
   };
 
   return (
     <div>
       <div style={logoStyle}>
-        <img src={logo} alt="logo" width="50%" height="auto" />
+        <img src={logo} alt="logo" width="54.5%" height="auto" />
       </div>
       <div style={optionWrapper}>
         <div style={minorOptions}>

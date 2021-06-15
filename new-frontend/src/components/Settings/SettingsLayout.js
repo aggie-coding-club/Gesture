@@ -49,7 +49,6 @@ export default class SettingsLayout extends Component {
     };
 
     const sideScreen = {
-      color: "#ececec",
       flex: 1,
       height: "100vh",
     };
@@ -64,15 +63,13 @@ export default class SettingsLayout extends Component {
     const titleStyle = {
       textAlign: "center",
       color: "#111111",
-      letterSpacing: "0.3em",
-      fontFamily: "Oxygen",
-      fontWeight: "bold",
-      fontSize: 13,
-      margin: "8vh 0 3vh",
+      fontFamily: 'Sacramento',
+      fontSize: 20,
+      margin: "8vh",
     };
 
     const pairStyle = {
-      margin: "0 7vw 0 7vw",
+      margin: "-8vh 7vw 0 7vw",
     };
 
     return (
@@ -82,7 +79,7 @@ export default class SettingsLayout extends Component {
         </div>
         <div style={settingsStyle}>
           <div style={titleStyle}>
-            <h1>SETTINGS</h1>
+            <h1>Settings</h1>
           </div>
           <div style={pairStyle}>
             <TrickGesturesPairs changeSettings={this.changeSettings} data={this.state.data} />

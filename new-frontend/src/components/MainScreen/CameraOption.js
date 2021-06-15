@@ -35,13 +35,14 @@ export default class CameraOption extends Component {
 
   render() {
     const btnContainer = {
-      padding: "50vh 0vh 0vh 2vh"
+      padding: "50vh 0vh 0vh 4vh"
     }
 
     const btnStyle = {
       background: "#1250a4",
       color: "white",
       border: "none",
+      outline: "none",
       cursor: "pointer",
       overflow: "hidden",
       margin: "auto",
@@ -58,7 +59,9 @@ export default class CameraOption extends Component {
     }
 
     const wordStyle = {
-      padding: "1vh 3vw"
+      padding: "0.6vh 3vw",
+      fontFamily: "Oxygen",
+      fontWeight: "400"
     }
 
     const word = {

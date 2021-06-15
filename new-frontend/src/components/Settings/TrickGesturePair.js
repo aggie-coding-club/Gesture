@@ -14,7 +14,8 @@ export default function TrickGesturePair({ dat, index, fullData, changeSettings 
 
   const trickContainer = {
     flex: 1,
-    margin: "0vh 0vh 0vh 8vh"
+    margin: "0vh 0vh 0vh 8vh",
+    webkitAppRegion: "no-drag"
   };
 
   const handButtonsStyle = {
@@ -30,7 +31,7 @@ export default function TrickGesturePair({ dat, index, fullData, changeSettings 
   return (
     <div style={contentStyle}>
       <div style={trickContainer}>
-        <Select maxMenuHeight={90} value={options[index]} options={options} />
+        <Select value={options[index]} options={options} />
       </div>
       <div style={handButtonsStyle}>
         <HandButtons dat={dat} changeSettings={changeSettings} />

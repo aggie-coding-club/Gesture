@@ -12,14 +12,13 @@ export default function SideBar({ btnClick }) {
   };
 
   const optionWrapper = {
-    margin: "15vh 2.5vw",
+    margin: "18vh 2.5vw",
   };
-
 
   return (
     <div>
       <div style={logoStyle}>
-        <img src={logo} alt="logo" width="50%" height="auto" />
+        <img src={logo} alt="logo" width="53%" height="auto" />
       </div>
       <div style={optionWrapper}>
         <div>
