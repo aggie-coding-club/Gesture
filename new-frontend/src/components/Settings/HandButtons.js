@@ -43,7 +43,7 @@ export default class HandButtons extends Component {
     const btnStyle = {
       cursor: "pointer",
       border: this.state.borderClr,
-      backgroundColor: "#234796",
+      backgroundColor: "#081a2d",
       padding: "2vh 3vw",
       outline: "none",
       borderRadius: "10px",

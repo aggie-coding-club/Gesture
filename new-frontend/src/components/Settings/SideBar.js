@@ -7,7 +7,8 @@ import logo from "../../assets/logo.png";
 export default function SideBar({ btnClick }) {
   const logoStyle = {
     height: "10vh",
-    paddingLeft: "1vw",
+    position: "relative",
+    top: "-3vh"
   };
 
   const optionWrapper = {
@@ -18,7 +19,7 @@ export default function SideBar({ btnClick }) {
   return (
     <div>
       <div style={logoStyle}>
-        <img src={logo} alt="logo" width="40%" height="auto" />
+        <img src={logo} alt="logo" width="50%" height="auto" />
       </div>
       <div style={optionWrapper}>
         <div>

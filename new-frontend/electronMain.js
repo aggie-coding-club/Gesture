@@ -29,9 +29,11 @@ if ( process.defaultApp || /[\\/]electron-prebuilt[\\/]/.test(process.execPath) 
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 860,
-    height: 520,
+    width: 865,
+    height: 480,
     autoHideMenuBar: true,
+    transparent: true, 
+    frame: false,
     resizable: false,
     icon: "./src/assets/icon.png",
     webPreferences: {

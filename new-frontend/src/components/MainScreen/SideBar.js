@@ -8,9 +8,12 @@ import logo from "../../assets/logo.png";
 import cameraPic from "../../assets/webcam.png";
 
 export default function SideBar({ btnClick }) {
+
+ 
   const logoStyle = {
     height: "10vh",
-    paddingLeft: "1vw",
+    position: "relative",
+    top: "-3vh"
   };
 
   const optionWrapper = {
@@ -18,13 +21,13 @@ export default function SideBar({ btnClick }) {
     height: "60vh",
     display: "flex",
     flexDirection: "column"
-
   };
 
   const minorOptions  = {
     flex: 2,
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    marginTop: "5vh",
   }
 
   const optionStyle = {
@@ -33,13 +36,13 @@ export default function SideBar({ btnClick }) {
 
   const cameraOptionStyle = {
     flex: 1,
-    marginRight: "3vw"
+    marginRight: "3vw",
   };
 
   return (
     <div>
       <div style={logoStyle}>
-        <img src={logo} alt="logo" width="40%" height="auto" />
+        <img src={logo} alt="logo" width="50%" height="auto" />
       </div>
       <div style={optionWrapper}>
         <div style={minorOptions}>

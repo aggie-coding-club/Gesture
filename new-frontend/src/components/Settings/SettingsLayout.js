@@ -45,11 +45,11 @@ export default class SettingsLayout extends Component {
       display: "flex",
       margin: 0,
       padding: 0,
-      backgroundColor: "#090e18",
+      backgroundColor: "#ececec",
     };
 
     const sideScreen = {
-      color: "#afb0b2",
+      color: "#ececec",
       flex: 1,
       height: "100vh",
     };
@@ -63,7 +63,7 @@ export default class SettingsLayout extends Component {
 
     const titleStyle = {
       textAlign: "center",
-      color: "white",
+      color: "#111111",
       letterSpacing: "0.3em",
       fontFamily: "Oxygen",
       fontWeight: "bold",

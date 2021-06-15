@@ -18,7 +18,7 @@ app = Flask(__name__)
 
 
 # Getting openCV ready
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 # restricting webcam size
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
@@ -39,7 +39,7 @@ print(wCam, hCam)
 # Number of consecutive frames a gesture has to be detected before it changes
 # Lower the number the faster it changes, but the more jumpy it is
 # Higher the number the slower it changes, but the less jumpy it is
-frames_until_change = 3
+frames_until_change = 10
 prevGestures = [] # gestures calculated in previous frames
 
 # Getting media-pipe ready
