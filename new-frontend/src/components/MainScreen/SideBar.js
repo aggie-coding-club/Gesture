@@ -5,14 +5,15 @@ import MenuButtons from "./MenuButtons";
 import { Link } from "react-router-dom";
 import settingsPic from "../../assets/settings.png";
 import aboutPic from "../../assets/about.png";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/blank.png";
 import cameraPic from "../../assets/webcam.png";
 
 export default function SideBar({ btnClick }) { 
   const logoStyle = {
     height: "10vh",
     position: "relative",
-    top: "-4.5vh"
+    top: "1vh",
+    left: "1vw"
   };
 
   const optionWrapper = {

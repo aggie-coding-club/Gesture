@@ -37,7 +37,7 @@ function createWindow() {
     resizable: false,
     maximizable: false,
     fullscreenable: false,
-    icon: "./src/assets/icon.png",
+    icon: "./src/assets/transparent2.ico",
     webPreferences: {
       nodeIntegration: true,
     },

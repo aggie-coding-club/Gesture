@@ -31,7 +31,7 @@ if cap is None or not cap.isOpened():
 wCam = int(cap.get(3))
 hCam = int(cap.get(4))
 
-print(wCam, hCam)
+# print(wCam, hCam)
 
 # For testing, write output to video
 #out = cv2.VideoWriter('output.mp4',cv2.VideoWriter_fourcc('M','J','P','G'), 30, (wCam,hCam))

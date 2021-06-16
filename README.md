@@ -1,4 +1,4 @@
-# Vision Controls
+# Gesture
 > Gesture Recognition Software.
 
 ## Table of contents
@@ -11,10 +11,11 @@
 
 ## General info
 <p align="center">
-    <img src="./assets/readme/logo.png" width="259.4" height="200" />
+    <img src="./assets/readme/blank.png" width="691" height="254" />
 </p>
-
-Vision Controls is a desktop application that allows the user to control various applications through hand gestures.
+<p align="center" style="margin: 2vh">
+    Gesture is a desktop application that allows the user to control various applications through hand gestures.
+</p>
 
 
 ## Showcase
