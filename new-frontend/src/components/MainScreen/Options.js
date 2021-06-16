@@ -3,14 +3,11 @@ import React from "react"
 export default function Options({name, btnClick, imagePic}) {
   const anOptionStyle = {
     padding: "2.5vh",
-   // backgroundColor: "red",
-    //margin: "10px 0 ",
-   // flex: 1,
-
+    marginLeft: "1vw"
   }
 
   const btnStyle = {
-    color: "white",
+    color: "#111111",
     backgroundColor: "transparent",
     border: "none",
     cursor: "pointer",
@@ -23,8 +20,11 @@ export default function Options({name, btnClick, imagePic}) {
   }
 
   const tagNameStyle = {
-    marginTop: "10px",
-    float: "right"
+    marginTop: "7px",
+    float: "right",
+    fontFamily: "Oxygen",
+    fontWeight: "normal",
+    fontSize: 14,
   }
 
   function toggleChange() {
@@ -32,7 +32,6 @@ export default function Options({name, btnClick, imagePic}) {
   }
   return (
     <div style={anOptionStyle}>
-
       <button style={btnStyle} onClick={toggleChange}>
         <img src={imagePic} alt={name} width="30px" height="30px" style={imageStyle}/>
         <div style={tagNameStyle}>

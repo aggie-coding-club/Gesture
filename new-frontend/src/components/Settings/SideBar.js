@@ -1,5 +1,6 @@
 import React from "react";
 import Options from "../MainScreen/Options";
+import MenuButtons from "../MainScreen/MenuButtons";
 import { Link } from "react-router-dom";
 import homePic from "../../assets/home.png";
 import logo from "../../assets/logo.png";
@@ -7,18 +8,21 @@ import logo from "../../assets/logo.png";
 export default function SideBar({ btnClick }) {
   const logoStyle = {
     height: "10vh",
-    paddingLeft: "1vw",
+    position: "relative",
+    top: "-4.5vh",
   };
 
   const optionWrapper = {
-    margin: "15vh 2.5vw",
+    margin: "12vh 3vw",
   };
-
-
+  
   return (
     <div>
       <div style={logoStyle}>
-        <img src={logo} alt="logo" width="40%" height="auto" />
+        {/* <img src={logo} alt="logo" width="54.5%" height="auto" /> */}
+      </div>
+      <div>
+        <MenuButtons />
       </div>
       <div style={optionWrapper}>
         <div>

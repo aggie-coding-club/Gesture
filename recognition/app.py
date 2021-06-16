@@ -39,7 +39,7 @@ print(wCam, hCam)
 # Number of consecutive frames a gesture has to be detected before it changes
 # Lower the number the faster it changes, but the more jumpy it is
 # Higher the number the slower it changes, but the less jumpy it is
-frames_until_change = 3
+frames_until_change = 10
 prevGestures = [] # gestures calculated in previous frames
 
 # Getting media-pipe ready
@@ -393,7 +393,7 @@ def gen_video():
 
 
 def gen_off():
-    img = cv2.imread("../new-frontend/src/assets/camera-off2.png", 1)
+    img = cv2.imread("../new-frontend/src/assets/camera-off.png", 1)
     ret, buffer = cv2.imencode('.jpg', img)
     frame = buffer.tobytes()
     yield (b'--frame\r\n'

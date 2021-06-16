@@ -45,48 +45,44 @@ export default class SettingsLayout extends Component {
       display: "flex",
       margin: 0,
       padding: 0,
-      backgroundColor: "#090e18",
+      backgroundColor: "#ececec",
     };
 
     const sideScreen = {
-      color: "#afb0b2",
       flex: 1,
-      height: "100vh",
     };
 
     const settingsStyle = {
-      height: "98vh",
-      margin: "1vh 1vh 1vh 0",
+      margin: "0vh 1vh 1vh 0",
       padding: 0,
       flex: 3,
+      height: "100vh",
     };
 
     const titleStyle = {
       textAlign: "center",
-      color: "white",
-      letterSpacing: "0.3em",
-      fontFamily: "Oxygen",
-      fontWeight: "bold",
-      fontSize: 13,
-      margin: "8vh 0 3vh",
+      color: "#111111",
+      fontFamily: 'Sacramento',
+      fontSize: 20,
+      margin: "8vh",
     };
 
     const pairStyle = {
-      margin: "0 7vw 0 7vw",
+      margin: "-8vh 7vw 0 7vw",
     };
 
     return (
       <div style={flexContainer}>
-        <div style={sideScreen}>
-          <SideBar btnClick={this.click}/>
-        </div>
         <div style={settingsStyle}>
           <div style={titleStyle}>
-            <h1>SETTINGS</h1>
+            <h1>Settings</h1>
           </div>
           <div style={pairStyle}>
             <TrickGesturesPairs changeSettings={this.changeSettings} data={this.state.data} />
           </div>
+        </div>
+        <div style={sideScreen}>
+          <SideBar btnClick={this.click}/>
         </div>
       </div>
     );

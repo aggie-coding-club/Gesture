@@ -7,7 +7,7 @@ export default class CameraOption extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      camSource: 'http://localhost:5000/video_feed'
+      camSource: 'http://localhost:5000/off'
     }
     this.handleRenderer = this.handleRenderer.bind(this);
     this.toggleChange = this.toggleChange.bind(this);
@@ -35,17 +35,17 @@ export default class CameraOption extends Component {
 
   render() {
     const btnContainer = {
-      padding: "20vh 0 0vh 2vh"
+      // padding: "50vh 0vh 0vh 0vh"
+      margin: "50vh 0vh 0vh 3vh"
     }
 
     const btnStyle = {
       background: "#1250a4",
       color: "white",
       border: "none",
+      outline: "none",
       cursor: "pointer",
       overflow: "hidden",
-      outline: "none",
-      margin: "auto",
       borderRadius: "10px",
       display: "flex",
       flexDirection: "row",
@@ -59,7 +59,9 @@ export default class CameraOption extends Component {
     }
 
     const wordStyle = {
-      padding: "1vh 3vw"
+      padding: "0.6vh 3vw",
+      fontFamily: "Oxygen",
+      fontWeight: "400"
     }
 
     const word = {
@@ -71,9 +73,8 @@ export default class CameraOption extends Component {
       width: "640px",
       border: "none",
       position: "absolute",
-      top: "5px",
-      right: "5px",
-      borderRadius: "25px",
+      top: "0px",
+      right: "24.8vw",
     };
 
     return (

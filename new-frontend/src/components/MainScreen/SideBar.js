@@ -1,30 +1,32 @@
 import React from "react";
 import Options from "./Options";
 import CameraOption from "./CameraOption";
+import MenuButtons from "./MenuButtons";
 import { Link } from "react-router-dom";
 import settingsPic from "../../assets/settings.png";
 import aboutPic from "../../assets/about.png";
 import logo from "../../assets/logo.png";
 import cameraPic from "../../assets/webcam.png";
 
-export default function SideBar({ btnClick }) {
+export default function SideBar({ btnClick }) { 
   const logoStyle = {
     height: "10vh",
-    paddingLeft: "1vw",
+    position: "relative",
+    top: "-4.5vh"
   };
 
   const optionWrapper = {
-    margin: "15vh 2.5vw",
-    height: "60vh",
+    margin: "9vh 2.5vw",
+    height: "67vh",
     display: "flex",
-    flexDirection: "column"
-
+    flexDirection: "column",
   };
 
   const minorOptions  = {
     flex: 2,
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    marginTop: "3vh"
   }
 
   const optionStyle = {
@@ -33,13 +35,15 @@ export default function SideBar({ btnClick }) {
 
   const cameraOptionStyle = {
     flex: 1,
-    marginRight: "3vw"
   };
 
   return (
     <div>
       <div style={logoStyle}>
-        <img src={logo} alt="logo" width="40%" height="auto" />
+        <img src={logo} alt="logo" width="54.5%" height="auto" />
+      </div>
+      <div>
+        <MenuButtons />
       </div>
       <div style={optionWrapper}>
         <div style={minorOptions}>
