@@ -4,13 +4,13 @@ import mediapipe as mp
 import numpy as np
 import pyautogui
 import argparse
+import config
 import math
 
 from Emitter import event
 from flask import Flask, render_template, Response
 
 
-# import config
 # import time
 
 
@@ -18,7 +18,7 @@ app = Flask(__name__)
 
 
 # Getting openCV ready
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(config.settings["camera_index"])
 
 # restricting webcam size
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
@@ -308,6 +308,8 @@ def gen_video():
     # fpsList = []
     frame_count = 0
 
+    # reopens camera after release
+    cap.open(0);
 
     while True:
         """
@@ -398,6 +400,7 @@ def gen_off():
     frame = buffer.tobytes()
     yield (b'--frame\r\n'
             b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+    cap.release()
 
     # cv2.imshow("Video with Hand Detection", img)
 
