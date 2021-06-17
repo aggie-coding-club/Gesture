@@ -12,7 +12,7 @@ export default function SideBar({ btnClick }) {
   const logoStyle = {
     height: "10vh",
     position: "relative",
-    top: "1vh",
+    top: "1.5vh",
     left: "1vw"
   };
 

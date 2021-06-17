@@ -1,5 +1,6 @@
 import React from "react";
 import SideBar from "./SideBar";
+import camOff from "../../assets/camera-off.png";
 
 export default function MainLayout() {
   const btnClick = (name) => {
@@ -21,15 +22,16 @@ export default function MainLayout() {
 
   const cameraScreen = {
     flex: 3,
-    height: "98vh",
+    height: "100vh",
     color: "#afb0b2",
-    margin: "1vh 1vh 1vh 0",
     overflow: "hidden",
   };
 
   return (
     <div style={flexContainer}>
-      <div style={cameraScreen}></div>
+      <div style={cameraScreen}>
+        <img src={camOff}></img>
+      </div>
       <div style={sideScreen}>
         <SideBar btnClick={btnClick} />
       </div>
