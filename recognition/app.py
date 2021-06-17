@@ -4,42 +4,35 @@ import mediapipe as mp
 import numpy as np
 import pyautogui
 import argparse
+import helpers.config as config
 import math
 
-from Emitter import event
+from helpers.Actions import event
 from flask import Flask, render_template, Response
-
-
-# import config
-# import time
 
 
 app = Flask(__name__)
 
 
 # Getting openCV ready
-cap = cv2.VideoCapture(0)
+if (config.settings["camera_index"] == 0):
+    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+else:
+    cap = cv2.VideoCapture(1)
 
 # restricting webcam size
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+cap.set(cv2.CAP_PROP_FPS, 60)
 
 #Camera detection
 if cap is None or not cap.isOpened():
     pyautogui.alert('Your camera is unavailable. Try to fix this issue and try again!', 'Error')
-# Dimensions of the camera output window
-wCam = int(cap.get(3))
-hCam = int(cap.get(4))
-
-print(wCam, hCam)
-
-# For testing, write output to video
-#out = cv2.VideoWriter('output.mp4',cv2.VideoWriter_fourcc('M','J','P','G'), 30, (wCam,hCam))
 
 # Number of consecutive frames a gesture has to be detected before it changes
 # Lower the number the faster it changes, but the more jumpy it is
 # Higher the number the slower it changes, but the less jumpy it is
-frames_until_change = 10
+frames_until_change = 15
 prevGestures = [] # gestures calculated in previous frames
 
 # Getting media-pipe ready
@@ -54,6 +47,7 @@ pyautogui.PAUSE = 0
 pyautogui.FAILSAFE = False
 
 screenWidth, screenHeight = pyautogui.size()
+
 
 def parse_arguments():
     """Parses Arguments
@@ -194,10 +188,6 @@ def straightFingers(hand, img):
             else:
                 openFingers.append(-1)
 
-            # Code below draws the two vectors from above
-            # cx, cy = int(lms[id].x * wCam), int(lms[id].y * hCam)
-            # cx2, cy2 = int(lms[id-2].x * wCam), int(lms[id-2].y * hCam)
-            # cx0, cy0 = int(lms[0].x * wCam), int(lms[0].y * hCam)
             finger_connections = filter(lambda x: id-2 <= x[0] and x[0] <= id, mpHands.HAND_CONNECTIONS) # gets the connections only for the thumb
             if dotProduct(fv, pv) >= .65:
                 mpDraw.draw_landmarks(img,hand, connections=finger_connections)
@@ -213,11 +203,6 @@ def straightFingers(hand, img):
             pv = [x1-x0, y1-y0]  # wrist to joint vector
             pv = normalize(pv)
             openFingers.append(dotProduct(fv, pv))  # Calculates if the finger is open or closed
-
-            # Code below draws the two vectors from above
-            # cx, cy = int(lms[id].x * wCam), int(lms[id].y * hCam)
-            # cx2, cy2 = int(lms[id-2].x * wCam), int(lms[id-2].y * hCam)
-            # cx0, cy0 = int(lms[0].x * wCam), int(lms[0].y * hCam)
 
             # Connections from tip to first knuckle from base
             finger_connections = [(id-1, id),
@@ -261,6 +246,10 @@ def mouseModeHandler(detectedHand, currGests, gestures, results, mouseHand):
 
     return mouseAnchor
 
+
+# Preparing arguments for main
+args = parse_arguments() # parsing arguments
+
 #Moves the mouse
 #anchorMouse mode: While in mouse-movement mode (a.k.a. when mouseAnchor isn't [-1,-1]), when distance from mouse anchor point is far enough, start moving the mouse in that direction.
 #absoluteMouse mode: Moves mouse proportionately to screen size.
@@ -290,8 +279,11 @@ def moveMouse(results):
 
 
 def gen_video():
-    # Preparing arguments for main
-    args = parse_arguments() # parsing arguments
+    # reopens camera after release
+    if (config.settings["camera_index"] == 0):
+        cap.open(0, cv2.CAP_DSHOW);
+    else:
+        cap.open(1);
 
     prevGests = {
         "right": [],
@@ -301,13 +293,6 @@ def gen_video():
         "right": None,
         "left": None,
     }
-
-    # Vars used to calculate avg fps
-    # prevTime = 0
-    # currTime = 0
-    # fpsList = []
-    frame_count = 0
-
 
     while True:
         """
@@ -337,7 +322,6 @@ def gen_video():
                     gestures['left'] = gesture(fingers, handLms)
                 else:
                     gestures['right'] = gesture(fingers, handLms)
-                frame_count += 1
                 #mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
                 mpDraw.draw_landmarks(img, handLms)
 
@@ -369,40 +353,25 @@ def gen_video():
                 prevGests[hand].append(gestures[hand])
                 prevGests[hand] = prevGests[hand][-frames_until_change:]
 
-        # Used for fps calculation
-        # currTime = time.time()
-        # fpsList = calcFPS(prevTime, currTime, fpsList)
-        # prevTime = currTime
-
-        # # Displays the fps
-        # cv2.putText(img, str(int(np.average(fpsList))), (10, 70),
-        #             cv2.FONT_HERSHEY_PLAIN, 2, (0, 255, 0), 3)
-
-        # cv2.imshow("Video with Hand Detection", img)
         ret, buffer = cv2.imencode('.jpg', img)
         frame = buffer.tobytes()
         yield (b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 
-        # Used for testing, writing video to output
-        #out.write(img)
-
         if cv2.waitKey(1) == 27:
             break
 
 
 def gen_off():
-    img = cv2.imread("../new-frontend/src/assets/camera-off.png", 1)
+    img = cv2.imread("../frontend/src/assets/loading.png", 1)
     ret, buffer = cv2.imencode('.jpg', img)
     frame = buffer.tobytes()
     yield (b'--frame\r\n'
             b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+    cap.release()
 
-    # cv2.imshow("Video with Hand Detection", img)
 
-# cap.release()
-# cv2.destroyAllWindows()
 
 @app.route('/video_feed')
 def video_feed():
