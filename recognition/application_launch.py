@@ -24,7 +24,8 @@ def openChromeWSL(url):
 def openFirefoxWSL(url):
     webbrowser.get("firefoxWSL").open(url)
 
-
+def openDefault(url):
+    webbrowser.open(url)
 
 
 

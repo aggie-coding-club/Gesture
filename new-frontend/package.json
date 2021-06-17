@@ -8,17 +8,10 @@
     "type": "git",
     "url": "https://github.com/aggie-coding-club/Vision-Controls"
   },
-  "contributors": [
-    "Phillip Barbiero <https://github.com/pbarbiero>",
-    "Keith Weaver <https://github.com/keithweaver>",
-    "Denys Dovhan <https://github.com/denysdovhan>",
-    "Willy Ovalle <https://github.com/wovalle>"
-  ],
-  "license": "MIT",
   "main": "electronMain.js",
   "scripts": {
     "prod": "webpack --config webpack.build.config.js && electron --noDevServer .",
-    "dev": "webpack-dev-server --hot --host 0.0.0.0 --port 4000 --config=./webpack.dev.config.js",
+    "dev": "webpack-dev-server --hot --host 127.0.0.1 --port 4000 --config=./webpack.dev.config.js",
     "build": "webpack --config webpack.build.config.js",
     "package": "webpack --config webpack.build.config.js",
     "postpackage": "electron-packager ./ --out=./builds"

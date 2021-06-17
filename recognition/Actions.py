@@ -1,10 +1,7 @@
-# %%
-import webbrowser
 # import pyautogui
 # import time
 import application_launch as app
 import config
-
 from Emitter import event
 
 preferred_broswer = ""
@@ -20,7 +17,7 @@ def openProject(hand, gest):
 
         elif config.actions[x][2].startswith("http"):
             if (config.actions[x][0].lower() == hand.lower() and config.actions[x][1].lower() == gest.lower()):
-                webbrowser.open(config.actions[x][2])
+                app.openDefault(config.actions[x][2])
 
         elif (config.actions[x][0].lower() == hand.lower() and config.actions[x][1].lower() == gest.lower()):
             try:

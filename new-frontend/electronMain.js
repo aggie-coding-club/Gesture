@@ -26,7 +26,20 @@ if ( process.defaultApp || /[\\/]electron-prebuilt[\\/]/.test(process.execPath) 
   dev = true;
 }
 
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}
+
+
 function createWindow() {
+  // develop
+  let subpy = require('child_process').spawn('python',['../recognition/app.py']);
+  sleep(10000);
+
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 840,
@@ -37,29 +50,29 @@ function createWindow() {
     resizable: false,
     maximizable: false,
     fullscreenable: false,
-    icon: "./src/assets/icon.png",
+    icon: "./src/assets/transparent.ico",
     webPreferences: {
       nodeIntegration: true,
     },
   });
 
-  // and load the index.html of the app.
-  let indexPath;
-  if ( dev && process.argv.indexOf('--noDevServer') === -1 ) {
-    indexPath = url.format({
-      protocol: 'http:',
-      host: 'localhost:4000',
-      pathname: 'index.html',
-      slashes: true
-    });
-  } else {
-    indexPath = url.format({
-      protocol: 'file:',
-      pathname: path.join(__dirname, 'dist', 'index.html'),
-      slashes: true
-    });
-  }
-  mainWindow.loadURL( indexPath );
+  // // and load the index.html of the app.
+  // let indexPath;
+  // if ( dev && process.argv.indexOf('--noDevServer') === -1 ) {
+  //   indexPath = url.format({
+  //     protocol: 'http:',
+  //     host: 'localhost:4000',
+  //     pathname: 'index.html',
+  //     slashes: true
+  //   });
+  // } else {
+  //   indexPath = url.format({
+  //     protocol: 'file:',
+  //     pathname: path.join(__dirname, 'dist', 'index.html'),
+  //     slashes: true
+  //   });
+  // }
+  mainWindow.loadURL('http://localhost:4000');
 
   // Don't show until we are ready and loaded
   mainWindow.once('ready-to-show', () => {

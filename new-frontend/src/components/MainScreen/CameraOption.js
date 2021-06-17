@@ -27,10 +27,13 @@ export default class CameraOption extends Component {
 
 
   toggleChange() {
-    if (this.state.camSource == 'http://localhost:5000/video_feed')
-      this.setState({camSource: 'http://localhost:5000/off'})
-    else
-      this.setState({camSource: 'http://localhost:5000/video_feed'})
+    if (this.state.camSource == 'http://localhost:5000/video_feed') {
+      this.setState({camSource: 'http://localhost:5000/off'});
+      document.getElementById("blank").style.display="none";
+    } else {
+      this.setState({camSource: 'http://localhost:5000/video_feed'});
+      document.getElementById("blank").style.display="block";
+    }
   }
 
   render() {
@@ -74,7 +77,8 @@ export default class CameraOption extends Component {
       border: "none",
       position: "absolute",
       top: "0px",
-      right: "24.8vw",
+      right: "25vw",
+      display: "none"
     };
 
     return (
@@ -90,7 +94,8 @@ export default class CameraOption extends Component {
           </button>
         </div>
         <div>
-          <iframe 
+          <iframe
+            id = "blank"
             style={videoStyle} 
             src={this.state.camSource} 
             scrolling={"no"}>
