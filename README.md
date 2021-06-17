@@ -9,13 +9,15 @@
 * [Extra](#extra)
 
 ## General info
-![ss1](./assets/readme/blank.png)
+<p align="center">
+    <img src="./assets/readme/blank.png" width="auto" />
+</p>
 
 <p align="center" style="margin: 2vh">
     Gesture is a desktop application that allows the user to control various applications through hand gestures.
 </p>
 
-![ss2](./assets/readme/app_photo.png)
+![ss1](./assets/readme/app_photo.png)
 
 
 
