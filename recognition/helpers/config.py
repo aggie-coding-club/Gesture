@@ -30,5 +30,5 @@ actions = {
 }
 
 settings = {
-    "camera_index": 1, # 0 should be the default for built in cameras. If this doesn't work, try 1.
+    "camera_index": 0, # 0 should be the default for built in cameras. If this doesn't work, try 1.
 }

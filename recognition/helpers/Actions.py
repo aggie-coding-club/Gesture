@@ -1,8 +1,9 @@
 # import pyautogui
 # import time
-import application_launch as app
-import config
-from Emitter import event
+import helpers.application_launch as app
+import helpers.config as config
+from pymitter import EventEmitter
+event = EventEmitter()
 
 preferred_broswer = ""
 
@@ -40,8 +41,8 @@ def logGest(hand, gest):
     return
     #print(f"start gesture: {hand} {gest}")
 
-@event.on("multigesture")
-def logMultiGest(gest):
-    print(f"Multi-gesture: {gest}")
+# @event.on("multigesture")
+# def logMultiGest(gest):
+#     print(f"Multi-gesture: {gest}")
 
 # gesture modes like mouse movement or quite mode
