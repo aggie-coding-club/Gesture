@@ -1,9 +1,8 @@
-# Vision Controls
+# Gesture
 > Gesture Recognition Software.
 
 ## Table of contents
 * [General info](#general-info)
-* [Showcase](#showcase)
 * [Tech Stack](#tech-stack)
 * [Setup](#setup)
 * [Features](#features)
@@ -11,14 +10,15 @@
 
 ## General info
 <p align="center">
-    <img src="./assets/readme/logo.png" width="259.4" height="200" />
+    <img src="./assets/readme/blank.png" width="691" height="254" />
+</p>
+<p align="center" style="margin: 2vh">
+    Gesture is a desktop application that allows the user to control various applications through hand gestures.
 </p>
 
-Vision Controls is a desktop application that allows the user to control various applications through hand gestures.
+![ss1](./assets/readme/app_photo.png)
 
 
-## Showcase
-![ss1](./assets/readme/main.png)
 
 ## Tech Stack
 **Frontend**
@@ -34,22 +34,16 @@ Vision Controls is a desktop application that allows the user to control various
 * OpenCV
 
 ## Setup
-General
+Installation
+
 ```
 git clone https://github.com/aggie-coding-club/Vision-Controls
 cd Vision-Controls
-```
-Frontend
-```
+pip install -r requirements.txt
 cd new-frontend
 npm install
-npm run dev
 ```
-Backend
-```
-pip install -r requirements.txt
-python recognition/app.py
-```
+Once ready run **npm run dev** to launch application.
 
 ## Features
 * Full Desktop UI Using React and Electron
