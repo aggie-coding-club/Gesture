@@ -3,11 +3,11 @@ import Modal from "react-modal";
 import GestureBox from "./GestureBox";
 import fist from "../../assets/gestures/fist.png";
 import onefinger from "../../assets/gestures/onefinger.png";
-import peace from "../../assets/gestures/peace.png";
-import threefingers from "../../assets/gestures/three-fingers.png";
-import fourfingers from "../../assets/gestures/four-fingers.png";
-import openhand from "../../assets/gestures/open-hand.png";
-import rocknroll from "../../assets/gestures/rock-and-roll.png";
+import twofinger from "../../assets/gestures/twofinger.png";
+import threefingers from "../../assets/gestures/threefinger.png";
+import fourfingers from "../../assets/gestures/fourfinger.png";
+import openhand from "../../assets/gestures/openhand.png";
+import rockandroll from "../../assets/gestures/rockandroll.png";
 import thumbsup from "../../assets/gestures/thumbsup.png";
 
 export default class HandButtons extends Component {
@@ -108,7 +108,7 @@ export default class HandButtons extends Component {
           <div style={modalContainer}>
             <div style={row}>
               <GestureBox name={onefinger} newSetting={this.newSetting} selected={this.state.selected} />
-              <GestureBox name={peace} newSetting={this.newSetting} selected={this.state.selected} />
+              <GestureBox name={twofinger} newSetting={this.newSetting} selected={this.state.selected} />
               <GestureBox name={threefingers} newSetting={this.newSetting} selected={this.state.selected} />
             </div>
             <div style={row}>
@@ -118,7 +118,7 @@ export default class HandButtons extends Component {
             </div>
             <div style={row}>
               <div style={blankBox}> </div>
-              <GestureBox name={rocknroll} newSetting={this.newSetting} selected={this.state.selected} />
+              <GestureBox name={rockandroll} newSetting={this.newSetting} selected={this.state.selected} />
               <div style={blankBox}> </div>
             </div>
           </div>
