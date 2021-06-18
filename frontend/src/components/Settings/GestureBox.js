@@ -1,8 +1,8 @@
 import React from "react";
 
-export default function GestureBox({ name, newSetting, redNum }) {
+export default function GestureBox({ name, newSetting, selected }) {
   var theBackground;
-  if (name === redNum) {
+  if (name.split("_").join("/").split("/")[2] === selected) {
     theBackground = "#967223";
   } else {
     theBackground = "#081a2d";
@@ -26,7 +26,7 @@ export default function GestureBox({ name, newSetting, redNum }) {
   };
 
   function handleClick() {
-    newSetting(name);
+    newSetting(name.split("_").join("/").split("/")[2]);
   }
 
   return (
