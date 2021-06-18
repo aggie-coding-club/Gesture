@@ -23,7 +23,7 @@ export default function TrickGesturePair({ dat, changeSettings }) {
 
   return (
     <div style={contentStyle}>
-      <div style={trickContainer}>{dat[0]}</div>
+      <div style={trickContainer}>{dat["alias"]}</div>
       <div style={handButtonsStyle}>
         <HandButtons dat={dat} changeSettings={changeSettings} />
       </div>

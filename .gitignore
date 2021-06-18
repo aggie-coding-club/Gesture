@@ -1,9 +1,8 @@
 .idea
 .vscode
-flask/__pycache__
-flask/recognition/__pycache__
-frontend/.idea
-frontend/node_modules
+__pycache__/
+frontend/.idea/
+frontend/node_modules/
 frontend/*npm-debug.log
 frontend/*.DS_Store
 frontend/dist/

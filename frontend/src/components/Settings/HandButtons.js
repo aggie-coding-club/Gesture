@@ -82,7 +82,7 @@ export default class HandButtons extends Component {
       <div>
         <button style={btnStyle} onClick={this.handleClick}>
           {" "}
-          <img style={imgFormat} src={this.props.dat[1]}></img>{" "}
+          <img style={imgFormat} src={this.props.dat["gesture"]}></img>{" "}
         </button>
         <Modal
           isOpen={this.state.showModal}

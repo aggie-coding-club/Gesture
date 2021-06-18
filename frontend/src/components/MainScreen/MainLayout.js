@@ -1,16 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import SideBar from "./SideBar";
 import camOff from "../../assets/camera-off.png";
 
 export default function MainLayout() {
-  useEffect(() => {
-    fetch("http://localhost:5000/config/retrieve").then((response) =>
-      response.json().then((data) => {
-        console.log(data);
-      })
-    );
-  }, []);
-
   const btnClick = (name) => {
     console.log("clicked", name);
   };

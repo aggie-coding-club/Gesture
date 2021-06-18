@@ -10,7 +10,8 @@ def addConfiguration():
 
     newConfiguration = Configuration(   hand=configData["hand"], 
                                         gesture=configData["gesture"],
-                                        action=configData["action"])
+                                        action=configData["action"],
+                                        alias=configData["alias"])
 
     db.session.add(newConfiguration)
     db.session.commit()
@@ -26,6 +27,19 @@ def retrieve():
     for configuration in configQuery:
         configData.append({ "hand" : configuration.hand,
                             "gesture" : configuration.gesture,
-                            "action" : configuration.action})
+                            "action" : configuration.action,
+                            "alias" : configuration.alias})
 
     return jsonify({"config" : configData})
+
+
+@cf.route("update_configuration", methods=["POST"])
+def updateConfiguration():
+    configData = request.get_json()
+
+    configuration = Configuration.query.filter_by(alias=configData["alias"]).first()
+    configuration.gesture = configData["gesture"]
+    db.session.commit()
+
+    return "Updated", 201
+

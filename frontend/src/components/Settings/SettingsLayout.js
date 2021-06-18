@@ -9,7 +9,7 @@ export default class SettingsLayout extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: configData.settings,
+      data: [],
     };
     this.changeSettings = this.changeSettings.bind(this);
     this.click = this.click.bind(this);
@@ -19,6 +19,12 @@ export default class SettingsLayout extends Component {
   //............Example of Electron sending message to React..............
   componentDidMount() {
     ipcRenderer.on(SEND_TO_RENDERER, this.handleRenderer);
+    fetch("http://localhost:5000/config/retrieve").then((response) =>
+      response.json().then((data) => {
+        this.setState({ data: data.config });
+        console.log(this.state.data[0]["action"]);
+      })
+    );
   }
   componentWillUnmount() {
     ipcRenderer.removeListener(SEND_TO_RENDERER, this.handleRenderer);
