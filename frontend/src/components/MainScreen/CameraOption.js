@@ -7,7 +7,7 @@ export default class CameraOption extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      camSource: "http://localhost:5000/off",
+      camSource: "http://localhost:5000/video/off",
     };
     this.handleRenderer = this.handleRenderer.bind(this);
     this.toggleChange = this.toggleChange.bind(this);
@@ -25,12 +25,12 @@ export default class CameraOption extends Component {
   }
 
   toggleChange() {
-    if (this.state.camSource == "http://localhost:5000/video_feed") {
-      this.setState({ camSource: "http://localhost:5000/off" });
+    if (this.state.camSource == "http://localhost:5000/video/feed") {
+      this.setState({ camSource: "http://localhost:5000/video/off" });
       document.getElementById("camera-frame").style.display = "none";
     } else {
       document.getElementById("camera-frame").style.display = "block";
-      this.setState({ camSource: "http://localhost:5000/video_feed" });
+      this.setState({ camSource: "http://localhost:5000/video/feed" });
     }
   }
 

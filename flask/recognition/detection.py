@@ -4,18 +4,13 @@ import mediapipe as mp
 import numpy as np
 import pyautogui
 import argparse
-import helpers.config as config
 import math
 
-from helpers.Actions import event
-from flask import Flask, render_template, Response
-
-
-app = Flask(__name__)
+import recognition.Actions as Actions
 
 
 # Getting openCV ready
-if (config.settings["camera_index"] == 0):
+if (Actions.settings["camera_index"] == 0):
     cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 else:
     cap = cv2.VideoCapture(1)
@@ -100,20 +95,20 @@ def gesture(f, hand):
         if index_tip.y > index_base.y: # Y goes from top to bottom instead of bottom to top
             return "Horns Down"
         elif f[0] > 0:
-            return "Rock and Roll"
+            return "rockandroll"
         else:
             return "No Gesture"
     elif f[0] > 0 and (f[1] < 0 and f[2] < 0 and f[3] < 0 and f[4] < 0):
         thumb_tip = hand.landmark[4]
         thumb_base = hand.landmark[2]
         if thumb_tip.y < thumb_base.y: # Y goes from top to bottom instead of bottom to top
-            return "Gig Em"
+            return "thumbsup"
         else:
             return "Thumbs Down"
     elif f[0] < 0 and f[1] > 0 and f[2] < 0 and (f[3] < 0 and f[4] < 0):
-        return "1 finger"
+        return "onefinger"
     elif f[0] < 0 and f[1] > 0 and f[2] > 0 and (f[3] < 0 and f[4] < 0):
-        return "Peace"
+        return "twofinger"
     elif f[0] > 0 and f[1] > 0 and f[2] > 0 and f[3] > 0 and f[4] > 0:
         mid_tip = hand.landmark[12]
         ring_tip = hand.landmark[16]
@@ -121,13 +116,13 @@ def gesture(f, hand):
         if angle_between(mid_tip, wrist, ring_tip) > 0.3:
             return 'Vulcan Salute'
         else:
-            return "Open Hand"
+            return "openhand"
     elif f[0] < 0 and f[1] < 0 and f[2] < 0 and f[3] < 0 and f[4] < 0:
-        return "Fist"
+        return "fist"
     elif f[0] < 0 and f[1] > 0 and f[2] > 0 and f[3] > 0 and f[4] > 0:
-        return "4 fingers"
+        return "fourfinger"
     elif f[0] < 0 and f[1] > 0 and f[2] > 0 and f[3] > 0 and f[4] < 0:
-        return "3 fingers"
+        return "threefinger"
     else:
         return "No Gesture"
 
@@ -278,9 +273,9 @@ def moveMouse(results):
         pyautogui.moveTo(-(avgx - 0.5)*2*screenWidth + screenWidth/2, (avgy - 0.5)*2*screenHeight + screenHeight/2)
 
 
-def gen_video():
+def gen_video(configData):
     # reopens camera after release
-    if (config.settings["camera_index"] == 0):
+    if (Actions.settings["camera_index"] == 0):
         cap.open(0, cv2.CAP_DSHOW);
     else:
         cap.open(1);
@@ -338,14 +333,14 @@ def gen_video():
                 # too much gesture, it is not a word anymore
                 if(gestures[hand] != currGests[hand] and all(x == gestures[hand] for x in prevGests[hand])):
 
-                    # print(f'{hand} : {gestures[hand]}')
-
                     if (args.m == 'anchorMouse' or args.m == 'absoluteMouse'):
                         # Handles mouse-movement mode through mouseModeHandler function
                         mouseAnchor = mouseModeHandler(hand, currGests, gestures, results, "right")
                     else:
                         # event.emit("end", hand=hand, gest=currGests[hand]) ## doesn't do anything yet
-                        event.emit("start", hand=hand, gest=gestures[hand])
+                        Actions.event.emit("start", configData=configData, hand=hand, gest=gestures[hand])
+                        # Actions.openProject(configData, hand, gesture[hand])
+                        # print(f'{hand} : {gestures[hand]}')
 
                     currGests[hand] = gestures[hand]
 
@@ -373,15 +368,5 @@ def gen_off():
 
 
 
-@app.route('/video_feed')
-def video_feed():
-    return Response(gen_video(), mimetype='multipart/x-mixed-replace; boundary=frame')
+    
 
-
-@app.route('/off')
-def off():
-    return Response(gen_off(), mimetype='multipart/x-mixed-replace; boundary=frame')
-
-
-if __name__ == "__main__":
-    app.run(port=5000)

@@ -1,11 +1,10 @@
+(TO BE UPDATED)
 
 # Hand Gesture Recognition
-  
 
 ## Dependencies
 
 Dependencies can be installed using: `pip install -r requirements.txt`
-
 
 ## Using Gesture Recognition
 
@@ -40,11 +39,12 @@ Dependencies can be installed using: `pip install -r requirements.txt`
 ## Notes for Developers
 
 ### Averaging Frames
+
 - frames_until_change: number of frames to look at before determining a hand gesture (all must match). Note the following:
-     - With a higher `frames_until_change`, the script may be slow to recognize a gesture.
-     - With a lower `frames_until_change`, the script will be very fast, but may have mistakes.
+  - With a higher `frames_until_change`, the script may be slow to recognize a gesture.
+  - With a lower `frames_until_change`, the script will be very fast, but may have mistakes.
 
 ### Adding / Editing Gestures
-- When adding or editing a gesture in the `gesture` function, keep the following in mind: 
-     - `f[0]` = thumb, `f[1]` = index, `f[2]` = middle, `f[3]` = ring, `f[4]` = pinky
 
+- When adding or editing a gesture in the `gesture` function, keep the following in mind:
+  - `f[0]` = thumb, `f[1]` = index, `f[2]` = middle, `f[3]` = ring, `f[4]` = pinky

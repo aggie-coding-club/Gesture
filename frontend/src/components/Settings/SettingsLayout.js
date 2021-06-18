@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import SideBar from "./SideBar.js";
 import TrickGesturesPairs from "./TrickGesturePairs";
-import configData from "../../data/config.json";
 import { ipcRenderer } from "electron";
 const { BUTTON_CLICK, SEND_TO_RENDERER } = require("../../../etc/constants.js");
 
@@ -9,7 +8,7 @@ export default class SettingsLayout extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: configData.settings,
+      data: [],
     };
     this.changeSettings = this.changeSettings.bind(this);
     this.click = this.click.bind(this);
@@ -19,6 +18,11 @@ export default class SettingsLayout extends Component {
   //............Example of Electron sending message to React..............
   componentDidMount() {
     ipcRenderer.on(SEND_TO_RENDERER, this.handleRenderer);
+    fetch("http://localhost:5000/config/retrieve").then((response) =>
+      response.json().then((data) => {
+        this.setState({ data: data.config });
+      })
+    );
   }
   componentWillUnmount() {
     ipcRenderer.removeListener(SEND_TO_RENDERER, this.handleRenderer);
@@ -34,10 +38,21 @@ export default class SettingsLayout extends Component {
   }
 
   //...................................................................
-  changeSettings(index, newNum) {
-    let copy = this.state.data;
-    copy[index][1] = newNum;
-    this.setState({ data: copy });
+  async changeSettings(originalConfiguration, newGesture) {
+    const updatedConfiguration = { hand: "", gesture: newGesture, action: "", alias: originalConfiguration };
+    await fetch("http://localhost:5000/config/update_configuration", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedConfiguration),
+    });
+
+    fetch("http://localhost:5000/config/retrieve").then((response) =>
+      response.json().then((data) => {
+        this.setState({ data: data.config });
+      })
+    );
   }
 
   render() {

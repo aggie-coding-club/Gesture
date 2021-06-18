@@ -19,7 +19,7 @@ if (process.defaultApp || /[\\/]electron-prebuilt[\\/]/.test(process.execPath) |
 
 function createWindow() {
   // load flask webserver
-  require("child_process").spawn("python", ["../recognition/app.py"]);
+  require("child_process").spawn("python", ["../flask/app.py"]);
 
   // Create the browser window.
   mainWindow = new BrowserWindow({

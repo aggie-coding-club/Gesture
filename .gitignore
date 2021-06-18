@@ -1,14 +1,11 @@
 .idea
 .vscode
-node_modules/
-/sampleVideo
-recognition/test_files
-recognition/__pycache__
-recognition/config.py
-new-frontend/.idea
-new-frontend/node_modules
-new-frontend/*npm-debug.log
-new-frontend/*.DS_Store
-new-frontend/dist/
-new-frontend/builds/
+__pycache__/
+frontend/.idea/
+frontend/node_modules/
+frontend/*npm-debug.log
+frontend/*.DS_Store
+frontend/dist/
+frontend/builds/
+
 

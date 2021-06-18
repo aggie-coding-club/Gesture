@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import Modal from "react-modal";
 import GestureBox from "./GestureBox";
 import fist from "../../assets/gestures/fist.png";
-import onefinger from "../../assets/gestures/one-finger.png";
-import peace from "../../assets/gestures/peace.png";
-import threefingers from "../../assets/gestures/three-fingers.png";
-import fourfingers from "../../assets/gestures/four-fingers.png";
-import openhand from "../../assets/gestures/open-hand.png";
-import rocknroll from "../../assets/gestures/rock-and-roll.png";
+import onefinger from "../../assets/gestures/onefinger.png";
+import twofinger from "../../assets/gestures/twofinger.png";
+import threefingers from "../../assets/gestures/threefinger.png";
+import fourfingers from "../../assets/gestures/fourfinger.png";
+import openhand from "../../assets/gestures/openhand.png";
+import rockandroll from "../../assets/gestures/rockandroll.png";
+import thumbsup from "../../assets/gestures/thumbsup.png";
 
 export default class HandButtons extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ export default class HandButtons extends Component {
     this.state = {
       borderClr: "none",
       showModal: false,
-      redNum: -2,
+      selected: "",
     };
     this.handleClick = this.handleClick.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -36,8 +37,8 @@ export default class HandButtons extends Component {
   }
 
   newSetting(newGesture) {
-    this.props.changeSettings(this.props.dat[2] - 1, newGesture);
-    this.setState({ redNum: newGesture });
+    this.props.changeSettings(this.props.dat["alias"], newGesture);
+    this.setState({ selected: newGesture });
   }
 
   render() {
@@ -56,7 +57,7 @@ export default class HandButtons extends Component {
       padding: 0,
       margin: 0,
       height: "100%",
-      webkitAppRegion: "no-drag",
+      WebkitAppRegion: "no-drag",
     };
 
     const row = {
@@ -82,7 +83,7 @@ export default class HandButtons extends Component {
       <div>
         <button style={btnStyle} onClick={this.handleClick}>
           {" "}
-          <img style={imgFormat} src={this.props.dat[1]}></img>{" "}
+          <img style={imgFormat} src={require("../../assets/gestures/" + this.props.dat["gesture"] + ".png")}></img>{" "}
         </button>
         <Modal
           isOpen={this.state.showModal}
@@ -101,23 +102,23 @@ export default class HandButtons extends Component {
               margin: "auto auto",
               padding: 0,
             },
-            webkitAppRegion: "no-drag",
+            WebkitAppRegion: "no-drag",
           }}
         >
           <div style={modalContainer}>
             <div style={row}>
-              <GestureBox name={onefinger} newSetting={this.newSetting} redNum={this.state.redNum} />
-              <GestureBox name={peace} newSetting={this.newSetting} redNum={this.state.redNum} />
-              <GestureBox name={threefingers} newSetting={this.newSetting} redNum={this.state.redNum} />
+              <GestureBox name={onefinger} newSetting={this.newSetting} selected={this.state.selected} />
+              <GestureBox name={twofinger} newSetting={this.newSetting} selected={this.state.selected} />
+              <GestureBox name={threefingers} newSetting={this.newSetting} selected={this.state.selected} />
             </div>
             <div style={row}>
-              <GestureBox name={fourfingers} newSetting={this.newSetting} redNum={this.state.redNum} />
-              <GestureBox name={openhand} newSetting={this.newSetting} redNum={this.state.redNum} />
-              <GestureBox name={fist} newSetting={this.newSetting} redNum={this.state.redNum} />
+              <GestureBox name={fourfingers} newSetting={this.newSetting} selected={this.state.selected} />
+              <GestureBox name={openhand} newSetting={this.newSetting} selected={this.state.selected} />
+              <GestureBox name={thumbsup} newSetting={this.newSetting} selected={this.state.selected} />
             </div>
             <div style={row}>
               <div style={blankBox}> </div>
-              <GestureBox name={rocknroll} newSetting={this.newSetting} redNum={this.state.redNum} />
+              <GestureBox name={rockandroll} newSetting={this.newSetting} selected={this.state.selected} />
               <div style={blankBox}> </div>
             </div>
           </div>
