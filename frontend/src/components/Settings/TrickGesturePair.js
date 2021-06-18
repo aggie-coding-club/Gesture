@@ -13,7 +13,7 @@ export default function TrickGesturePair({ dat, changeSettings }) {
   const trickContainer = {
     flex: 1,
     margin: "0vh 0vh 0vh 10vh",
-    webkitAppRegion: "no-drag",
+    WebkitAppRegion: "no-drag",
   };
 
   const handButtonsStyle = {
