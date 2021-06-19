@@ -9,6 +9,7 @@ import fourfingers from "../../assets/gestures/fourfinger.png";
 import openhand from "../../assets/gestures/openhand.png";
 import rockandroll from "../../assets/gestures/rockandroll.png";
 import thumbsup from "../../assets/gestures/thumbsup.png";
+import thumbsdown from "../../assets/gestures/thumbsdown.png";
 
 export default class HandButtons extends Component {
   constructor(props) {
@@ -117,9 +118,9 @@ export default class HandButtons extends Component {
               <GestureBox name={thumbsup} newSetting={this.newSetting} selected={this.state.selected} />
             </div>
             <div style={row}>
-              <div style={blankBox}> </div>
+              <GestureBox name={fist} newSetting={this.newSetting} selected={this.state.selected} />
               <GestureBox name={rockandroll} newSetting={this.newSetting} selected={this.state.selected} />
-              <div style={blankBox}> </div>
+              <GestureBox name={thumbsdown} newSetting={this.newSetting} selected={this.state.selected} />
             </div>
           </div>
         </Modal>

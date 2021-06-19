@@ -84,7 +84,7 @@ def gesture(f, hand):
         if thumb_tip.y < thumb_base.y: # Y goes from top to bottom instead of bottom to top
             return "thumbsup"
         else:
-            return "Thumbs Down"
+            return "thumbsdown"
     elif f[0] < 0 and f[1] > 0 and f[2] < 0 and (f[3] < 0 and f[4] < 0):
         return "onefinger"
     elif f[0] < 0 and f[1] > 0 and f[2] > 0 and (f[3] < 0 and f[4] < 0):

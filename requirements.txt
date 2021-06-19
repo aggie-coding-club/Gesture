@@ -7,3 +7,4 @@ pymitter==0.3.0
 flask==2.0.1
 flask-sqlalchemy==2.5.1
 flask-cors==3.0.10
+pycaw==20181226
