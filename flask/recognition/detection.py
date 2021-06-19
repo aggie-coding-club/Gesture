@@ -35,26 +35,8 @@ mpHands = mp.solutions.hands
 hands = mpHands.Hands(min_detection_confidence=.7)
 mpDraw = mp.solutions.drawing_utils
 
-# Mouse movement anchor
-mouseAnchor = [-1,-1]
-wristPositionHistory = []
-pyautogui.PAUSE = 0
-pyautogui.FAILSAFE = False
-
-screenWidth, screenHeight = pyautogui.size()
 
 
-def parse_arguments():
-    """Parses Arguments
-    -m: mode that gesture will be recognized for
-    """
-    # Setting up the argument parser
-    p = argparse.ArgumentParser(description='Used to parse options for hand tracking')
-
-    # -v flag is the path to the video, -m flag is the background subtraction method
-    p.add_argument('-m', type=str, help='The mode that the recognition will control for (ie. mouse)')
-
-    return p.parse_args()
 
 def dotProduct(v1, v2):
     return v1[0]*v2[0] + v1[1]*v2[1]
@@ -125,15 +107,6 @@ def gesture(f, hand):
         return "threefinger"
     else:
         return "No Gesture"
-
-def calcFPS(pt, ct, framelist):
-    fps = 1 / (ct - pt)
-    if len(framelist) < 30:
-        framelist.append(fps)
-    else:
-        framelist.append(fps)
-        framelist.pop(0)
-    return framelist
 
 def findLandMarks(img):
     """
@@ -222,57 +195,6 @@ def getHand(handedness):
     else:
         return 'Left'
 
-#Handles entering and exiting mouse-movement mode and also handles mouse clicks
-def mouseModeHandler(detectedHand, currGests, gestures, results, mouseHand):
-	# Enters mouse movement mode on Gig Em gesture, setting a mouse anchor point at that position
-    if(detectedHand == mouseHand and currGests[detectedHand] != "Gig Em" and currGests[detectedHand] != "Fist" and gestures[detectedHand] == "Gig Em"):
-        print("Entering mouse mode at (" + str(results.multi_hand_landmarks[0].landmark[0].x) + ", " + str(results.multi_hand_landmarks[0].landmark[0].y) + ")")
-        return [results.multi_hand_landmarks[0].landmark[0].x, results.multi_hand_landmarks[0].landmark[0].y]
-
-    # Leave mouse mode when gesture isn't Gig Em or fist anymore
-    if (detectedHand == mouseHand and (currGests[detectedHand] == "Gig Em" or currGests[detectedHand] == "Fist") and gestures[detectedHand] != "Fist" and gestures[hand] != "Gig Em"):
-        print("Exiting mouse mode.")
-        return [-1,-1]
-
-    # Clicks the mouse upon a fist gesture while in mouse-movement mode
-    if(detectedHand == mouseHand and currGests[detectedHand] == "Gig Em" and gestures[detectedHand] == "Fist"):
-        pyautogui.click()
-        print("Click!")
-
-    return mouseAnchor
-
-
-# Preparing arguments for main
-args = parse_arguments() # parsing arguments
-
-#Moves the mouse
-#anchorMouse mode: While in mouse-movement mode (a.k.a. when mouseAnchor isn't [-1,-1]), when distance from mouse anchor point is far enough, start moving the mouse in that direction.
-#absoluteMouse mode: Moves mouse proportionately to screen size.
-def moveMouse(results):
-    if(args.m == 'anchorMouse'):
-        if(mouseAnchor != [-1,-1] and ((results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0])**2 + (results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1])**2)**0.5 > 0.025):
-            pyautogui.moveTo(pyautogui.position()[0] - ((results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0])*abs(results.multi_hand_landmarks[0].landmark[0].x - mouseAnchor[0])*1000), pyautogui.position()[1] + (((results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1])*abs(results.multi_hand_landmarks[0].landmark[0].y - mouseAnchor[1]))*1000))
-
-    if(args.m == 'absoluteMouse' and mouseAnchor != [-1,-1]):
-        if(len(wristPositionHistory) == 10):
-            wristPositionHistory.pop(0)
-            wristPositionHistory.append((results.multi_hand_landmarks[0].landmark[0].x, results.multi_hand_landmarks[0].landmark[0].y))
-        else:
-            wristPositionHistory.append((results.multi_hand_landmarks[0].landmark[0].x, results.multi_hand_landmarks[0].landmark[0].y))
-
-        avgx = 0
-        avgy = 0
-
-        for i in wristPositionHistory:
-            avgx += i[0]
-            avgy += i[1]
-
-        avgx /= len(wristPositionHistory)
-        avgy /= len(wristPositionHistory)
-
-        pyautogui.moveTo(-(avgx - 0.5)*2*screenWidth + screenWidth/2, (avgy - 0.5)*2*screenHeight + screenHeight/2)
-
-
 def gen_video(configData):
     # reopens camera after release
     if (Actions.settings["camera_index"] == 0):
@@ -304,8 +226,6 @@ def gen_video(configData):
         imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         results = hands.process(imgRGB)
 
-        # leftPrevGestures = []
-        # rightPrevGestures = []
         # if there are hands in frame, calculate which fingers are open and draw the landmarks for each hand
         if results.multi_hand_landmarks:
             gestures = {}
@@ -324,24 +244,11 @@ def gen_video(configData):
             for hand in ['left', 'right']:
                 if not hand in gestures:
                     continue
-
-                #Moves mouse if in mouse mode
-                if (args.m == 'anchorMouse' or args.m == 'absoluteMouse'):
-                    moveMouse(results)
-
                 # if gesture is diff from currGesture and the previous 3 gestures are the same as the current gesture
                 # too much gesture, it is not a word anymore
                 if(gestures[hand] != currGests[hand] and all(x == gestures[hand] for x in prevGests[hand])):
-
-                    if (args.m == 'anchorMouse' or args.m == 'absoluteMouse'):
-                        # Handles mouse-movement mode through mouseModeHandler function
-                        mouseAnchor = mouseModeHandler(hand, currGests, gestures, results, "right")
-                    else:
-                        # event.emit("end", hand=hand, gest=currGests[hand]) ## doesn't do anything yet
-                        Actions.event.emit("start", configData=configData, hand=hand, gest=gestures[hand])
-                        # Actions.openProject(configData, hand, gesture[hand])
-                        # print(f'{hand} : {gestures[hand]}')
-
+                    Actions.event.emit("start", configData=configData, hand=hand, gest=gestures[hand])
+                
                     currGests[hand] = gestures[hand]
 
                 # keep only the 3 previous Gestures
@@ -356,7 +263,6 @@ def gen_video(configData):
 
         if cv2.waitKey(1) == 27:
             break
-
 
 def gen_off():
     img = cv2.imread("../frontend/src/assets/loading.png", 1)
