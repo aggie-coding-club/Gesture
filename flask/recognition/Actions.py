@@ -2,8 +2,6 @@ import recognition.application_launch as app
 from pymitter import EventEmitter
 event = EventEmitter()
 
-preferred_broswer = ""
-
 settings = {
     "camera_index": 1, # 0 should be the default for built in cameras. If this doesn't work, try 1.
 }
