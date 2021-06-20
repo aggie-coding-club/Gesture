@@ -27,7 +27,8 @@ export default function SideBar({ btnClick }) {
     flexDirection: "row",
     height: "8vh",
     padding: "0 10px",
-    marginTop: "50px"
+    marginTop: "50px",
+    textDecoration: "none"
   }
 
 
