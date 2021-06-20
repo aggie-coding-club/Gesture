@@ -21,12 +21,11 @@ function createWindow() {
   // load flask webserver
   require("child_process").spawn("python", ["../flask/app.py"]);
 
-  // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 840,
     height: 480,
     autoHideMenuBar: true,
-    transparent: true,
+
     frame: false,
     resizable: false,
     maximizable: false,
@@ -37,31 +36,30 @@ function createWindow() {
     },
   });
 
-  // // and load the index.html of the app.
-  // let indexPath;
-  // if ( dev && process.argv.indexOf('--noDevServer') === -1 ) {
-  //   indexPath = url.format({
-  //     protocol: 'http:',
-  //     host: 'localhost:4000',
-  //     pathname: 'index.html',
-  //     slashes: true
-  //   });
-  // } else {
-  //   indexPath = url.format({
-  //     protocol: 'file:',
-  //     pathname: path.join(__dirname, 'dist', 'index.html'),
-  //     slashes: true
-  //   });
-  // }
-  mainWindow.loadURL("http://localhost:4000/index.html");
+  let indexPath;
+  if (dev && process.argv.indexOf("--noDevServer") === -1) {
+    indexPath = url.format({
+      protocol: "http:",
+      host: "localhost:4000",
+      pathname: "index.html",
+      slashes: true,
+    });
+  } else {
+    indexPath = url.format({
+      protocol: "file:",
+      pathname: path.join(__dirname, "dist", "index.html"),
+      slashes: true,
+    });
+  }
+  mainWindow.loadURL(indexPath);
 
   // Don't show until we are ready and loaded
   mainWindow.once("ready-to-show", () => {
     mainWindow.show();
     // Open the DevTools automatically if developing
-    if (dev) {
-      mainWindow.webContents.openDevTools();
-    }
+    // if (dev) {
+    //   mainWindow.webContents.openDevTools();
+    // }
   });
 
   // Emitted when the window is closed.
