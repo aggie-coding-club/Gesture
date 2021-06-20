@@ -5,11 +5,12 @@ const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const fs = require("fs");
 const url = require("url");
-const { CATCH_ON_MAIN, SEND_TO_RENDERER, CREATE_FILE, BUTTON_CLICK } = require("./etc/constants");
+const { CATCH_ON_MAIN, SEND_TO_RENDERER, CREATE_FILE, BUTTON_CLICK, OPEN_CUSTOM_WINDOW } = require("./etc/constants");
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+let customWindow;
 
 // Keep a reference for dev mode
 let dev = false;
@@ -70,6 +71,30 @@ function createWindow() {
     mainWindow = null;
   });
 }
+
+//open custom window
+ipcMain.on(OPEN_CUSTOM_WINDOW, (event) => {
+  console.log('message received, opening window ...');
+  customWindow = new BrowserWindow({
+    width: 420,
+    height: 240,
+    autoHideMenuBar: false, //FIXME: should be true when implement custom menu bar
+
+    frame: false,
+    resizable: false,
+    maximizable: false,
+    fullscreenable: false,
+    icon: "./src/assets/transparent.ico",
+    webPreferences: {
+      nodeIntegration: true,
+    },
+  });
+
+  customWindow.on("closed", function() {
+    customWindow = null;
+  })
+
+})
 
 //Catch home button being clicked and send message to console
 //...Electron receiving message from React...

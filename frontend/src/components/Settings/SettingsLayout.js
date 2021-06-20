@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import SideBar from "./SideBar.js";
 import TrickGesturesPairs from "./TrickGesturePairs";
 import { ipcRenderer } from "electron";
-const { BUTTON_CLICK, SEND_TO_RENDERER } = require("../../../etc/constants.js");
+const { BUTTON_CLICK, SEND_TO_RENDERER, OPEN_CUSTOM_WINDOW } = require("../../../etc/constants.js");
 
 export default class SettingsLayout extends Component {
   constructor(props) {
@@ -40,7 +40,8 @@ export default class SettingsLayout extends Component {
   //...................................................................
 
   openCustomWindow() {
-    console.log('opening')
+    console.log('React -- open custom window')
+    ipcRenderer.send(OPEN_CUSTOM_WINDOW)
   }
 
   async changeSettings(originalConfiguration, newGesture) {
