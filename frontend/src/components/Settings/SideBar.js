@@ -4,7 +4,7 @@ import MenuButtons from "../MainScreen/MenuButtons";
 import { Link } from "react-router-dom";
 import homePic from "../../assets/home.png";
 
-export default function SideBar({ btnClick, openCustomWindow }) {
+export default function SideBar({ btnClick }) {
   const spacer = {
     height: "10vh",
     position: "relative",
@@ -45,7 +45,9 @@ export default function SideBar({ btnClick, openCustomWindow }) {
           </Link>
         </div>
         <div>
-          <button style={customBtn} onClick={openCustomWindow}>New Custom Setting</button>
+          <Link to="/custom">
+            <button style={customBtn}>New Custom Setting</button>
+          </Link>
         </div>
       </div>
     </div>
