@@ -12,6 +12,7 @@ export default class SettingsLayout extends Component {
     };
     this.changeSettings = this.changeSettings.bind(this);
     this.click = this.click.bind(this);
+    this.openCustomWindow = this.openCustomWindow.bind(this);
     this.handleRenderer = this.handleRenderer.bind(this);
   }
 
@@ -36,8 +37,12 @@ export default class SettingsLayout extends Component {
     console.log("click:", name);
     ipcRenderer.send(BUTTON_CLICK, name);
   }
-
   //...................................................................
+
+  openCustomWindow() {
+    console.log('opening')
+  }
+
   async changeSettings(originalConfiguration, newGesture) {
     const updatedConfiguration = { hand: "", gesture: newGesture, action: "", alias: originalConfiguration };
     await fetch("http://localhost:5000/config/update_configuration", {
@@ -97,7 +102,7 @@ export default class SettingsLayout extends Component {
           </div>
         </div>
         <div style={sideScreen}>
-          <SideBar btnClick={this.click} />
+          <SideBar btnClick={this.click} openCustomWindow={this.openCustomWindow}/>
         </div>
       </div>
     );

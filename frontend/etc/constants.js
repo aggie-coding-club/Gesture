@@ -3,4 +3,5 @@ module.exports = {
 	SEND_TO_RENDERER: "send-to-renderer",
 	CREATE_FILE: "create-file",
 	BUTTON_CLICK: "button-click",
+	OPEN_CUSTOM_WINDOW: 'open-custom-window'
 };
