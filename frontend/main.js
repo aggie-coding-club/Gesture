@@ -1,16 +1,20 @@
 "use strict";
 
 // Import parts of electron to use
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const path = require("path");
 const fs = require("fs");
 const url = require("url");
-const { CATCH_ON_MAIN, SEND_TO_RENDERER, CREATE_FILE, BUTTON_CLICK, OPEN_CUSTOM_WINDOW } = require("./etc/constants");
+const { CATCH_ON_MAIN,
+  SEND_TO_RENDERER,
+  CREATE_FILE,
+  BUTTON_CLICK,
+  OPEN_FILE_EXPLORER
+} = require("./etc/constants");
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
-let customWindow;
 
 // Keep a reference for dev mode
 let dev = false;
@@ -72,34 +76,6 @@ function createWindow() {
   });
 }
 
-//..............................Custom Window..............................
-// ipcMain.on(OPEN_CUSTOM_WINDOW, (event) => {
-//   console.log('message received, opening window ...');
-//   customWindow = new BrowserWindow({
-//     width: 420,
-//     height: 240,
-//     autoHideMenuBar: false, //FIXME: should be true when implement custom menu bar
-//     //
-//     //frame: false,
-//     resizable: false,
-//     maximizable: false,
-//     fullscreenable: false,
-//     icon: "./src/assets/transparent.ico",
-//     webPreferences: {
-//       nodeIntegration: true,
-//      },
-//   });
-//
-//   customWindow.loadURL(indexPath);
-//
-//   customWindow.on("closed", function() {
-//     customWindow = null;
-//   })
-//
-// })
-
-//...................................................................................
-
 //Catch home button being clicked and send message to console
 //...Electron receiving message from React...
 ipcMain.on(BUTTON_CLICK, (event, arg) => {
@@ -107,6 +83,14 @@ ipcMain.on(BUTTON_CLICK, (event, arg) => {
   //...Electron sending message to React...
   mainWindow.send(SEND_TO_RENDERER, "Button Click received by Electron");
 });
+
+//open file explorer
+ipcMain.on(OPEN_FILE_EXPLORER, (event, arg) => {
+  console.log("opening file explorer")
+  dialog.showOpenDialog(function(fileNames) {
+    console.log(fileNames)
+  })
+})
 
 //...................EXAMPLES................................
 // ipcMain.on(CATCH_ON_MAIN, (event, arg) => {

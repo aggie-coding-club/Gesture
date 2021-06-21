@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import SideBar from "./Sidebar";
 import AddSetting from "./AddSettings"
-
-import AddSettings from "./AddSettings";
 import {Link} from "react-router-dom";
+import { ipcRenderer } from "electron";
+const {OPEN_FILE_EXPLORER} = require("../../../etc/constants")
 
 const activeBtn = {
   backgroundColor: "#045bb7",
@@ -38,6 +38,8 @@ export default class CustomLayout extends Component{
   focusFile() {
     this.setState({ urlBtn: disabledBtn });
     this.setState({ fileBtn: activeBtn });
+    ipcRenderer.send(OPEN_FILE_EXPLORER);
+
   }
 
   addSetting() {
