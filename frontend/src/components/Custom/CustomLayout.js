@@ -18,8 +18,7 @@ const disabledBtn = {
   color: "#bdb49d"
 }
 
-let filePathVisible = "hidden"
-let filePathColor = "#51595b"
+
 
 export default class CustomLayout extends Component{
   constructor() {
@@ -29,6 +28,8 @@ export default class CustomLayout extends Component{
       urlBtn: activeBtn,
       fileBtn: disabledBtn,
       filePath: "Choose File",
+      filePathVisible: "hidden",
+      filePathColor: "#51595b"
 
     };
     this.focusUrl = this.focusUrl.bind(this);
@@ -47,25 +48,29 @@ export default class CustomLayout extends Component{
   }
   updateFilePath(event, data) {
     this.setState({filePath: data})
-    filePathColor = "black"
+    this.setState({filePathColor: "black"})
   }
 
   focusUrl() {
     this.setState({ urlBtn: activeBtn });
     this.setState({ fileBtn: disabledBtn });
-    filePathVisible = "none"
+    this.setState({filePathVisible: "none"})
 
   }
   focusFile() {
     this.setState({ urlBtn: disabledBtn });
     this.setState({ fileBtn: activeBtn });
-    filePathVisible = "flex"
+    this.setState({filePathVisible: "flex"})
 
     ipcRenderer.send(OPEN_FILE_EXPLORER);
   }
 
   addSetting() {
-    console.log("add setting")
+    console.log(this.state.filePathVisible)
+    if(this.state.filePath !== "Choose File" && this.state.filePathVisible === "flex") {
+      console.log("add setting: ", this.state.filePath)
+    }
+
   }
 
   render() {
@@ -104,8 +109,9 @@ export default class CustomLayout extends Component{
       overflow: "hidden",
       borderRadius: "10px",
       height: "8vh",
-      padding: "2vh 5vw",
-      marginRight: "5vw"
+      marginRight: "5vw",
+      width: "100px",
+      textAlign: "center"
 
     }
 
@@ -113,14 +119,25 @@ export default class CustomLayout extends Component{
       margin: "25px 0 0 50px",
     }
 
+    const addCancelStyle = {
+      //margin: "10px 35vw",
+      marginLeft: "32.5vw"
+    }
+
     const addBtn = {
       color: "#ffd9d9",
       backgroundColor: "#a31212",
-      margin: "10px 0 0 31vw"
+      marginTop: "5vh"
+
+    }
+
+    const cancelBtn = {
+      backgroundColor: "#8f9cb0",
+      color: "#1d2430",
     }
 
     const filePathContainer = {
-      display: filePathVisible,
+      display: this.state.filePathVisible,
       margin: "10vh 10vw",
 
     }
@@ -129,8 +146,9 @@ export default class CustomLayout extends Component{
       border: "1px black solid",
       borderRadius: "10px",
       textAlign: "center",
-      color: filePathColor,
-      flex: "5"
+      color: this.state.filePathColor,
+      flex: "5",
+      overflow: "hidden"
     }
 
 
@@ -154,9 +172,17 @@ export default class CustomLayout extends Component{
             <div style={fileTextStyle}>{this.state.filePath}</div>
           </div>
 
-          <Link to="/settings">
-            <button style={Object.assign({}, btnStyle, addBtn)} onClick={this.addSetting}>Add</button>
-          </Link>
+          <div style={addCancelStyle}>
+            <Link to="/settings">
+              <div>
+                <button style={Object.assign({}, btnStyle, cancelBtn)} onClick={this.addSetting}>Cancel</button>
+              </div>
+              <div>
+                <button style={Object.assign({}, btnStyle, addBtn)} onClick={this.addSetting}>Add</button>
+
+              </div>
+            </Link>
+          </div>
 
         </div>
         <SideBar />
