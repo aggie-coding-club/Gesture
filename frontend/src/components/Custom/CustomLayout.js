@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import MenuButtons from "../MainScreen/MenuButtons";
+import SideBar from "./Sidebar";
 
 const activeBtn = {
   backgroundColor: "#045bb7",
@@ -46,15 +46,7 @@ export default class CustomLayout extends Component{
       backgroundColor: "#ececec",
     };
 
-    const sideBar = {
-      flex: 1,
-      backgroundColor: "#ffd6c2"
-    }
-    const spacer = {
-      height: "10vh",
-      position: "relative",
-      top: "-4.5vh",
-    };
+
 
     const mainContentStyle = {
       margin: "0vh 1vh 1vh 0",
@@ -91,6 +83,7 @@ export default class CustomLayout extends Component{
       margin: "25px 0 0 50px",
     }
 
+
     return (
       <div style={flexContainer}>
         <div style={mainContentStyle}>
@@ -108,14 +101,8 @@ export default class CustomLayout extends Component{
               Perhaps Option to add custom broswer.
           </div>
 
-
         </div>
-        <div style={sideBar}>
-          <div style={spacer}></div>
-          <div>
-            <MenuButtons/>
-          </div>
-        </div>
+        <SideBar />
       </div>
     )
   }
