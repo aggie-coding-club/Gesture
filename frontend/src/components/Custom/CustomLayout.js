@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 import SideBar from "./Sidebar";
+import AddSetting from "./AddSettings"
+
+import AddSettings from "./AddSettings";
+import {Link} from "react-router-dom";
 
 const activeBtn = {
   backgroundColor: "#045bb7",
@@ -22,6 +26,7 @@ export default class CustomLayout extends Component{
     };
     this.focusUrl = this.focusUrl.bind(this);
     this.focusFile = this.focusFile.bind(this);
+    this.addSetting = this.addSetting.bind(this);
 
   }
 
@@ -33,7 +38,10 @@ export default class CustomLayout extends Component{
   focusFile() {
     this.setState({ urlBtn: disabledBtn });
     this.setState({ fileBtn: activeBtn });
+  }
 
+  addSetting() {
+    console.log("add setting")
   }
 
   render() {
@@ -67,7 +75,7 @@ export default class CustomLayout extends Component{
       paddingLeft: "23vw"
     }
 
-    const pathTypeBtnStyle = {
+    const btnStyle = {
       border: "none",
       outline: "none",
       cursor: "pointer",
@@ -83,6 +91,12 @@ export default class CustomLayout extends Component{
       margin: "25px 0 0 50px",
     }
 
+    const addBtn = {
+      color: "#ffd9d9",
+      backgroundColor: "#a31212",
+      margin: "10px 0 0 31vw"
+    }
+
 
     return (
       <div style={flexContainer}>
@@ -92,14 +106,21 @@ export default class CustomLayout extends Component{
           </div>
 
           <div style={pathTypeStyle}>
-            <button style={Object.assign({}, pathTypeBtnStyle, this.state.urlBtn)} onClick={this.focusUrl}>Url</button>
-            <button style={Object.assign({}, pathTypeBtnStyle, this.state.fileBtn)} onClick={this.focusFile}>File</button>
+            <button style={Object.assign({}, btnStyle, this.state.urlBtn)} onClick={this.focusUrl}>Url</button>
+            <button style={Object.assign({}, btnStyle, this.state.fileBtn)} onClick={this.focusFile}>File</button>
           </div>
 
-          <div style={browserStyle}>
-            Preferred Browser: Simple Select of Browswers. Disabled when File Buttton focused.
-              Perhaps Option to add custom broswer.
-          </div>
+          {/*<div style={browserStyle}>*/}
+          {/*FIXME:*/}
+          {/*  Preferred Browser: Simple Select of Browser. Disabled when File Buttton focused.*/}
+          {/*    Perhaps Option to add custom browser.*/}
+          {/*</div>*/}
+
+          <AddSetting />
+
+          <Link to="/settings">
+            <button style={Object.assign({}, btnStyle, addBtn)} onClick={this.addSetting}>Add</button>
+          </Link>
 
         </div>
         <SideBar />
