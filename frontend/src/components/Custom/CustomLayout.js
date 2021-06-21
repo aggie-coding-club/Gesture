@@ -3,7 +3,10 @@ import SideBar from "./Sidebar";
 import AddSetting from "./AddSettings"
 import {Link} from "react-router-dom";
 import { ipcRenderer } from "electron";
-const {OPEN_FILE_EXPLORER} = require("../../../etc/constants")
+const {
+  OPEN_FILE_EXPLORER,
+  SEND_FILE_PATH,
+} = require("../../../etc/constants")
 
 const activeBtn = {
   backgroundColor: "#045bb7",
@@ -21,14 +24,29 @@ export default class CustomLayout extends Component{
 
     this.state = {
       urlBtn: activeBtn,
-      fileBtn: disabledBtn
+      fileBtn: disabledBtn,
+      filePath: "...",
 
     };
     this.focusUrl = this.focusUrl.bind(this);
     this.focusFile = this.focusFile.bind(this);
     this.addSetting = this.addSetting.bind(this);
+    this.updateFilePath = this.updateFilePath.bind(this);
 
   }
+
+  //update File Path received from electron
+  componentDidMount() {
+    ipcRenderer.on(SEND_FILE_PATH, this.updateFilePath);
+  }
+  componentWillUnmount() {
+    ipcRenderer.removeListener(SEND_FILE_PATH, this.updateFilePath);
+  }
+  updateFilePath(event, data) {
+    this.setState({filePath: data})
+  }
+
+
 
   focusUrl() {
     this.setState({ urlBtn: activeBtn });
@@ -39,7 +57,6 @@ export default class CustomLayout extends Component{
     this.setState({ urlBtn: disabledBtn });
     this.setState({ fileBtn: activeBtn });
     ipcRenderer.send(OPEN_FILE_EXPLORER);
-
   }
 
   addSetting() {
@@ -112,13 +129,8 @@ export default class CustomLayout extends Component{
             <button style={Object.assign({}, btnStyle, this.state.fileBtn)} onClick={this.focusFile}>File</button>
           </div>
 
-          {/*<div style={browserStyle}>*/}
-          {/*FIXME:*/}
-          {/*  Preferred Browser: Simple Select of Browser. Disabled when File Buttton focused.*/}
-          {/*    Perhaps Option to add custom browser.*/}
-          {/*</div>*/}
-
-          <AddSetting />
+          {/*<AddSetting />*/}
+          <div>{this.state.filePath}</div>
 
           <Link to="/settings">
             <button style={Object.assign({}, btnStyle, addBtn)} onClick={this.addSetting}>Add</button>

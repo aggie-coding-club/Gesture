@@ -9,7 +9,8 @@ const { CATCH_ON_MAIN,
   SEND_TO_RENDERER,
   CREATE_FILE,
   BUTTON_CLICK,
-  OPEN_FILE_EXPLORER
+  OPEN_FILE_EXPLORER,
+  SEND_FILE_PATH
 } = require("./etc/constants");
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -87,8 +88,10 @@ ipcMain.on(BUTTON_CLICK, (event, arg) => {
 //open file explorer
 ipcMain.on(OPEN_FILE_EXPLORER, (event, arg) => {
   console.log("opening file explorer")
-  dialog.showOpenDialog(function(fileNames) {
-    console.log(fileNames)
+  dialog.showOpenDialog(function(filePaths) {
+    console.log(filePaths[0]);
+    mainWindow.send(SEND_FILE_PATH, filePaths[0])
+
   })
 })
 

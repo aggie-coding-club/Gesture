@@ -12,7 +12,6 @@ export default class SettingsLayout extends Component {
     };
     this.changeSettings = this.changeSettings.bind(this);
     this.click = this.click.bind(this);
-    //this.openCustomWindow = this.openCustomWindow.bind(this);
     this.handleRenderer = this.handleRenderer.bind(this);
   }
 
@@ -38,11 +37,6 @@ export default class SettingsLayout extends Component {
     ipcRenderer.send(BUTTON_CLICK, name);
   }
   //...................................................................
-
-  // openCustomWindow() {
-  //   console.log('React -- open custom window')
-  //   ipcRenderer.send(OPEN_CUSTOM_WINDOW)
-  // }
 
   async changeSettings(originalConfiguration, newGesture) {
     const updatedConfiguration = { hand: "", gesture: newGesture, action: "", alias: originalConfiguration };
