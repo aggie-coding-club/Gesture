@@ -48,6 +48,7 @@ export default class CustomLayout extends Component{
 
     const sideBar = {
       flex: 1,
+      backgroundColor: "#ffd6c2"
     }
     const spacer = {
       height: "10vh",
@@ -71,7 +72,7 @@ export default class CustomLayout extends Component{
     };
 
     const pathTypeStyle = {
-
+      paddingLeft: "23vw"
     }
 
     const pathTypeBtnStyle = {
@@ -81,8 +82,13 @@ export default class CustomLayout extends Component{
       overflow: "hidden",
       borderRadius: "10px",
       height: "8vh",
-      padding: "0 10px",
+      padding: "2vh 5vw",
+      marginRight: "5vw"
 
+    }
+
+    const browserStyle = {
+      margin: "25px 0 0 50px",
     }
 
     return (
@@ -95,6 +101,11 @@ export default class CustomLayout extends Component{
           <div style={pathTypeStyle}>
             <button style={Object.assign({}, pathTypeBtnStyle, this.state.urlBtn)} onClick={this.focusUrl}>Url</button>
             <button style={Object.assign({}, pathTypeBtnStyle, this.state.fileBtn)} onClick={this.focusFile}>File</button>
+          </div>
+
+          <div style={browserStyle}>
+            Preferred Browser: Simple Select of Browswers. Disabled when File Buttton focused.
+              Perhaps Option to add custom broswer.
           </div>
 
 
