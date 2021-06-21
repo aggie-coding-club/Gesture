@@ -18,6 +18,9 @@ const disabledBtn = {
   color: "#bdb49d"
 }
 
+let filePathVisible = "hidden"
+let filePathColor = "#51595b"
+
 export default class CustomLayout extends Component{
   constructor() {
     super();
@@ -25,7 +28,7 @@ export default class CustomLayout extends Component{
     this.state = {
       urlBtn: activeBtn,
       fileBtn: disabledBtn,
-      filePath: "...",
+      filePath: "Choose File",
 
     };
     this.focusUrl = this.focusUrl.bind(this);
@@ -44,18 +47,20 @@ export default class CustomLayout extends Component{
   }
   updateFilePath(event, data) {
     this.setState({filePath: data})
+    filePathColor = "black"
   }
-
-
 
   focusUrl() {
     this.setState({ urlBtn: activeBtn });
     this.setState({ fileBtn: disabledBtn });
+    filePathVisible = "none"
 
   }
   focusFile() {
     this.setState({ urlBtn: disabledBtn });
     this.setState({ fileBtn: activeBtn });
+    filePathVisible = "flex"
+
     ipcRenderer.send(OPEN_FILE_EXPLORER);
   }
 
@@ -72,8 +77,6 @@ export default class CustomLayout extends Component{
       padding: 0,
       backgroundColor: "#ececec",
     };
-
-
 
     const mainContentStyle = {
       margin: "0vh 1vh 1vh 0",
@@ -116,6 +119,20 @@ export default class CustomLayout extends Component{
       margin: "10px 0 0 31vw"
     }
 
+    const filePathContainer = {
+      display: filePathVisible,
+      margin: "10vh 10vw",
+
+    }
+
+    const fileTextStyle = {
+      border: "1px black solid",
+      borderRadius: "10px",
+      textAlign: "center",
+      color: filePathColor,
+      flex: "5"
+    }
+
 
     return (
       <div style={flexContainer}>
@@ -130,7 +147,12 @@ export default class CustomLayout extends Component{
           </div>
 
           {/*<AddSetting />*/}
-          <div>{this.state.filePath}</div>
+
+
+          <div style={filePathContainer}>
+            <div style={{flex: "1"}}>File Path: </div>
+            <div style={fileTextStyle}>{this.state.filePath}</div>
+          </div>
 
           <Link to="/settings">
             <button style={Object.assign({}, btnStyle, addBtn)} onClick={this.addSetting}>Add</button>

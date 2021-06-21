@@ -89,9 +89,10 @@ ipcMain.on(BUTTON_CLICK, (event, arg) => {
 ipcMain.on(OPEN_FILE_EXPLORER, (event, arg) => {
   console.log("opening file explorer")
   dialog.showOpenDialog(function(filePaths) {
-    console.log(filePaths[0]);
-    mainWindow.send(SEND_FILE_PATH, filePaths[0])
-
+    if(filePaths) {
+      console.log(filePaths[0]);
+      mainWindow.send(SEND_FILE_PATH, filePaths[0])
+    }
   })
 })
 
