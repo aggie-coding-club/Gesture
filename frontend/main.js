@@ -5,20 +5,17 @@ const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const path = require("path");
 const fs = require("fs");
 const url = require("url");
-const { CATCH_ON_MAIN,
+const {
   SEND_TO_RENDERER,
-  CREATE_FILE,
   BUTTON_CLICK,
   OPEN_FILE_EXPLORER,
   SEND_FILE_PATH,
   ADD_FILE_SETTING,
 } = require("./etc/constants");
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
-// Keep a reference for dev mode
+// Dev mode
 let dev = false;
 if (process.defaultApp || /[\\/]electron-prebuilt[\\/]/.test(process.execPath) || /[\\/]electron[\\/]/.test(process.execPath)) {
   dev = true;
@@ -26,7 +23,7 @@ if (process.defaultApp || /[\\/]electron-prebuilt[\\/]/.test(process.execPath) |
 
 function createWindow() {
   // load flask webserver
-  //require("child_process").spawn("python", ["../flask/app.py"]);
+  require("child_process").spawn("python", ["../flask/app.py"]);
 
   mainWindow = new BrowserWindow({
     width: 840,

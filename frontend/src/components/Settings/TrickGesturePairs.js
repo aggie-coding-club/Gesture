@@ -5,7 +5,7 @@ export default function TrickGesturesPairs({ data, changeSettings }) {
   return (
     <div>
       {data.map((trick, index) => (
-        <TrickGesturePair dat={data[index]} key={data[index]["action"]} changeSettings={changeSettings} />
+        <TrickGesturePair dat={data[index]} key={data[index]["alias"]} changeSettings={changeSettings} />
       ))}
     </div>
   );

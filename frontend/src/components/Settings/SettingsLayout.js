@@ -48,11 +48,17 @@ export default class SettingsLayout extends Component {
       body: JSON.stringify(updatedConfiguration),
     });
 
+    console.log("Settings Layout - changeSettings:")
+    console.log("updatedConfiguration:", updatedConfiguration)
+
     fetch("http://localhost:5000/config/retrieve").then((response) =>
       response.json().then((data) => {
         this.setState({ data: data.config });
+        console.log("data:", data)
       })
     );
+
+
   }
 
   render() {

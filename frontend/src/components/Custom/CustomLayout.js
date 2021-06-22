@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import SideBar from "./Sidebar";
 import AddSetting from "./AddSettings"
+import SettingName from "./SettingName"
 import {Link} from "react-router-dom";
 import { ipcRenderer } from "electron";
 const {
@@ -28,15 +29,17 @@ export default class CustomLayout extends Component{
     this.state = {
       urlBtn: activeBtn,
       fileBtn: disabledBtn,
-      filePath: "Choose File",
+      customSettingName: '',
+      filePath: "Choose File in File Explorer",
       filePathVisible: "none",
-      filePathColor: "#51595b"
+      filePathColor: "#51595b",
 
     };
     this.focusUrl = this.focusUrl.bind(this);
     this.focusFile = this.focusFile.bind(this);
     this.addFileSetting = this.addFileSetting.bind(this);
     this.updateFilePath = this.updateFilePath.bind(this);
+    this.updateName = this.updateName.bind(this)
 
   }
 
@@ -66,9 +69,13 @@ export default class CustomLayout extends Component{
     ipcRenderer.send(OPEN_FILE_EXPLORER);
   }
 
+  updateName(newName) {
+    this.setState({customSettingName: newName})
+  }
+
   addFileSetting() {
     this.setState({filePathVisible: "none"})
-    if(this.state.filePath !== "Choose File" && this.state.filePathVisible === "flex") {
+    if(this.state.filePath !== "Choose File" && this.state.filePathVisible === "flex" && this.state.customSettingName !== '') {
       console.log("add file setting: ", this.state.filePath)
       //Send file path to electron
       ipcRenderer.send(ADD_FILE_SETTING, this.state.filePath)
@@ -165,6 +172,8 @@ export default class CustomLayout extends Component{
             <button style={Object.assign({}, btnStyle, this.state.urlBtn)} onClick={this.focusUrl}>Url</button>
             <button style={Object.assign({}, btnStyle, this.state.fileBtn)} onClick={this.focusFile}>File</button>
           </div>
+
+          <SettingName updateName={this.updateName} name={this.state.customSettingName}/>
 
           {/*<AddSetting />*/}
 
