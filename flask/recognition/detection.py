@@ -8,7 +8,11 @@ import math
 import recognition.Actions as Actions
 
 
-if (Actions.settings["camera_index"] == 0):
+settings = {
+    "camera_index": 1, # 0 should be the default for built in cameras. If this doesn't work, try 1.
+}
+
+if (settings["camera_index"] == 0):
     cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 else:
     cap = cv2.VideoCapture(1)
@@ -32,8 +36,6 @@ prevGestures = [] # gestures calculated in previous frames
 mpHands = mp.solutions.hands
 hands = mpHands.Hands(False, 2, 0.5, 0.5)
 mpDraw = mp.solutions.drawing_utils
-
-
 
 
 def dotProduct(v1, v2):
@@ -164,7 +166,7 @@ def getHand(handedness):
 
 def gen_video(configData):
     # reopens camera after release
-    if (Actions.settings["camera_index"] == 0):
+    if (settings["camera_index"] == 0):
         cap.open(0, cv2.CAP_DSHOW);
     else:
         cap.open(1);
@@ -235,6 +237,10 @@ def gen_off():
     cap.release()
 
 
-
+def switchWebcam():
+    if (settings["camera_index"] == 0):
+        settings["camera_index"] = 1;
+    else:
+        settings["camera_index"] = 0;
     
 
