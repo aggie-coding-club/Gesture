@@ -17,6 +17,9 @@ if (settings["camera_index"] == 0):
 else:
     cap = cv2.VideoCapture(1)
 
+
+switch = False
+
 if cap is None or not cap.isOpened():
     pyautogui.alert('Your camera is unavailable. Try to fix this issue and try again!', 'Error')
 
@@ -165,6 +168,7 @@ def getHand(handedness):
         return 'Left'
 
 def gen_video(configData):
+    global switch
     # reopens camera after release
     if (settings["camera_index"] == 0):
         cap.open(0, cv2.CAP_DSHOW);
@@ -184,6 +188,15 @@ def gen_video(configData):
         """
         Main code loop
         """
+
+        if switch:
+            if (settings["camera_index"] == 0):
+                settings["camera_index"] = 1
+                cap.open(1)
+            else:
+                settings["camera_index"] = 0
+                cap.open(0, cv2.CAP_DSHOW)
+            switch = False
 
         success, img = cap.read()
 
@@ -238,9 +251,11 @@ def gen_off():
 
 
 def switchWebcam():
-    if (settings["camera_index"] == 0):
-        settings["camera_index"] = 1;
-    else:
-        settings["camera_index"] = 0;
+    global switch
+    # if (settings["camera_index"] == 0):
+    #     settings["camera_index"] = 1;
+    # else:
+    #     settings["camera_index"] = 0;
+    switch = True
     
 
