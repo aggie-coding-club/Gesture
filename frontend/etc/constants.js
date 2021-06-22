@@ -4,5 +4,6 @@ module.exports = {
 	CREATE_FILE: "create-file",
 	BUTTON_CLICK: "button-click",
 	OPEN_FILE_EXPLORER: 'open-file-explorer',
-	SEND_FILE_PATH: 'send-file-path'
+	SEND_FILE_PATH: 'send-file-path',
+	ADD_FILE_SETTING: 'add-file-setting'
 };

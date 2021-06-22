@@ -10,7 +10,8 @@ const { CATCH_ON_MAIN,
   CREATE_FILE,
   BUTTON_CLICK,
   OPEN_FILE_EXPLORER,
-  SEND_FILE_PATH
+  SEND_FILE_PATH,
+  ADD_FILE_SETTING,
 } = require("./etc/constants");
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -32,7 +33,6 @@ function createWindow() {
     height: 480,
     autoHideMenuBar: true,
 
-    frame: false,
     resizable: false,
     maximizable: false,
     fullscreenable: false,
@@ -87,13 +87,16 @@ ipcMain.on(BUTTON_CLICK, (event, arg) => {
 
 //open file explorer
 ipcMain.on(OPEN_FILE_EXPLORER, (event, arg) => {
-  console.log("opening file explorer")
   dialog.showOpenDialog(function(filePaths) {
     if(filePaths) {
-      console.log(filePaths[0]);
       mainWindow.send(SEND_FILE_PATH, filePaths[0])
     }
   })
+})
+
+//add file setting
+ipcMain.on(ADD_FILE_SETTING, (event, arg) => {
+  console.log('add file setting: ', arg)
 })
 
 //...................EXAMPLES................................

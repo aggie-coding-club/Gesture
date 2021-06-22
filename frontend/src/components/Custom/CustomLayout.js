@@ -6,6 +6,7 @@ import { ipcRenderer } from "electron";
 const {
   OPEN_FILE_EXPLORER,
   SEND_FILE_PATH,
+  ADD_FILE_SETTING,
 } = require("../../../etc/constants")
 
 const activeBtn = {
@@ -28,13 +29,13 @@ export default class CustomLayout extends Component{
       urlBtn: activeBtn,
       fileBtn: disabledBtn,
       filePath: "Choose File",
-      filePathVisible: "hidden",
+      filePathVisible: "none",
       filePathColor: "#51595b"
 
     };
     this.focusUrl = this.focusUrl.bind(this);
     this.focusFile = this.focusFile.bind(this);
-    this.addSetting = this.addSetting.bind(this);
+    this.addFileSetting = this.addFileSetting.bind(this);
     this.updateFilePath = this.updateFilePath.bind(this);
 
   }
@@ -65,12 +66,13 @@ export default class CustomLayout extends Component{
     ipcRenderer.send(OPEN_FILE_EXPLORER);
   }
 
-  addSetting() {
-    console.log(this.state.filePathVisible)
+  addFileSetting() {
+    this.setState({filePathVisible: "none"})
     if(this.state.filePath !== "Choose File" && this.state.filePathVisible === "flex") {
-      console.log("add setting: ", this.state.filePath)
+      console.log("add file setting: ", this.state.filePath)
+      //Send file path to electron
+      ipcRenderer.send(ADD_FILE_SETTING, this.state.filePath)
     }
-
   }
 
   render() {
@@ -175,10 +177,10 @@ export default class CustomLayout extends Component{
           <div style={addCancelStyle}>
             <Link to="/settings">
               <div>
-                <button style={Object.assign({}, btnStyle, cancelBtn)} onClick={this.addSetting}>Cancel</button>
+                <button style={Object.assign({}, btnStyle, cancelBtn)}>Cancel</button>
               </div>
               <div>
-                <button style={Object.assign({}, btnStyle, addBtn)} onClick={this.addSetting}>Add</button>
+                <button style={Object.assign({}, btnStyle, addBtn)} onClick={this.addFileSetting}>Add</button>
 
               </div>
             </Link>
