@@ -30,7 +30,7 @@ export default class CustomLayout extends Component{
       urlBtn: activeBtn,
       fileBtn: disabledBtn,
       customSettingName: '',
-      filePath: "Choose File in File Explorer",
+      filePath: "Click on File Button to Choose File",
       filePathVisible: "none",
       filePathColor: "#51595b",
 
@@ -75,15 +75,22 @@ export default class CustomLayout extends Component{
 
   addFileSetting() {
     this.setState({filePathVisible: "none"})
-    if(this.state.filePath !== "Choose File" && this.state.filePathVisible === "flex" && this.state.customSettingName !== '') {
-      console.log("add file setting: ", this.state.filePath)
-      //Send file path to electron
-      ipcRenderer.send(ADD_FILE_SETTING, this.state.filePath)
+    if(this.state.filePath !== "Click on File Button to Choose File"
+        && this.state.filePathVisible === "flex"
+        && this.state.customSettingName !== '')
+    {
+      console.log("add file setting ")
+
+      let fileData = {
+        "path": this.state.filePath,
+        "name": this.state.customSettingName
+      }
+      //Send fileData to electron
+      ipcRenderer.send(ADD_FILE_SETTING, fileData)
     }
   }
 
   render() {
-
 
     const flexContainer = {
       display: "flex",
@@ -147,7 +154,7 @@ export default class CustomLayout extends Component{
 
     const filePathContainer = {
       display: this.state.filePathVisible,
-      margin: "10vh 10vw",
+      margin: "0 10vw 5vh 10vw",
 
     }
 
@@ -190,7 +197,6 @@ export default class CustomLayout extends Component{
               </div>
               <div>
                 <button style={Object.assign({}, btnStyle, addBtn)} onClick={this.addFileSetting}>Add</button>
-
               </div>
             </Link>
           </div>
