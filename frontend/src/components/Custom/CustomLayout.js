@@ -7,7 +7,6 @@ import { ipcRenderer } from "electron";
 const {
   OPEN_FILE_EXPLORER,
   SEND_FILE_PATH,
-  ADD_FILE_SETTING,
 } = require("../../../etc/constants")
 
 const activeBtn = {
@@ -19,8 +18,6 @@ const disabledBtn = {
   backgroundColor: "#51595b",
   color: "#bdb49d"
 }
-
-
 
 export default class CustomLayout extends Component{
   constructor() {
@@ -37,6 +34,7 @@ export default class CustomLayout extends Component{
     };
     this.focusUrl = this.focusUrl.bind(this);
     this.focusFile = this.focusFile.bind(this);
+    this.addSetting = this.addSetting.bind(this);
     this.addFileSetting = this.addFileSetting.bind(this);
     this.updateFilePath = this.updateFilePath.bind(this);
     this.updateName = this.updateName.bind(this)
@@ -73,21 +71,40 @@ export default class CustomLayout extends Component{
     this.setState({customSettingName: newName})
   }
 
-  addFileSetting() {
-    this.setState({filePathVisible: "none"})
-    if(this.state.filePath !== "Click on File Button to Choose File"
-        && this.state.filePathVisible === "flex"
-        && this.state.customSettingName !== '')
-    {
-      console.log("add file setting ")
-
-      let fileData = {
-        "path": this.state.filePath,
-        "name": this.state.customSettingName
+  addSetting() {
+    if(this.state.customSettingName !== '') {
+      if(this.state.filePath !== "Click on File Button to Choose File" && this.state.filePathVisible === "flex") {
+        this.addFileSetting();
+      } else {
+        //add url
       }
-      //Send fileData to electron
-      ipcRenderer.send(ADD_FILE_SETTING, fileData)
     }
+
+  }
+
+  async addFileSetting() {
+    this.setState({filePathVisible: "none"})
+
+    console.log("add file setting ")
+    let action = this.state.filePath.split('\\').join('//');
+
+    let fileData = {
+          "hand": "right",
+          "gesture": "fist",
+          "action": action,
+          "alias": this.state.customSettingName
+        }
+
+        await fetch('http://localhost:5000/config/add_configuration', {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(fileData),
+
+        } )
+
+
   }
 
   render() {
@@ -196,7 +213,7 @@ export default class CustomLayout extends Component{
                 <button style={Object.assign({}, btnStyle, cancelBtn)}>Cancel</button>
               </div>
               <div>
-                <button style={Object.assign({}, btnStyle, addBtn)} onClick={this.addFileSetting}>Add</button>
+                <button style={Object.assign({}, btnStyle, addBtn)} onClick={this.addSetting}>Add</button>
               </div>
             </Link>
           </div>

@@ -90,6 +90,8 @@ export default class SettingsLayout extends Component {
 
     const pairStyle = {
       margin: "-8vh 7vw 0 7vw",
+      height: "70vh",
+      overflow: "auto",
     };
 
     return (
