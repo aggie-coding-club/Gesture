@@ -40,10 +40,3 @@ def openProject(configData, hand, gest):
                     volume.SetMute(1, None)
                 else:
                     volume.SetMute(0, None)
-
-
-
-
-settings = {
-    "camera_index": 1, # 0 should be the default for built in cameras. If this doesn't work, try 1.
-}

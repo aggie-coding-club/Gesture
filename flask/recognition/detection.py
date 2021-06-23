@@ -8,10 +8,17 @@ import math
 import recognition.Actions as Actions
 
 
-if (Actions.settings["camera_index"] == 0):
+settings = {
+    "camera_index": 0, # 0 should be the default for built in cameras. If this doesn't work, try 1.
+}
+
+if (settings["camera_index"] == 0):
     cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 else:
     cap = cv2.VideoCapture(1)
+
+
+switch = False
 
 if cap is None or not cap.isOpened():
     pyautogui.alert('Your camera is unavailable. Try to fix this issue and try again!', 'Error')
@@ -32,8 +39,6 @@ prevGestures = [] # gestures calculated in previous frames
 mpHands = mp.solutions.hands
 hands = mpHands.Hands(False, 2, 0.5, 0.5)
 mpDraw = mp.solutions.drawing_utils
-
-
 
 
 def dotProduct(v1, v2):
@@ -163,8 +168,9 @@ def getHand(handedness):
         return 'Left'
 
 def gen_video(configData):
+    global switch
     # reopens camera after release
-    if (Actions.settings["camera_index"] == 0):
+    if (settings["camera_index"] == 0):
         cap.open(0, cv2.CAP_DSHOW);
     else:
         cap.open(1);
@@ -182,6 +188,19 @@ def gen_video(configData):
         """
         Main code loop
         """
+
+        if switch:
+            if (settings["camera_index"] == 0):
+                cap.open(1)
+                settings["camera_index"] = 1
+                if cap.read()[1] is None:
+                    cap.open(0, cv2.CAP_DSHOW)
+                    settings["camera_index"] = 0
+            else:
+                cap.open(0, cv2.CAP_DSHOW)
+                settings["camera_index"] = 0
+            
+            switch = False
 
         success, img = cap.read()
 
@@ -235,6 +254,11 @@ def gen_off():
     cap.release()
 
 
-
+def switchWebcam():
+    global switch
+    if switch:
+        switch = False
+    else:
+        switch = True
     
 

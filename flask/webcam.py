@@ -1,6 +1,5 @@
 from flask import Blueprint, Response
 import recognition.detection as dt
-from app import db
 from model import Configuration
 
 feed = Blueprint('video', __name__, url_prefix="/video")
@@ -22,4 +21,10 @@ def video_feed():
 @feed.route('/off')
 def off():
     return Response(dt.gen_off(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+@feed.route('/switch')
+def switch():
+    dt.switchWebcam()
+    return "Switched", 200
 
