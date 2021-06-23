@@ -191,11 +191,15 @@ def gen_video(configData):
 
         if switch:
             if (settings["camera_index"] == 0):
-                settings["camera_index"] = 1
                 cap.open(1)
+                settings["camera_index"] = 1
+                if cap.read()[1] is None:
+                    cap.open(0, cv2.CAP_DSHOW)
+                    settings["camera_index"] = 0
             else:
-                settings["camera_index"] = 0
                 cap.open(0, cv2.CAP_DSHOW)
+                settings["camera_index"] = 0
+            
             switch = False
 
         success, img = cap.read()
@@ -252,10 +256,9 @@ def gen_off():
 
 def switchWebcam():
     global switch
-    # if (settings["camera_index"] == 0):
-    #     settings["camera_index"] = 1;
-    # else:
-    #     settings["camera_index"] = 0;
-    switch = True
+    if switch:
+        switch = False
+    else:
+        switch = True
     
 
