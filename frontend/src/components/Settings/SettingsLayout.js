@@ -48,17 +48,15 @@ export default class SettingsLayout extends Component {
       body: JSON.stringify(updatedConfiguration),
     });
 
-    console.log("Settings Layout - changeSettings:")
-    console.log("updatedConfiguration:", updatedConfiguration)
+    console.log("Settings Layout - changeSettings:");
+    console.log("updatedConfiguration:", updatedConfiguration);
 
     fetch("http://localhost:5000/config/retrieve").then((response) =>
       response.json().then((data) => {
         this.setState({ data: data.config });
-        console.log("data:", data)
+        console.log("data:", data);
       })
     );
-
-
   }
 
   render() {
@@ -85,7 +83,7 @@ export default class SettingsLayout extends Component {
       color: "#111111",
       fontFamily: "Sacramento",
       fontSize: 25,
-      margin: "8vh",
+      margin: "10vh",
     };
 
     const pairStyle = {
@@ -105,7 +103,7 @@ export default class SettingsLayout extends Component {
           </div>
         </div>
         <div style={sideScreen}>
-          <SideBar btnClick={this.click}/>
+          <SideBar btnClick={this.click} />
         </div>
       </div>
     );
