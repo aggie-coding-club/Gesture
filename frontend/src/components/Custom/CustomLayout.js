@@ -148,9 +148,6 @@ export default class CustomLayout extends Component{
 
     }
 
-    const browserStyle = {
-      margin: "25px 0 0 50px",
-    }
 
     const addCancelStyle = {
       //margin: "10px 35vw",
