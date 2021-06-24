@@ -8,10 +8,13 @@ cf = Blueprint("config", __name__, url_prefix="/config")
 def addConfiguration():
     configData = request.get_json()
 
-    newConfiguration = Configuration(   hand=configData["hand"],
-                                        gesture=configData["gesture"],
-                                        action=configData["action"],
-                                        alias=configData["alias"])
+    newConfiguration = Configuration(   
+        hand=configData["hand"],
+        gesture=configData["gesture"],
+        action=configData["action"],
+        alias=configData["alias"],
+        id=configData["id"]
+    )
 
     db.session.add(newConfiguration)
     db.session.commit()
@@ -25,10 +28,13 @@ def retrieve():
     configData = []
 
     for configuration in configQuery:
+        if not(configuration.id):
+            configuration.id = "none"
         configData.append({ "hand" : configuration.hand,
                             "gesture" : configuration.gesture,
                             "action" : configuration.action,
-                            "alias" : configuration.alias})
+                            "alias" : configuration.alias,
+                            "id": configuration.id})
 
     return jsonify({"config" : configData})
 
@@ -42,8 +48,8 @@ def updateConfiguration():
     db.session.commit()
 
     return "Updated", 201
-#
-# @cf.route("delete_configuration", methods=[])
-# def deleteConfig():
+
+
+
 
 
