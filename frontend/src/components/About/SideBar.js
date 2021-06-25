@@ -15,24 +15,6 @@ export default function SideBar({ btnClick }) {
     margin: "12vh 3vw",
   };
 
-  const customBtn = {
-    background: "#1250a4",
-    color: "white",
-    border: "none",
-    outline: "none",
-    cursor: "pointer",
-    overflow: "hidden",
-    borderRadius: "10px",
-    display: "flex",
-    flexDirection: "row",
-    height: "8vh",
-    padding: "0 10px",
-    marginTop: "50px",
-    textDecoration: "none"
-  }
-
-
-
   return (
     <div>
       <div style={spacer}></div>
@@ -43,11 +25,6 @@ export default function SideBar({ btnClick }) {
         <div>
           <Link to="">
             <Options btnClick={btnClick} name={"Home"} imagePic={homePic} />
-          </Link>
-        </div>
-        <div>
-          <Link to="/custom">
-            <button style={customBtn}>New Custom Setting</button>
           </Link>
         </div>
       </div>

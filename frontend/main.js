@@ -1,17 +1,15 @@
 "use strict";
 
 // Import parts of electron to use
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const path = require("path");
 const fs = require("fs");
 const url = require("url");
-const { CATCH_ON_MAIN, SEND_TO_RENDERER, CREATE_FILE, BUTTON_CLICK } = require("./etc/constants");
+const { SEND_TO_RENDERER, BUTTON_CLICK, OPEN_FILE_EXPLORER, SEND_FILE_PATH, ADD_FILE_SETTING } = require("./etc/constants");
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
-// Keep a reference for dev mode
+// Dev mode
 let dev = false;
 if (process.defaultApp || /[\\/]electron-prebuilt[\\/]/.test(process.execPath) || /[\\/]electron[\\/]/.test(process.execPath)) {
   dev = true;
@@ -25,7 +23,6 @@ function createWindow() {
     width: 840,
     height: 480,
     autoHideMenuBar: true,
-
     frame: false,
     resizable: false,
     maximizable: false,
@@ -77,6 +74,20 @@ ipcMain.on(BUTTON_CLICK, (event, arg) => {
   console.log("This button was clicked", arg);
   //...Electron sending message to React...
   mainWindow.send(SEND_TO_RENDERER, "Button Click received by Electron");
+});
+
+//open file explorer
+ipcMain.on(OPEN_FILE_EXPLORER, (event, arg) => {
+  dialog.showOpenDialog(function (filePaths) {
+    if (filePaths) {
+      mainWindow.send(SEND_FILE_PATH, filePaths[0]);
+    }
+  });
+});
+
+//add file setting
+ipcMain.on(ADD_FILE_SETTING, (event, arg) => {
+  console.log("add file setting: ", arg);
 });
 
 //...................EXAMPLES................................

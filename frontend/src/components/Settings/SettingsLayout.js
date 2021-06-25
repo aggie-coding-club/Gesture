@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import SideBar from "./SideBar.js";
 import TrickGesturesPairs from "./TrickGesturePairs";
 import { ipcRenderer } from "electron";
-const { BUTTON_CLICK, SEND_TO_RENDERER } = require("../../../etc/constants.js");
+const { BUTTON_CLICK, SEND_TO_RENDERER, OPEN_CUSTOM_WINDOW } = require("../../../etc/constants.js");
 
 export default class SettingsLayout extends Component {
   constructor(props) {
@@ -36,8 +36,8 @@ export default class SettingsLayout extends Component {
     console.log("click:", name);
     ipcRenderer.send(BUTTON_CLICK, name);
   }
-
   //...................................................................
+
   async changeSettings(originalConfiguration, newGesture) {
     const updatedConfiguration = { hand: "", gesture: newGesture, action: "", alias: originalConfiguration };
     await fetch("http://localhost:5000/config/update_configuration", {
@@ -48,9 +48,13 @@ export default class SettingsLayout extends Component {
       body: JSON.stringify(updatedConfiguration),
     });
 
+    console.log("Settings Layout - changeSettings:");
+    console.log("updatedConfiguration:", updatedConfiguration);
+
     fetch("http://localhost:5000/config/retrieve").then((response) =>
       response.json().then((data) => {
         this.setState({ data: data.config });
+        console.log("data:", data);
       })
     );
   }
@@ -79,11 +83,13 @@ export default class SettingsLayout extends Component {
       color: "#111111",
       fontFamily: "Sacramento",
       fontSize: 25,
-      margin: "8vh",
+      margin: "10vh",
     };
 
     const pairStyle = {
       margin: "-8vh 7vw 0 7vw",
+      height: "70vh",
+      overflow: "auto",
     };
 
     return (

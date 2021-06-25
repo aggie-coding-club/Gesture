@@ -27,7 +27,6 @@ export default class HandButtons extends Component {
   handleClick() {
     this.setState({ borderClr: "1px solid white" });
     this.setState({ showModal: true });
-    console.log("opening modal", this.state.showModal);
     document.getElementById("settings-back").style.webkitAppRegion = "no-drag";
   }
 
@@ -39,6 +38,7 @@ export default class HandButtons extends Component {
 
   newSetting(newGesture) {
     this.props.changeSettings(this.props.dat["alias"], newGesture);
+    //console.log("newSetting props:", this.props.dat)
     this.setState({ selected: newGesture });
   }
 

@@ -26,8 +26,9 @@ export default function MenuButtons() {
     top: "-7vh",
   };
 
+
   return (
-    <div>
+    <div >
       <button style={menuButtonStyle} onClick={minimizeScreen}>
         —
       </button>
