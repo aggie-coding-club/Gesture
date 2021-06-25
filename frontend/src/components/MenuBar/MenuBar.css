@@ -1,0 +1,33 @@
+#window-controls {
+  display: grid;
+  grid-template-columns: repeat(2, 46px);
+  position: absolute;
+  right: 0;
+  height: 32px;
+  -webkit-app-region: no-drag;
+  text-align: center;
+}
+
+#window-controls .button:hover {
+  background: rgba(77, 77, 77, 0.3);
+}
+
+#window-controls .button:active {
+  background: rgba(26, 26, 26, 0.4);
+}
+
+#close-button:hover {
+  background: #e81123 !important;
+}
+
+#close-button:active {
+  background: #f1707a !important;
+}
+
+#close-button:hover .icon {
+  filter: invert(1);
+}
+
+#close-button:active .icon {
+  filter: invert(1);
+}

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SideBar from "./SideBar.js";
+import MenuBar from "../MenuBar/MenuBar";
 import TrickGesturesPairs from "./TrickGesturePairs";
 import { ipcRenderer } from "electron";
 const { BUTTON_CLICK, SEND_TO_RENDERER, OPEN_CUSTOM_WINDOW } = require("../../../etc/constants.js");
@@ -72,38 +73,39 @@ export default class SettingsLayout extends Component {
     };
 
     const settingsStyle = {
-      margin: "0vh 1vh 1vh 0",
       padding: 0,
       flex: 3,
       height: "100vh",
+      marginTop: "-2vh",
     };
 
     const titleStyle = {
       textAlign: "center",
       color: "#111111",
-      fontFamily: "Sacramento",
-      fontSize: 25,
-      margin: "10vh",
+      fontFamily: "Lobster Two",
     };
 
     const pairStyle = {
-      margin: "-8vh 7vw 0 7vw",
+      margin: "-3vh 5vw 0 7vw",
       height: "70vh",
       overflow: "auto",
     };
 
     return (
-      <div id="settings-back" style={flexContainer}>
-        <div style={settingsStyle}>
-          <div style={titleStyle}>
-            <h1>Settings</h1>
+      <div>
+        <MenuBar />
+        <div id="settings-back" style={flexContainer}>
+          <div style={settingsStyle}>
+            <div style={titleStyle}>
+              <h1 style={{ fontWeight: "400", fontSize: "3em" }}>Settings</h1>
+            </div>
+            <div style={pairStyle}>
+              <TrickGesturesPairs changeSettings={this.changeSettings} data={this.state.data} />
+            </div>
           </div>
-          <div style={pairStyle}>
-            <TrickGesturesPairs changeSettings={this.changeSettings} data={this.state.data} />
+          <div style={sideScreen}>
+            <SideBar btnClick={this.click} />
           </div>
-        </div>
-        <div style={sideScreen}>
-          <SideBar btnClick={this.click} />
         </div>
       </div>
     );

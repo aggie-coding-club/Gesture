@@ -99,7 +99,7 @@ export default class CameraOption extends Component {
       width: "640px",
       border: "none",
       position: "absolute",
-      top: "0px",
+      bottom: "0px",
       right: "25vw",
       display: "none",
     };

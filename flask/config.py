@@ -9,6 +9,7 @@ def addConfiguration():
     configData = request.get_json()
 
     newConfiguration = Configuration(   
+        id=configData["id"],
         hand=configData["hand"],
         gesture=configData["gesture"],
         action=configData["action"],

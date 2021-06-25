@@ -1,5 +1,6 @@
 import React from "react";
 import SideBar from "./SideBar";
+import MenuBar from "../MenuBar/MenuBar";
 import camOff from "../../assets/camera-off.png";
 
 export default function MainLayout() {
@@ -9,8 +10,6 @@ export default function MainLayout() {
 
   const flexContainer = {
     display: "flex",
-    margin: 0,
-    padding: 0,
     backgroundColor: "grey",
   };
 
@@ -28,12 +27,15 @@ export default function MainLayout() {
   };
 
   return (
-    <div style={flexContainer}>
-      <div style={cameraScreen}>
-        <img src={camOff}></img>
-      </div>
-      <div style={sideScreen}>
-        <SideBar btnClick={btnClick} />
+    <div>
+      <MenuBar />
+      <div style={flexContainer}>
+        <div style={cameraScreen}>
+          <img src={camOff}></img>
+        </div>
+        <div style={sideScreen}>
+          <SideBar btnClick={btnClick} />
+        </div>
       </div>
     </div>
   );

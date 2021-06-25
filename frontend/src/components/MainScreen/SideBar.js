@@ -1,7 +1,6 @@
 import React from "react";
 import Options from "./Options";
 import CameraOption from "./CameraOption";
-import MenuButtons from "./MenuButtons";
 import { Link } from "react-router-dom";
 import settingsPic from "../../assets/settings.png";
 import aboutPic from "../../assets/about.png";
@@ -42,9 +41,6 @@ export default function SideBar({ btnClick }) {
     <div>
       <div style={logoStyle}>
         <img src={logo} alt="logo" width="54.5%" height="auto" />
-      </div>
-      <div>
-        <MenuButtons />
       </div>
       <div style={optionWrapper}>
         <div style={minorOptions}>
