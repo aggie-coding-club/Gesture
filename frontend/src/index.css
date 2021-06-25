@@ -9,7 +9,6 @@ body {
 
 body {
   margin: 0;
-  -webkit-app-region: drag;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -18,4 +17,11 @@ body {
 
 button {
   -webkit-app-region: no-drag;
+}
+
+#titlebar {
+  display: block;
+  height: 32px;
+  background: #254053;
+  -webkit-app-region: drag;
 }

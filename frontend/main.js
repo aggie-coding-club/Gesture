@@ -5,13 +5,7 @@ const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const path = require("path");
 const fs = require("fs");
 const url = require("url");
-const {
-  SEND_TO_RENDERER,
-  BUTTON_CLICK,
-  OPEN_FILE_EXPLORER,
-  SEND_FILE_PATH,
-  ADD_FILE_SETTING,
-} = require("./etc/constants");
+const { SEND_TO_RENDERER, BUTTON_CLICK, OPEN_FILE_EXPLORER, SEND_FILE_PATH, ADD_FILE_SETTING } = require("./etc/constants");
 
 let mainWindow;
 
@@ -29,7 +23,7 @@ function createWindow() {
     width: 840,
     height: 480,
     autoHideMenuBar: true,
-
+    frame: false,
     resizable: false,
     maximizable: false,
     fullscreenable: false,
@@ -84,17 +78,17 @@ ipcMain.on(BUTTON_CLICK, (event, arg) => {
 
 //open file explorer
 ipcMain.on(OPEN_FILE_EXPLORER, (event, arg) => {
-  dialog.showOpenDialog(function(filePaths) {
-    if(filePaths) {
-      mainWindow.send(SEND_FILE_PATH, filePaths[0])
+  dialog.showOpenDialog(function (filePaths) {
+    if (filePaths) {
+      mainWindow.send(SEND_FILE_PATH, filePaths[0]);
     }
-  })
-})
+  });
+});
 
 //add file setting
 ipcMain.on(ADD_FILE_SETTING, (event, arg) => {
-  console.log('add file setting: ', arg)
-})
+  console.log("add file setting: ", arg);
+});
 
 //...................EXAMPLES................................
 // ipcMain.on(CATCH_ON_MAIN, (event, arg) => {

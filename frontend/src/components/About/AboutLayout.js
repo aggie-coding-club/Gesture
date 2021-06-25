@@ -1,6 +1,6 @@
 import React from "react";
-import SideBar from "../Settings/SideBar.js";
-import aboutImage from "../../assets/aboutimage.png";
+import SideBar from "./SideBar.js";
+import aboutImage from "../../assets/aboutlogo.png";
 
 export default function AboutLayout() {
   const btnClick = (name) => {
