@@ -50,7 +50,7 @@ Installation
 git clone https://github.com/aggie-coding-club/Vision-Controls
 cd Vision-Controls
 pip install -r requirements.txt
-cd new-frontend
+cd frontend
 npm install
 ```
 
