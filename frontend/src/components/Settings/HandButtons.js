@@ -58,7 +58,6 @@ export default class HandButtons extends Component {
       padding: 0,
       margin: 0,
       height: "100%",
-      WebkitAppRegion: "no-drag",
     };
 
     const row = {
@@ -103,7 +102,6 @@ export default class HandButtons extends Component {
               margin: "auto auto",
               padding: 0,
             },
-            WebkitAppRegion: "no-drag",
           }}
         >
           <div style={modalContainer}>

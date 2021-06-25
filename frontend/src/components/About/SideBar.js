@@ -1,6 +1,5 @@
 import React from "react";
 import Options from "../MainScreen/Options";
-import MenuButtons from "../MainScreen/MenuButtons";
 import { Link } from "react-router-dom";
 import homePic from "../../assets/home.png";
 
@@ -8,7 +7,6 @@ export default function SideBar({ btnClick }) {
   const spacer = {
     height: "10vh",
     position: "relative",
-    top: "-4.5vh",
   };
 
   const optionWrapper = {
@@ -18,9 +16,6 @@ export default function SideBar({ btnClick }) {
   return (
     <div>
       <div style={spacer}></div>
-      <div>
-        <MenuButtons />
-      </div>
       <div style={optionWrapper}>
         <div>
           <Link to="">

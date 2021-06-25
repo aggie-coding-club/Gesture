@@ -1,6 +1,5 @@
 import React from "react";
 import Options from "../MainScreen/Options";
-import MenuButtons from "../MainScreen/MenuButtons";
 import { Link } from "react-router-dom";
 import homePic from "../../assets/home.png";
 
@@ -8,7 +7,6 @@ export default function SideBar({ btnClick }) {
   const spacer = {
     height: "10vh",
     position: "relative",
-    top: "-4.5vh",
   };
 
   const optionWrapper = {
@@ -23,22 +21,15 @@ export default function SideBar({ btnClick }) {
     cursor: "pointer",
     overflow: "hidden",
     borderRadius: "10px",
-    display: "flex",
-    flexDirection: "row",
     height: "8vh",
-    padding: "0 10px",
+    padding: "0 15px",
     marginTop: "50px",
-    textDecoration: "none"
-  }
-
-
+    marginLeft: "4px",
+  };
 
   return (
     <div>
       <div style={spacer}></div>
-      <div>
-        <MenuButtons />
-      </div>
       <div style={optionWrapper}>
         <div>
           <Link to="">
@@ -46,8 +37,8 @@ export default function SideBar({ btnClick }) {
           </Link>
         </div>
         <div>
-          <Link to="/custom">
-            <button style={customBtn}>New Custom Setting</button>
+          <Link to="/custom" style={{ textDecoration: "none" }}>
+            <button style={customBtn}>Custom Setting</button>
           </Link>
         </div>
       </div>
