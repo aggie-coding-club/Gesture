@@ -28,11 +28,11 @@ def openProject(configData, hand, gest):
                 webbrowser.open(action)
             elif alias == "Open Chrome":
                 os.startfile(action)
-            elif alias.startswith("Open"):
+            elif action.startswith("C://"):
                 try:
-                    os.startfile("C://Users//" + username + action)
-                except:
                     os.startfile(action)
+                except:
+                    os.startfile("C://Users//" + username + action)
                     print("No program at path:", "C://Users//" + username + action)
             elif alias.startswith("Volume"):
                 # current = volume.GetMasterVolumeLevel()

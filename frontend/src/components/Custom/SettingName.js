@@ -38,7 +38,7 @@ export default class SettingName extends Component {
             value={this.props.name}
             onChange={this.handleChange}
             style={textInputStyle}
-            placeholder="Enter name of custom setting"
+            placeholder="Enter name of application or website"
           />
         </label>
       </div>
