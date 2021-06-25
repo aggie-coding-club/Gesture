@@ -13,7 +13,6 @@ def addConfiguration():
         gesture=configData["gesture"],
         action=configData["action"],
         alias=configData["alias"],
-        id=configData["id"]
     )
 
     db.session.add(newConfiguration)
