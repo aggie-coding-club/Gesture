@@ -21,12 +21,12 @@
 </p>
 
 <p align="center">
-    <img src="./assets/readme/cam_on.png" width="auto" />
+    <img src="./assets/readme/main.png" width="auto" />
 </p>
 
-<p align="center">
+<!-- <p align="center">
     <img src="./assets/readme/cam_off.png" width="auto" />
-</p>
+</p> -->
 
 ## Tech Stack
 
