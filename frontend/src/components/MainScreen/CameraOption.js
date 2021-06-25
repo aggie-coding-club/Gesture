@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { ipcRenderer } from "electron";
 import icon from "../../assets/webcam.png";
+import switchIcon from "../../assets/switch.png";
 const { BUTTON_CLICK, SEND_TO_RENDERER } = require("../../../etc/constants.js");
 
 export default class CameraOption extends Component {
@@ -34,9 +35,19 @@ export default class CameraOption extends Component {
     }
   }
 
+  toggleSwitch() {
+    fetch("http://localhost:5000/video/switch");
+  }
+
   render() {
     const btnContainer = {
       margin: "50vh 0vh 0vh 3vh",
+    };
+
+    const switchContainer = {
+      position: "absolute",
+      right: "92vw",
+      bottom: "4vh",
     };
 
     const btnStyle = {
@@ -50,6 +61,21 @@ export default class CameraOption extends Component {
       display: "flex",
       flexDirection: "row",
       height: "8vh",
+    };
+
+    const switchStyle = {
+      background: "#ececec",
+      color: "white",
+      border: "none",
+      outline: "none",
+      cursor: "pointer",
+      borderRadius: "100px",
+      height: "10vh",
+      width: "6vw",
+    };
+
+    const switchImageStyle = {
+      top: "-10vh",
     };
 
     const imageStyle = {
@@ -92,6 +118,13 @@ export default class CameraOption extends Component {
         </div>
         <div>
           <iframe id="camera-frame" style={videoStyle} src={this.state.camSource} scrolling={"no"}></iframe>
+        </div>
+        <div style={switchContainer}>
+          <button style={switchStyle} onClick={this.toggleSwitch}>
+            <div style={switchImageStyle}>
+              <img src={switchIcon} alt="camera" height="auto" width="32px" />
+            </div>
+          </button>
         </div>
       </div>
     );

@@ -5,6 +5,7 @@ export default function SideBar() {
     flex: 1,
     backgroundColor: "#ffd6c2",
   };
+
   const spacer = {
     height: "10vh",
     position: "relative",
