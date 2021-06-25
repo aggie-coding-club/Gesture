@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from "react";
 
 export default class SettingName extends Component {
   constructor(props) {
@@ -8,14 +8,14 @@ export default class SettingName extends Component {
   }
 
   handleChange(event) {
-    this.props.updateName(event.target.value)
+    this.props.updateName(event.target.value);
   }
 
   render() {
     const containerStyle = {
-      margin: "10vh 5vw 5vh 5vw",
-      display: "flex"
-    }
+      margin: "10vh 8vw 5vh 8vw",
+      display: "flex",
+    };
 
     const textInputStyle = {
       border: "1px black solid",
@@ -25,14 +25,12 @@ export default class SettingName extends Component {
       flex: "4",
       overflow: "hidden",
       backgroundColor: "#ececec",
-    }
+    };
 
     return (
       <div>
-        <label  style={containerStyle}>
-          <div style={{flex: 1}}>
-            Setting Name:
-          </div>
+        <label style={containerStyle}>
+          <div style={{ flex: 1 }}>Setting Alias:</div>
           <input
             type="text"
             value={this.props.name}
