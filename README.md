@@ -48,7 +48,7 @@ Installation
 
 ```
 git clone https://github.com/aggie-coding-club/Vision-Controls
-cd Vision-Controls
+cd Gesture
 pip install -r requirements.txt
 cd frontend
 npm install
